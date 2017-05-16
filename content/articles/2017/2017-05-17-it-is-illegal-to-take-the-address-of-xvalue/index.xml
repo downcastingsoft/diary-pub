@@ -1,0 +1,60 @@
+---
+title: xvalueにaddress-of演算子は適用できない
+---
+<?xml version="1.0"?>
+<i:article xmlns:i="https://ijkml.example.com/">
+  <i:p>
+    タイトルの通り。たとえばこういうことは(当然だが)できない。
+<i:code lang="cpp">
+#include &lt;utility&gt;
+
+int main() {
+  int i = 0;
+  int *pi = &amp;(std::move(i));
+  return 0;
+}
+</i:code>
+
+    <i:a href="http://eel.is/c++draft/expr.unary.op#3">[expr.unary.op]/3</i:a>において
+    <i:quote>
+      <i:p>
+        The result of the unary &amp; operator is a pointer to its operand.
+        The operand shall be an lvalue or a qualified-id.
+      </i:p>
+      <i:p>
+        &amp; 演算の結果は被演算子へのポインターである。被演算子はlvalueかqualified-idでなければならない。
+      </i:p>
+    </i:quote>
+    と定められているからだ。
+    こうなっている理由を考えたけどいくつかある。
+  </i:p>
+
+  <i:p>
+    <i:h2>prvalueに&amp;演算子を適用できるようになってしまう</i:h2>
+    glvalueが求められる文脈にprvalueが出現するとtemporary materialization conversionが適用されてxvalueになる。
+    だからたとえば次のようなコードが可能になってしまう。
+
+<i:code lang="cpp">
+int main() {
+  int *pi = &amp;1;
+  return 0;
+}
+</i:code>
+
+    さすがにこれは気持ち悪い。
+    Conversion sequenceがtemporary materialization conversionを含んでいたらill-formedとする([dcl.init.ref]/5みたいに)みたいな定め方もできそうだがダルい。
+  </i:p>
+  <i:p>
+    <i:h2>*演算子との整合性</i:h2>
+    *演算の結果はlvalueである([expr.unary.op]/3)ので、もしもxvalueに&amp;演算子が適用できるとすると、合法的にxvalueを(そしてprvalueを)lvalueに変換することができてしまう。
+    たとえば次のように。
+<i:code>
+int main() {
+  int i = 0;
+  // *(&amp;(std::move(i)));
+  return 0;
+}
+</i:code>
+
+  </i:p>
+</i:article>
