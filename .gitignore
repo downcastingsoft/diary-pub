@@ -1,0 +1,7 @@
+/.bundle
+/crash.log
+/output
+/tmp
+/vendor
+/Gemfile.lock
+.ruby-version
