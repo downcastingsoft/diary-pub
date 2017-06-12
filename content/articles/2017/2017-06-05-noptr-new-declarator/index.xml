@@ -3,14 +3,12 @@
   xmlns:i="https://ijkml.example.com/">
 
 <i:head>
-  <i:title><i:snip language="cpp">new (void(*[i])())<i:snip>と書けない理由</i:title>
+  <i:title><i:snip language="cpp">new (void(*[i])())</i:snip>と書けない理由</i:title>
   <i:summary>
   </i:summary>
 </i:head>
 
 <i:body>
-<i:title></i:title>
-
 <p>
 次のC++コードは正しい。
 
@@ -174,6 +172,8 @@ new-type-idは括弧で始まることはないし、
 
 というわけではじめに載せたコードは正しくない。
 
+</p>
+
 <i:section id="solution">
 <i:title>解決策</i:title>
 
@@ -199,9 +199,9 @@ typedef名を使う。
 }
 </i:code>
 
+</p>
 </i:section>
 
-</p>
 </i:body>
 
 </i:article>
