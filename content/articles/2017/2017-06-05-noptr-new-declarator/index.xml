@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<i:article>
+<i:article
+  xmlns:i="https://ijkml.example.com/">
 
 <i:head>
   <i:title><i:snip language="cpp">new (void(*[i])())<i:snip>と書けない理由</i:title>
