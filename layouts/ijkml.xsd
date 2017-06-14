@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<xsd:schema
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://ijkml.example.com"
+  xmlns:i="https://ijkml.example.com/">
+
+  <xsd:element name="article">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="head" />
+        <xsd:element ref="body" />
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="body">
+  </xsd:element>
+
+  <xsd:element name="code">
+  </xsd:element>
+
+  <xsd:element name="head">
+  </xsd:element>
+
+  <xsd:element name="p">
+  </xsd:element>
+
+  <xsd:element name="section">
+  </xsd:element>
+
+  <xsd:element name="snip">
+  </xsd:element>
+
+  <xsd:element name="summary">
+  </xsd:element>
+
+  <xsd:element name="title">
+  </xsd:element>
+
+</xsd:schema>

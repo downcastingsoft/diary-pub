@@ -1,0 +1,41 @@
+---
+title: "error: reference to non-static member function must be called"
+---
+<?xml version="1.0"?>
+<i:article xmlns:i="https://ijkml.example.com/">
+  <i:p>
+    次のコードはエラーである。
+<i:code lang="cpp">
+class A {
+  public:
+  void func() { }
+};
+
+int main() {
+  A a;
+  a.func;   // error
+  return 0;
+}
+</i:code>
+
+  </i:p>
+
+  <i:p>
+    Clangだとこういうエラーが出る。
+
+<i:code lang="terminal">
+2017-05-14-memcall.cpp:8:5: error: reference to non-static member function must be called; did you mean to call it with no arguments?
+  a.func;
+  ~~^~~~
+        ()
+1 error generated.
+</i:code>
+
+  </i:p>
+
+  <i:p>
+    どうやら非staticメンバー関数には出現できる環境に制限があるっぽい。
+    具体的に規格のどこで決められているのだろうか?
+  </i:p>
+
+</i:article>
