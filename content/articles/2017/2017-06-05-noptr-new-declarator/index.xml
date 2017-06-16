@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="https://ijkml.example.com/">
+
+<i:head>
+  <i:titlestring>`new (void(*[i])())`と書けない理由</i:titlestring>
+</i:head>
+
+<i:title>
+  <i:snip language="cpp">new (void(*[i])())</i:snip>と書けない理由
+</i:title>
+<i:body>
+<p>
+次のC++コードは正しい。
+
+<i:code language="cpp">void func() {
+  void (**ppf)() = new (void(*[10])());
+}
+</i:code>
+
+だが、次のC++コードは正しくない。
+
+<i:code language="cpp">void func() {
+  int i = 10;
+  void (**ppf)() = new (void(*[i])());
+}
+</i:code>
+
+2番目のコードが正しくないのはなぜか。
+</p>
+
+<p>
+そもそもの話として、C++で配列型を宣言するとき、その要素数は定数でなければならないのだった。
+
+<i:code language="cpp">void func() {
+  int a10i1[10];
+  int i = 10;
+  // int a10i2[i];  // error
+}
+</i:code>
+
+それではnew式で要素数が定数でない配列を作れるのはなぜか。
+それを考えるためnew-expressionの定義を見てみよう。
+
+<pre>
+new-expression:
+  ::_opt new new-placement_opt new-type-id new-initializer_opt
+  ::_opt new new-placement_opt ( type-id ) new-initializer_opt
+
+new-type-id:
+  type-specifier-seq new-declarator_opt
+
+type-id:
+  type-specifier-seq abstract-declarator_opt
+
+new-declarator:
+  ptr-operator new-declarator_opt
+  noptr-new-declarator
+
+noptr-new-declarator:
+  [ expression ] attribute-specifier-seq_opt #1
+  noptr-new-declarator [ constant-expression ] attribute-specifier-seq
+</pre>
+
+#1が定数式とは限らない式を要素数にもつ配列を作ることを許している。
+
+たとえば<i:snip>new int[i]</i:snip>という式は、
+
+<pre>
+new-expression: <i:snip>new int[i]</i:snip>
+  :: (なし)
+  new : <i:snip>new</i:snip>
+  new-placement (なし)
+  new-type-id : <i:snip>int[i]</i:snip>
+  type-specifier: <i:snip>int</i:snip>
+    new-declarator: <i:snip>[i]</i:snip>
+      noptr-new-declarator: <i:snip>[i]</i:snip>
+        [
+        expression : <i:snip>i</i:snip>
+        ]
+  new-initializer (なし)
+</pre>
+
+という風に当てはめられる。だから合法。
+
+逆に言うと#1に当てはまらない場合は非定数要素数の配列を作ることができない。
+
+</p>
+
+<p>
+
+今度はtype-specifier-seqを見てみよう。
+
+<pre>
+type-specifier-seq:
+  type-specifier attribute-specifier-seq_opt
+  type-specifier type-specifier-seq_opt
+
+type-specifier:
+  simple-type-specifier
+  elaborated-type-specifier
+  typename-specifier
+  cv-qualifier
+
+simple-type-specifier:
+  nested-name-specifier_opt type-name
+  nested-name-specifier template simple-template-id
+  nested-name-specifier_opt template-name
+  char
+  char16_t
+  char32_t
+  (中略)
+  void
+  auto
+  decltype-specifier
+
+elaborated-type-specifier:
+  class-key attribute-specifier-seq_opt nested-name-specifier_opt identifier
+  class-key simple-template-id
+  class-key nested-name-specifier_opt simple-template-id
+  enum nested-name-specifier_opt identifier
+
+typename-specifier
+  typename nested-name-specifier identifier
+  typename nested-name-specifier template_opt simple-template-id
+
+cv-qualifier
+  const
+  volatile
+
+nested-name-specifier:
+  ::
+  type-name ::
+  namespace-name ::
+  decltype-specifier ::
+  nested-name-specifier identifier ::
+  nested-name-specifier template_opt simple-template-id ::
+
+type-name:
+  class-name
+  enum-name
+  typedef-name
+  simple-template-id
+
+template-name:
+
+decltype-specifier:
+</pre>
+
+定義をよく見ると、
+type-specifierは開き括弧では始まらないことが分かる。
+
+<i:code language="cpp">void func() {
+  int i; // OK
+  // (int) i; error
+
+  new int; // OK
+  // new ((int)); error
+}
+</i:code>
+
+new-expressionである<i:snip>new (void(*[10])())</i:snip>についてここで改めて考えてみよう。
+
+まず、<i:snip>(void(*[10])())</i:snip>はnew-type-idではない。
+type-specifier-seqは開き括弧では始まらないからだ。
+ということは、
+<i:snip>(void(*[10])())</i:snip>はtype-idを括弧で括ったものであり、
+<i:snip>void(*[10])()</i:snip>はtype-specifierである。
+
+(無)
+(無)
+
+<i:snip>new (void(*[i])())</i:snip>はnew-expressionではない。
+もしそうなら<i:snip>(void(*[i])())</i:snip>はnew-type-idである、
+または<i:snip>void(*[i])()</i:snip>はtype-idである、
+のいずれかが成り立たなければならないが、
+new-type-idは括弧で始まることはないし、
+<i:snip>i</i:snip>はconstant-expressionではないからだ。
+
+というわけではじめに載せたコードは正しくない。
+
+</p>
+
+<i:section id="solution">
+<i:title>解決策</i:title>
+
+<p>
+typedef名を使う。
+<i:code language="cpp">void func() {
+  int i = 10;
+  using F = void(*)();
+  void (**ppf)() = new F[i];
+}
+</i:code>
+</p>
+
+<p>
+次の解決策は使えないことに注意しよう。
+
+(ここにもう少し丁寧な説明を書く)
+(cf: <i:cpp-std section="expr.new" paragraph="4"/>)
+
+<i:code language="cpp">void func() {
+  int i = 10;
+  void (**ppf)() = new void(*[i])();
+}
+</i:code>
+
+</p>
+</i:section>
+
+</i:body>
+
+</i:article>
