@@ -3,11 +3,12 @@
   xmlns:i="https://ijkml.example.com/">
 
 <i:head>
-  <i:title><i:snip language="cpp">new (void(*[i])())</i:snip>と書けない理由</i:title>
-  <i:summary>
-  </i:summary>
+  <i:titlestring>`new (void(*[i])())`と書けない理由</i:titlestring>
 </i:head>
 
+<i:title>
+  <i:snip language="cpp">new (void(*[i])())</i:snip>と書けない理由
+</i:title>
 <i:body>
 <p>
 次のC++コードは正しい。
@@ -41,6 +42,7 @@
 それではnew式で要素数が定数でない配列を作れるのはなぜか。
 それを考えるためnew-expressionの定義を見てみよう。
 
+<pre>
 new-expression:
   ::_opt new new-placement_opt new-type-id new-initializer_opt
   ::_opt new new-placement_opt ( type-id ) new-initializer_opt
@@ -58,11 +60,13 @@ new-declarator:
 noptr-new-declarator:
   [ expression ] attribute-specifier-seq_opt #1
   noptr-new-declarator [ constant-expression ] attribute-specifier-seq
+</pre>
 
 #1が定数式とは限らない式を要素数にもつ配列を作ることを許している。
 
 たとえば<i:snip>new int[i]</i:snip>という式は、
 
+<pre>
 new-expression: <i:snip>new int[i]</i:snip>
   :: (なし)
   new : <i:snip>new</i:snip>
@@ -75,6 +79,7 @@ new-expression: <i:snip>new int[i]</i:snip>
         expression : <i:snip>i</i:snip>
         ]
   new-initializer (なし)
+</pre>
 
 という風に当てはめられる。だから合法。
 
@@ -86,6 +91,7 @@ new-expression: <i:snip>new int[i]</i:snip>
 
 今度はtype-specifier-seqを見てみよう。
 
+<pre>
 type-specifier-seq:
   type-specifier attribute-specifier-seq_opt
   type-specifier type-specifier-seq_opt
@@ -139,6 +145,7 @@ type-name:
 template-name:
 
 decltype-specifier:
+</pre>
 
 定義をよく見ると、
 type-specifierは開き括弧では始まらないことが分かる。
@@ -191,7 +198,7 @@ typedef名を使う。
 次の解決策は使えないことに注意しよう。
 
 (ここにもう少し丁寧な説明を書く)
-(cf: [expr.new]/4)
+(cf: <i:cpp-std section="expr.new" paragraph="4"/>)
 
 <i:code language="cpp">void func() {
   int i = 10;
