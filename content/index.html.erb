@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<% require 'pp' %>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>diary</title>
+</head>
+<body>
+  <ul>
+    <% @items.find_all("/articles/**/index.xml").each do |item| %>
+      <% pp item %>
+      <% r = %r[/articles/\d{4}/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<slug>[^\/]+)/index\.xml] %>
+      <% m = item.identifier.to_s.match(r) %>
+      <li>
+        <a href="/article/<%= m[:year] %>/<%= m[:month] %>/<%= m[:day] %>/<%= m[:slug] %>/">
+          <%= m[:year] %><%= m[:month] %>/<%= m[:day] %>: <%= item[:title] %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</body>
+</html>
