@@ -8,6 +8,11 @@ compile '/**/*.html' do
   layout '/default.*'
 end
 
+compile '/**/*.erb' do
+  filter :erb
+  write item.identifier.without_ext
+end
+
 compile '/**/*' do
   write item.identifier.to_s
 end
