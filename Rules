@@ -14,7 +14,6 @@ compile '/**/*.erb' do
 end
 
 compile '/**/*' do
-  write item.identifier.to_s
 end
 
 route %r[/articles/\d{4}/(\d{4})-(\d{2})-(\d{2})-([^\/]+)/([^\/.]+).xml] do |year, month, day, slug, filename|
