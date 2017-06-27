@@ -1,3 +1,8 @@
+---
+created_at: 2017-06-05
+last_updated_at: 2017-06-27
+title: "`new (void(*[i])())`と書けない理由"
+---
 <?xml version="1.0"?>
 <i:article
   xmlns:i="https://ijkml.example.com/">
