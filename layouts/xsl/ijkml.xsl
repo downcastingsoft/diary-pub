@@ -12,24 +12,24 @@
         <link href='/stylesheet.css' rel='stylesheet' type='text/css' />
         <meta charset='UTF-8' />
         <xsl:choose>
-          <xsl:when test="i:article/i:head/i:titlestring">
-            <xsl:apply-templates select="i:article/i:head/i:titlestring" />
+          <xsl:when test="i:head/i:titlestring">
+            <xsl:apply-templates select="i:head/i:titlestring" />
           </xsl:when>
           <xsl:otherwise>
             <title>
-              <xsl:value-of select="i:article/i:title"/>
+              <xsl:value-of select="i:title"/>
             </title>
           </xsl:otherwise>
         </xsl:choose>
       </head>
       <body>
-        <xsl:apply-templates select="i:article/i:title" />
-        <xsl:if test="i:article/i:summary">
+        <xsl:apply-templates select="i:title" />
+        <xsl:if test="i:summary">
           <hr />
-          <xsl:apply-templates select="i:article/i:summary" />
+          <xsl:apply-templates select="i:summary" />
         </xsl:if>
         <hr />
-        <xsl:apply-templates select="i:article/i:body" />
+        <xsl:apply-templates select="i:body" />
         <hr />
         <footer>
           <a href="/">Top</a> |
