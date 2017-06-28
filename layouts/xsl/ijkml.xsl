@@ -61,7 +61,10 @@
 
   <xsl:template match="i:section">
     <section>
-      <xsl:copy-of select="@id"/>
+      <xsl:attribute name="id">
+        <xsl:text>section-</xsl:text>
+        <xsl:value-of select="@sid"/>
+      </xsl:attribute>
       <xsl:apply-templates />
     </section>
   </xsl:template>
@@ -91,6 +94,8 @@
       <xsl:apply-templates />
     </title>
   </xsl:template>
+
+  <xsl:template match="@id" />
 
   <xsl:template match="node() | @*">
     <xsl:copy>
