@@ -1,6 +1,6 @@
 ---
 created_at: 2017-05-17
-last_updated_at: 2017-06-27
+last_updated_at: 2017-06-29
 title: "xvalueにaddress-of演算子は適用できない"
 ---
 <?xml version="1.0"?>
@@ -16,8 +16,8 @@ title: "xvalueにaddress-of演算子は適用できない"
 <i:body>
   <p>
     タイトルの通り。たとえばこういうことは(当然だが)できない。
-<i:code lang="cpp">
-#include &lt;utility&gt;
+  </p>
+  <i:code lang="cpp">#include &lt;utility&gt;
 
 int main() {
   int i = 0;
@@ -26,48 +26,57 @@ int main() {
 }
 </i:code>
 
+  <p>
     <i:cpp-std section="expr.unary.op" paragraph="3" />において
-    <i:quote>
-      <p>
-        The result of the unary &amp; operator is a pointer to its operand.
-        The operand shall be an lvalue or a qualified-id.
-      </p>
-      <p>
-        &amp; 演算の結果は被演算子へのポインターである。被演算子はlvalueかqualified-idでなければならない。
-      </p>
-    </i:quote>
+  </p>
+  <i:quote>
+    <p>
+      The result of the unary &amp; operator is a pointer to its operand.
+      The operand shall be an lvalue or a qualified-id.
+    </p>
+    <p>
+      &amp; 演算の結果は被演算子へのポインターである。被演算子はlvalueかqualified-idでなければならない。
+    </p>
+  </i:quote>
+  <p>
     と定められているからだ。
     こうなっている理由を考えたけどいくつかある。
   </p>
 
-  <p>
+  <i:section sid="apply-amp-to-prvalue">
     <i:title>prvalueに&amp;演算子を適用できるようになってしまう</i:title>
-    glvalueが求められる文脈にprvalueが出現するとtemporary materialization conversionが適用されてxvalueになる。
-    だからたとえば次のようなコードが可能になってしまう。
+    <p>
+      glvalueが求められる文脈にprvalueが出現するとtemporary materialization conversionが適用されてxvalueになる。
+      だからたとえば次のようなコードが可能になってしまう。
+    </p>
 
-<i:code lang="cpp">
-int main() {
+    <i:code language="cpp">int main() {
   int *pi = &amp;1;
   return 0;
 }
 </i:code>
 
-    さすがにこれは気持ち悪い。
-    Conversion sequenceがtemporary materialization conversionを含んでいたらill-formedとする(<i:cpp-std section="dcl.init.ref" paragraph="5"/>みたいに)みたいな定め方もできそうだがダルい。
-  </p>
-  <p>
+    <p>
+      さすがにこれは気持ち悪い。
+      Conversion sequenceがtemporary materialization conversionを含んでいたらill-formedとする(<i:cpp-std section="dcl.init.ref" paragraph="5"/>みたいに)みたいな定め方もできそうだがダルい。
+    </p>
+  </i:section>
+  <i:section sid="star-op">
     <i:title>*演算子との整合性</i:title>
-    *演算の結果はlvalueである(<i:cpp-std section="expr.unary.op" paragraph="3" />)ので、もしもxvalueに&amp;演算子が適用できるとすると、合法的にxvalueを(そしてprvalueを)lvalueに変換することができてしまう。
-    たとえば次のように。
-<i:code>
-int main() {
+    <p>
+      *演算の結果はlvalueである(<i:cpp-std section="expr.unary.op" paragraph="3" />)ので、もしもxvalueに&amp;演算子が適用できるとすると、
+      合法的にxvalueを(そしてprvalueを)lvalueに変換することができてしまう。
+      たとえば次のように。
+    </p>
+    <i:code language="cpp">int main() {
   int i = 0;
   // *(&amp;(std::move(i)));
   return 0;
 }
 </i:code>
 
-  </p>
+  </i:section>
+
 </i:body>
 
 </i:article>
