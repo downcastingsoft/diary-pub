@@ -5,6 +5,11 @@ body {
   max-width: 900px;
 }
 
+a.link-footnote {
+  vertical-align: super;
+  font-size: small;
+}
+
 a.targetable:target {
   background: #c9fbc9;
   color: black;
