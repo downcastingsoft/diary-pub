@@ -11,12 +11,18 @@ title: "`new (void(*[i])())`と書けない理由"
   <i:titlestring>`new (void(*[i])())`と書けない理由</i:titlestring>
 </i:head>
 
-<i:summary>
-</i:summary>
-
 <i:title>
   <i:snip language="cpp">new (void(*[i])())</i:snip>と書けない理由
 </i:title>
+
+<i:summary>
+  <i:snip>i</i:snip>が定数式でないとき、
+  <i:snip>new (void(*[i])())</i:snip>という式は不適格(ill-formed)である。
+  <i:snip>new int[i]</i:snip>や<i:snip>new (void(*[10])())</i:snip>が
+  適格であることを考えるとこれは驚くべきことである。
+  この記事では、C++におけるnew-expressionの定義からこの式が適格でないことを示す。
+</i:summary>
+
 <i:body>
 <i:section id="intro">
 <i:title>
