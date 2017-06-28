@@ -1,6 +1,6 @@
 ---
 created_at: 2017-06-05
-last_updated_at: 2017-06-27
+last_updated_at: 2017-06-28
 title: "`new (void(*[i])())`と書けない理由"
 ---
 <?xml version="1.0"?>
@@ -11,19 +11,28 @@ title: "`new (void(*[i])())`と書けない理由"
   <i:titlestring>`new (void(*[i])())`と書けない理由</i:titlestring>
 </i:head>
 
+<i:summary>
+</i:summary>
+
 <i:title>
   <i:snip language="cpp">new (void(*[i])())</i:snip>と書けない理由
 </i:title>
 <i:body>
+<i:section id="intro">
+<i:title>
+  導入
+</i:title>
 <p>
-次のC++コードは正しい。
 
+ある日、あなたは返り値がvoid型である無引数関数へのポインター10個分のメモリーを動的に確保したくなった。
+これは簡単だ。あなたは次のようなコードを書いた。これはC++として適格である。
 <i:code language="cpp">void func() {
   void (**ppf)() = new (void(*[10])());
 }
 </i:code>
 
-だが、次のC++コードは正しくない。
+次の日、あなたは10個といわず非定数個分のメモリーを確保したくなった。
+配列new式では要素数は定数でなくともよい。あなたは次のプログラムを書いた。
 
 <i:code language="cpp">void func() {
   int i = 10;
@@ -31,129 +40,116 @@ title: "`new (void(*[i])())`と書けない理由"
 }
 </i:code>
 
-2番目のコードが正しくないのはなぜか。
-</p>
+しかしこれはC++として適格ではない。なぜか。
 
+</p>
+</i:section>
+
+<i:section id="new-expression">
+<i:title>
+  配列new式の構文
+</i:title>
 <p>
-そもそもの話として、C++で配列型を宣言するとき、その要素数は定数でなければならないのだった。
+そもそもの話として、C++で配列型の変数を宣言するとき、その要素数は定数でなければならないのだった。
 
 <i:code language="cpp">void func() {
   int a10i1[10];
   int i = 10;
-  // int a10i2[i];  // error
+  // int a10i2[i]; - error
 }
 </i:code>
 
 それではnew式で要素数が定数でない配列を作れるのはなぜか。
 それを考えるためnew-expressionの定義を見てみよう。
 
-<pre>
-new-expression:
-  ::_opt new new-placement_opt new-type-id new-initializer_opt
-  ::_opt new new-placement_opt ( type-id ) new-initializer_opt
+<i:code language="ebnf">new-expression = [ "::" ], "new", [ new-placement ], new-type-id, [ new-initializer ] (* #1 *)
+               | [ "::" ], "new", [ new-placement ], "(", type-id, ")", [ new-initializer ]; (* #2 *)
 
-new-type-id:
-  type-specifier-seq new-declarator_opt
+new-type-id = type-specifier-seq, [ new-declarator ];
 
-type-id:
-  type-specifier-seq abstract-declarator_opt
+type-id = type-specifier-seq, [ abstract-declarator ];
 
-new-declarator:
-  ptr-operator new-declarator_opt
-  noptr-new-declarator
+new-declarator = ptr-operator, [ new-declarator ];
+               | noptr-new-declarator
 
-noptr-new-declarator:
-  [ expression ] attribute-specifier-seq_opt #1
-  noptr-new-declarator [ constant-expression ] attribute-specifier-seq
-</pre>
+noptr-new-declarator = "[", expression, "]", [ attribute-specifier-seq ] (* #3 *)
+                     | noptr-new-declarator, "[", constant-expression, "]", attribute-specifier-seq;
+</i:code>
 
-#1が定数式とは限らない式を要素数にもつ配列を作ることを許している。
+new-expression の規則は2つあり、 #1 は括弧で囲まれていない型(new-type-id), #2 は括弧で囲まれた型を受け入れるために定義されている。
 
-たとえば<i:snip>new int[i]</i:snip>という式は、
+<i:code language="cpp">void func() {
+  int *pi = new int;   // #1
+  void (**ppf)() = new (void(*[10])()); // #2
+}
+</i:code>
+
+
+#3 の規則が定数式とは限らない式を要素数にもつ配列を作ることを許している。
+
+たとえば <i:snip>new int[i]</i:snip> という式は、
 
 <pre>
 new-expression: <i:snip>new int[i]</i:snip>
-  :: (なし)
-  new : <i:snip>new</i:snip>
-  new-placement (なし)
+  [ "::" ]
+  "new" : <i:snip>new</i:snip>
+  [ new-placement ]
   new-type-id : <i:snip>int[i]</i:snip>
   type-specifier: <i:snip>int</i:snip>
     new-declarator: <i:snip>[i]</i:snip>
       noptr-new-declarator: <i:snip>[i]</i:snip>
-        [
+      "[" : <i:snip>[</i:snip>
         expression : <i:snip>i</i:snip>
-        ]
-  new-initializer (なし)
+        "]" : <i:snip>]</i:snip>
+  [ new-initializer ]
 </pre>
 
-という風に当てはめられる。だから合法。
+という風に当てはめられる。だから適格。
 
-逆に言うと#1に当てはまらない場合は非定数要素数の配列を作ることができない。
+逆に言うと #3 に当てはまらない場合は非定数要素数の配列を作ることができない。
+今から示すが、実は最初の例はこれに当てはまらない。
 
 </p>
+</i:section>
 
+<i:section id="new-type-id">
+<i:title>new-type-idについてもう少し詳しく見る</i:title>
 <p>
 
-今度はtype-specifier-seqを見てみよう。
+さっき new-type-id は括弧で囲まれていないと書いたが、それは本当だろうか。
+今度は type-specifier-seq の定義を見てみよう。
+type-specifier-seq は new-type-id の先頭の要素だ。
 
-<pre>
-type-specifier-seq:
-  type-specifier attribute-specifier-seq_opt
-  type-specifier type-specifier-seq_opt
+<i:code language="ebnf">type-specifier-seq = type-specifier, [ attribute-specifier-seq ]
+                   | type-specifier, [ type-specifier-seq ];
 
-type-specifier:
-  simple-type-specifier
-  elaborated-type-specifier
-  typename-specifier
-  cv-qualifier
+type-specifier = simple-type-specifier
+               | elaborated-type-specifier
+               | typename-specifier
+               | cv-qualifier;
+</i:code>
 
-simple-type-specifier:
-  nested-name-specifier_opt type-name
-  nested-name-specifier template simple-template-id
-  nested-name-specifier_opt template-name
-  char
-  char16_t
-  char32_t
-  (中略)
-  void
-  auto
-  decltype-specifier
+simple-type-specifier の先頭に来るのは
+型名、
+名前空間名、
+<i:snip>decltype</i:snip>、
+<i:snip>::</i:snip>
+のいずれか
+(これは嘘で本当はもっとあるが、いずれにせよ開き括弧は含まれていないのでとりあえず無視する)。
 
-elaborated-type-specifier:
-  class-key attribute-specifier-seq_opt nested-name-specifier_opt identifier
-  class-key simple-template-id
-  class-key nested-name-specifier_opt simple-template-id
-  enum nested-name-specifier_opt identifier
+elaborated-type-specifier の先頭に来るのは
+<i:snip>class</i:snip>、
+<i:snip>struct</i:snip>、
+<i:snip>union</i:snip>、
+<i:snip>enum</i:snip>
+のいずれか。
 
-typename-specifier
-  typename nested-name-specifier identifier
-  typename nested-name-specifier template_opt simple-template-id
+typename-specifier の先頭に来るのは <i:snip>typename</i:snip>。
 
-cv-qualifier
-  const
-  volatile
+cv-qualifier はそのままCV修飾子。
 
-nested-name-specifier:
-  ::
-  type-name ::
-  namespace-name ::
-  decltype-specifier ::
-  nested-name-specifier identifier ::
-  nested-name-specifier template_opt simple-template-id ::
-
-type-name:
-  class-name
-  enum-name
-  typedef-name
-  simple-template-id
-
-template-name:
-
-decltype-specifier:
-</pre>
-
-定義をよく見ると、
-type-specifierは開き括弧では始まらないことが分かる。
+というわけで本当に type-specifier は開き括弧では始まらない。
+たとえば次のようなコードは書けない。
 
 <i:code language="cpp">void func() {
   int i; // OK
@@ -164,18 +160,31 @@ type-specifierは開き括弧では始まらないことが分かる。
 }
 </i:code>
 
-new-expressionである<i:snip>new (void(*[10])())</i:snip>についてここで改めて考えてみよう。
+</p>
+</i:section>
 
+<i:section>
+<i:title>
+  <i:snip>new (void(*[i])())</i:snip>はnew-expressionではない
+</i:title>
+<p>
+最初の例に出てきた<i:snip>new (void(*[10])())</i:snip>についてここで改めて考える。これがnew-expressionだと仮定しよう。
+</p>
+
+<p>
 まず、<i:snip>(void(*[10])())</i:snip>はnew-type-idではない。
 type-specifier-seqは開き括弧では始まらないからだ。
 ということは、
 <i:snip>(void(*[10])())</i:snip>はtype-idを括弧で括ったものであり、
-<i:snip>void(*[10])()</i:snip>はtype-specifierである。
+<i:snip>void(*[10])()</i:snip>はtype-specifierでなければならない。
 
 (無)
 (無)
 
-<i:snip>new (void(*[i])())</i:snip>はnew-expressionではない。
+</p>
+
+<p>
+まとめると、<i:snip>new (void(*[i])())</i:snip>はnew-expressionではない。
 もしそうなら<i:snip>(void(*[i])())</i:snip>はnew-type-idである、
 または<i:snip>void(*[i])()</i:snip>はtype-idである、
 のいずれかが成り立たなければならないが、
@@ -186,32 +195,38 @@ new-type-idは括弧で始まることはないし、
 
 </p>
 
+</i:section>
+
 <i:section id="solution">
 <i:title>解決策</i:title>
 
-<p>
-typedef名を使う。
-<i:code language="cpp">void func() {
+  <i:section id="solution-typedef">
+    <i:title>方法1: typedef名を使う</i:title>
+    <p>
+      <i:code language="cpp">void func() {
   int i = 10;
   using F = void(*)();
   void (**ppf)() = new F[i];
 }
-</i:code>
-</p>
+      </i:code>
+    </p>
+  </i:section>
 
-<p>
-次の解決策は使えないことに注意しよう。
+  <i:section id="solution-noparenthesis">
+    <i:title>方法2(間違い): 括弧で囲まない</i:title>
+    <p>
+      括弧で囲むとnew-type-idでなくなるならば、括弧で囲まなければ大丈夫そうである。
 
-(ここにもう少し丁寧な説明を書く)
-(cf: <i:cpp-std section="expr.new" paragraph="4"/>)
-
-<i:code language="cpp">void func() {
+      <i:code language="cpp">void func() {
   int i = 10;
   void (**ppf)() = new void(*[i])();
 }
-</i:code>
+      </i:code>
 
-</p>
+      ところがこれは正しくない。
+      (ここにもう少し丁寧な説明を書く)
+      (cf: <i:cpp-std section="expr.new" paragraph="4"/>)
+    </p>
 </i:section>
 
 </i:body>
