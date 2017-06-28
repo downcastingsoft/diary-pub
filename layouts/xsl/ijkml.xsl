@@ -16,7 +16,6 @@
       <xsl:if test="i:summary">
         <xsl:apply-templates select="i:summary" />
       </xsl:if>
-      <hr />
       <xsl:apply-templates select="i:body" />
 
       <xsl:if test="//i:footnote">

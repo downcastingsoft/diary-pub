@@ -12,3 +12,15 @@ code {
   border: none;
   padding: 0;
 }
+
+#footnotes {
+  border-top: thin solid black;
+}
+
+#site-fotter {
+  border-top: thin solid black;
+}
+
+#summary {
+  border-bottom: thin solid black;
+}
