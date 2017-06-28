@@ -128,9 +128,11 @@
   </xsl:template>
 
   <xsl:template match="i:summary">
-    <p>
-      <xsl:apply-templates />
-    </p>
+    <section id="summary">
+      <p>
+        <xsl:apply-templates />
+      </p>
+    </section>
   </xsl:template>
 
   <xsl:template match="i:title">
