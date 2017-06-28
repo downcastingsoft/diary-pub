@@ -18,6 +18,32 @@
       </xsl:if>
       <hr />
       <xsl:apply-templates select="i:body" />
+
+      <xsl:if test="//i:footnote">
+        <section id="footnotes">
+          <h2>脚注</h2>
+          <xsl:for-each select="//i:footnote">
+            <xsl:variable name="num" select="position()" />
+            <div class="targetable">
+              <xsl:attribute name="id">
+                <xsl:text>footnote-</xsl:text>
+                <xsl:value-of select="@fid" />
+              </xsl:attribute>
+
+              <a>
+                <xsl:attribute name="href">
+                  <xsl:text>#ref-footnote-</xsl:text>
+                  <xsl:value-of select="@fid" />
+                </xsl:attribute>
+
+                <xsl:text>*</xsl:text>
+                <xsl:value-of select="$num"/>
+              </a>:
+              <xsl:apply-templates />
+            </div>
+          </xsl:for-each>
+        </section>
+      </xsl:if>
     </article>
   </xsl:template>
 
@@ -46,6 +72,26 @@
       <xsl:if test="@paragraph">
         <xsl:text/>/<xsl:value-of select="@paragraph"/><xsl:text/>
       </xsl:if>
+    </a>
+  </xsl:template>
+
+  <xsl:template match="i:footnote">
+    <xsl:variable name="predecessors" select="preceding::i:footnote"/>
+    <xsl:variable name="num" select="count($predecessors) + 1"/>
+    <a class="link-footnote targetable">
+      <xsl:attribute name="href">
+        <xsl:text>#footnote-</xsl:text>
+        <xsl:value-of select="@fid" />
+      </xsl:attribute>
+
+      <xsl:attribute name="id">
+        <xsl:text>ref-footnote-</xsl:text>
+        <xsl:value-of select="@fid" />
+      </xsl:attribute>
+
+      <xsl:text>[</xsl:text>
+      <xsl:value-of select="$num"/>
+      <xsl:text>]</xsl:text>
     </a>
   </xsl:template>
 
