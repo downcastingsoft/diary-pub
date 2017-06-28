@@ -16,6 +16,7 @@ title: "error: reference to non-static member function must be called"
 <i:body>
 <p>
 次のコードはエラーである。
+</p>
 
 <i:code language="cpp">class A {
   public:
@@ -29,10 +30,9 @@ int main() {
 }
 </i:code>
 
-</p>
-
 <p>
 Clangだとこういうエラーが出る。
+</p>
 
 <i:code lang="terminal">2017-05-14-memcall.cpp:8:5: error: reference to non-static member function must be called; did you mean to call it with no arguments?
   a.func;
@@ -40,8 +40,6 @@ Clangだとこういうエラーが出る。
         ()
 1 error generated.
 </i:code>
-
-</p>
 
 <p>
 
