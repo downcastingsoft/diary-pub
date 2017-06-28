@@ -1,6 +1,6 @@
 ---
 created_at: 2017-06-05
-last_updated_at: 2017-06-28
+last_updated_at: 2017-06-29
 title: "`new (void(*[i])())`と書けない理由"
 ---
 <?xml version="1.0"?>
@@ -35,7 +35,7 @@ title: "`new (void(*[i])())`と書けない理由"
 
 <p>
 次の日、あなたは10個といわず非定数個分のメモリーを確保したくなった。
-配列new式では要素数は定数でなくともよい。あなたは次のプログラムを書いた。
+配列new式では要素数は定数でなくともよい。あなたは次のようなコードを書いた。
 </p>
 
 <i:code language="cpp">void func() {
@@ -49,7 +49,7 @@ title: "`new (void(*[i])())`と書けない理由"
 </p>
 </i:section>
 
-<i:section id="new-expression">
+<i:section id="new-expr-syntax">
 <i:title>
   配列new式の構文
 </i:title>
@@ -103,7 +103,7 @@ new-expression: <i:snip>new int[i]</i:snip>
   "new" : <i:snip>new</i:snip>
   [ new-placement ]
   new-type-id : <i:snip>int[i]</i:snip>
-  type-specifier: <i:snip>int</i:snip>
+    type-specifier: <i:snip>int</i:snip>
     new-declarator: <i:snip>[i]</i:snip>
       noptr-new-declarator: <i:snip>[i]</i:snip>
       "[" : <i:snip>[</i:snip>
@@ -120,7 +120,7 @@ new-expression: <i:snip>new int[i]</i:snip>
 </p>
 </i:section>
 
-<i:section id="new-type-id">
+<i:section id="new-type-id-syntax">
 <i:title>new-type-idについてもう少し詳しく見る</i:title>
 <p>
 さっき new-type-id は括弧で囲まれていないと書いたが、それは本当だろうか。
@@ -157,7 +157,7 @@ typename-specifier の先頭に来るのは <i:snip>typename</i:snip>。
 
 cv-qualifier はそのままCV修飾子。
 
-というわけで本当に type-specifier は開き括弧では始まらない。
+というわけで type-specifier は開き括弧では始まらないというのは本当だった。
 たとえば次のようなコードは書けない。
 </p>
 
@@ -171,20 +171,20 @@ cv-qualifier はそのままCV修飾子。
 </i:code>
 </i:section>
 
-<i:section>
+<i:section id="main-section">
 <i:title>
   <i:snip>new (void(*[i])())</i:snip>はnew-expressionではない
 </i:title>
 <p>
-最初の例に出てきた<i:snip>new (void(*[10])())</i:snip>についてここで改めて考える。これがnew-expressionだと仮定しよう。
+最初の例に出てきた<i:snip>new (void(*[i])())</i:snip>についてここで改めて考える。これがnew-expressionだと仮定しよう。
 </p>
 
 <p>
-まず、<i:snip>(void(*[10])())</i:snip>はnew-type-idではない。
+まず、<i:snip>(void(*[i])())</i:snip>はnew-type-idではない。
 type-specifier-seqは開き括弧では始まらないからだ。
 ということは、
-<i:snip>(void(*[10])())</i:snip>はtype-idを括弧で括ったものであり、
-<i:snip>void(*[10])()</i:snip>はtype-specifierでなければならない。
+<i:snip>(void(*[i])())</i:snip>はtype-idを括弧で括ったものであり、
+<i:snip>void(*[i])()</i:snip>はtype-specifierでなければならない。
 
 (無)
 (無)
