@@ -24,7 +24,7 @@ title: "`new (void(*[i])())`と書けない理由"
 </i:summary>
 
 <i:body>
-<i:section id="intro">
+<i:section sid="intro">
 <i:title>
   導入
 </i:title>
@@ -55,7 +55,7 @@ title: "`new (void(*[i])())`と書けない理由"
 </p>
 </i:section>
 
-<i:section id="new-expr-syntax">
+<i:section sid="new-expr-syntax">
 <i:title>
   配列new式の構文
 </i:title>
@@ -126,7 +126,7 @@ new-expression: <i:snip>new int[i]</i:snip>
 </p>
 </i:section>
 
-<i:section id="new-type-id-syntax">
+<i:section sid="new-type-id-syntax">
 <i:title>new-type-idについてもう少し詳しく見る</i:title>
 <p>
 さっき new-type-id は括弧で囲まれていないと書いたが、それは本当だろうか。
@@ -177,7 +177,7 @@ cv-qualifier はそのままCV修飾子。
 </i:code>
 </i:section>
 
-<i:section id="main-section">
+<i:section sid="main-section">
 <i:title>
   <i:snip>new (void(*[i])())</i:snip>はnew-expressionではない
 </i:title>
@@ -211,10 +211,10 @@ new-type-idは括弧で始まることはないし、
 
 </i:section>
 
-<i:section id="solution">
+<i:section sid="solution">
 <i:title>解決策</i:title>
 
-  <i:section id="solution-typedef">
+  <i:section sid="solution-typedef">
     <i:title>方法1: typedef名を使う</i:title>
       <i:code language="cpp">void func() {
   int i = 10;
@@ -224,7 +224,7 @@ new-type-idは括弧で始まることはないし、
       </i:code>
   </i:section>
 
-  <i:section id="solution-noparenthesis">
+  <i:section sid="solution-noparenthesis">
     <i:title>方法2(間違い): 括弧で囲まない</i:title>
     <p>
       括弧で囲むとnew-type-idでなくなるならば、括弧で囲まなければ大丈夫そうである。
