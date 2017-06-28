@@ -150,7 +150,9 @@ simple-type-specifier の先頭に来るのは
 <i:snip>decltype</i:snip>、
 <i:snip>::</i:snip>
 のいずれか
-(これは嘘で本当はもっとあるが、いずれにせよ開き括弧は含まれていないのでとりあえず無視する)。
+<i:footnote fid="simple-type-specifier">
+  これは嘘で本当はもっとあるが、いずれにせよ開き括弧は含まれていないのでとりあえず無視する
+</i:footnote>。
 
 elaborated-type-specifier の先頭に来るのは
 <i:snip>class</i:snip>、
