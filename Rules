@@ -2,6 +2,7 @@
 
 compile '/articles/**/*.xml' do
   filter :ijkml, file: "/xsl/ijkml.xsl"
+  layout '/default.*'
 end
 
 compile '/**/*.html' do
