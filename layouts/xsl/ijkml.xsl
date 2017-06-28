@@ -98,9 +98,11 @@
   </xsl:template>
 
   <xsl:template match="i:title">
-    <h1>
+    <xsl:variable name="parents" select="ancestor::i:section"/>
+    <xsl:variable name="level" select="1 + count($parents)"/>
+    <xsl:element name="{concat('h', string($level))}">
       <xsl:apply-templates />
-    </h1>
+    </xsl:element>
   </xsl:template>
 
   <xsl:template match="i:titlestring">
