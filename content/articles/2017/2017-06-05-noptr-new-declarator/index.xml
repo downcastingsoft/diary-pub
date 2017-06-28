@@ -86,11 +86,11 @@ new-declarator = ptr-operator, [ new-declarator ];
                | noptr-new-declarator
 
 noptr-new-declarator = "[", expression, "]", [ attribute-specifier-seq ] (* #3 *)
-                     | noptr-new-declarator, "[", constant-expression, "]", attribute-specifier-seq;
+                     | noptr-new-declarator, "[", constant-expression, "]", [ attribute-specifier-seq ] (* #4 *);
 </i:code>
 
 <p>
-new-expression の規則は2つあり、 #1 は括弧で囲まれていない型(new-type-id), #2 は括弧で囲まれた型を受け入れるために定義されている。
+new-expression の規則は2つあり、 #1 は括弧で囲まれていない型(new-type-id)、 #2 は括弧で囲まれた型を受け入れるために定義されている。
 </p>
 
 <i:code language="cpp">void func() {
@@ -99,7 +99,19 @@ new-expression の規則は2つあり、 #1 は括弧で囲まれていない型
 }
 </i:code>
 
-#3 の規則が定数式とは限らない式を要素数にもつ配列を作ることを許している。
+<p>
+規則 #3 が定数式とは限らない式を要素数にもつ配列を作ることを許している。
+#3 で添字演算子の中身が expression なので、ここには非定数式を入れることができる。
+</p>
+
+<i:code language="cpp">void func() {
+  int i = 10;
+  new int[i]; // OK
+  new int[i][30]; // OK
+  // new int[30][i]; - error
+  // 規則 #4 により、最も外側(最も左側)以外の添字演算子の中身は定数式でなければならない
+}
+</i:code>
 
 たとえば <i:snip>new int[i]</i:snip> という式は、
 
@@ -122,7 +134,7 @@ new-expression: <i:snip>new int[i]</i:snip>
 
 <p>
 逆に言うと #3 に当てはまらない場合は非定数要素数の配列を作ることができない。
-今から示すが、実は最初の例はこれに当てはまらない。
+後で示すが、実は最初の例はこのケースに該当する。
 </p>
 </i:section>
 
