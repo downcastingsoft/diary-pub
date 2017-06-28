@@ -4,7 +4,11 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:i="https://ijkml.example.com/"
   exclude-result-prefixes="i">
-  <xsl:output method="xml" encoding="UTF-8" />
+  <xsl:output
+    encoding="UTF-8"
+    indent="yes"
+    method="html"
+    omit-xml-declaration="yes" />
 
   <xsl:template match="i:article">
     <article>
