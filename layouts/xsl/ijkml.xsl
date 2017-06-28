@@ -25,7 +25,6 @@
       <body>
         <xsl:apply-templates select="i:title" />
         <xsl:if test="i:summary">
-          <hr />
           <xsl:apply-templates select="i:summary" />
         </xsl:if>
         <hr />
