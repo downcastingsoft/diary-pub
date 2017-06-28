@@ -105,6 +105,12 @@
     </p>
   </xsl:template>
 
+  <xsl:template match="i:quote">
+    <blockquote>
+      <xsl:apply-templates />
+    </blockquote>
+  </xsl:template>
+
   <xsl:template match="i:section">
     <section>
       <xsl:attribute name="id">
