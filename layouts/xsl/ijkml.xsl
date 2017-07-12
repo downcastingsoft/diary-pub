@@ -98,6 +98,12 @@
     <xsl:apply-templates />
   </xsl:template>
 
+  <xsl:template match="i:italic">
+    <span style="font-style:italic;">
+      <xsl:apply-templates />
+    </span>
+  </xsl:template>
+
   <xsl:template match="i:p">
     <p>
       <xsl:apply-templates />
