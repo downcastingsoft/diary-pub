@@ -75,18 +75,18 @@ title: "`new (void(*[i])())`と書けない理由"
 それを考えるためnew-expressionの定義を見てみよう。
 </p>
 
-<i:code language="ebnf">new-expression = [ "::" ], "new", [ new-placement ], new-type-id, [ new-initializer ] (* #1 *)
-               | [ "::" ], "new", [ new-placement ], "(", type-id, ")", [ new-initializer ]; (* #2 *)
+<i:code language="ebnf">new expression = [ "::" ], "new", [ new placement ], new type id, [ new initializer ] (* #1 *)
+               | [ "::" ], "new", [ new placement ], "(", type id, ")", [ new initializer ]; (* #2 *)
 
-new-type-id = type-specifier-seq, [ new-declarator ];
+new type id = type specifier seq, [ new declarator ];
 
-type-id = type-specifier-seq, [ abstract-declarator ];
+type id = type specifier seq, [ abstract declarator ];
 
-new-declarator = ptr-operator, [ new-declarator ];
-               | noptr-new-declarator
+new declarator = ptr operator, [ new declarator ];
+               | noptr new declarator
 
-noptr-new-declarator = "[", expression, "]", [ attribute-specifier-seq ] (* #3 *)
-                     | noptr-new-declarator, "[", constant-expression, "]", [ attribute-specifier-seq ] (* #4 *);
+noptr new declarator = "[", expression, "]", [ attribute specifier seq ] (* #3 *)
+                     | noptr new declarator, "[", constant expression, "]", [ attribute specifier seq ] (* #4 *);
 </i:code>
 
 <p>
@@ -146,13 +146,13 @@ new-expression: <i:snip>new int[i]</i:snip>
 type-specifier-seq は new-type-id の先頭の要素だ。
 </p>
 
-<i:code language="ebnf">type-specifier-seq = type-specifier, [ attribute-specifier-seq ]
-                   | type-specifier, [ type-specifier-seq ];
+<i:code language="ebnf">type specifier seq = type specifier, [ attribute specifier seq ]
+                   | type specifier, [ type specifier seq ];
 
-type-specifier = simple-type-specifier
-               | elaborated-type-specifier
-               | typename-specifier
-               | cv-qualifier;
+type specifier = simple type specifier
+               | elaborated type specifier
+               | typename specifier
+               | cv qualifier;
 </i:code>
 
 <p>
