@@ -247,12 +247,33 @@ new-type-idは括弧で始まることはないし、
   int i = 10;
   void (**ppf)() = new void(*[i])();
 }
-      </i:code>
+</i:code>
 
     <p>
       ところがこれは正しくない。
-      (ここにもう少し丁寧な説明を書く)
-      (cf: <i:cpp-std section="expr.new" paragraph="4"/>)
+      <i:snip>void(*[i])()</i:snip>はnew-type-idではないからだ。
+      これは、new-type-idはtype-idとは違って関数の宣言子を含むことができないという事情による。
+    </p>
+    <i:code language="ebnf">new type id = type specifier seq, [ new declarator ];
+
+type id = type specifier seq, [ abstract declarator ];
+
+new declarator = ptr operator, [ new declarator ];
+               | noptr new declarator;
+
+abstract declarator = ptr abstract declarator
+                    | [ noptr abstract declarator ], parameters and qualifiers (* #1 *)
+                    | abstract pack declarator;
+
+parameters and qualifiers = "(", parameter declaration clause, ")", [ cv qualifier seq ],
+                            [ ref qualifier ], [ noexpect qualifier ], [ attribute specifier seq ];
+
+</i:code>
+    <p>
+      noptr-new-declaratorはnoptr-abstract-declaratorとは異なり、引数リスト(#1)をもつことができない。
+      このため<i:snip>void (*[i])()</i:snip>はnew-type-idになれない。引数リストをもつからだ。
+      <i:snip>i</i:snip>が定数式でないのでtype-idになることもできない。
+      このあたりの話は<i:cpp-std section="expr.new" paragraph="4"/>にも書いてある。
     </p>
 </i:section>
 
