@@ -8,6 +8,11 @@ body {
 a.link-footnote {
   vertical-align: super;
   font-size: small;
+  text-decoration: none;
+}
+
+a.link-footnote:hover {
+  text-decoration: underline;
 }
 
 a.targetable:target {
