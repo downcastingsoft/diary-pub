@@ -203,12 +203,8 @@ cv-qualifier はそのままCV修飾子。
 まず、<i:snip>(void(*[i])())</i:snip>はnew-type-idではない。
 type-specifier-seqは開き括弧では始まらないからだ。
 ということは、
-<i:snip>(void(*[i])())</i:snip>はtype-idを括弧で括ったものであり、
-<i:snip>void(*[i])()</i:snip>はtype-specifierでなければならない。
-
-(無)
-(無)
-
+<i:snip>(void(*[i])())</i:snip>はtype-idを括弧で括ったものでなければならないが、
+<i:snip>i<i:snip> は定数式でないので当然type-idにはなれない。
 </p>
 
 <p>
