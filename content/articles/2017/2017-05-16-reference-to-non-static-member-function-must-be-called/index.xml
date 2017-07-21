@@ -1,7 +1,7 @@
 ---
 created_at: 2017-05-16
-last_updated_at: 2017-06-27
-title: "error: reference to non-static member function must be called"
+last_updated_at: 2017-07-22
+title: "非staticメンバー関数は呼ぶことしかできない([expr.ref]/4.3.2)"
 ---
 <?xml version="1.0"?>
 <i:article xmlns:i="https://ijkml.example.com/">
@@ -10,12 +10,19 @@ title: "error: reference to non-static member function must be called"
 </i:head>
 
 <i:title>
-  error: reference to non-static member function must be called
+非staticメンバー関数は呼ぶことしかできない([expr.ref]/4.3.2)
 </i:title>
+
+<i:summary>
+クラス型オブジェクトの非staticメンバー関数への参照 <i:snip language="cpp">obj.func</i:snip>
+はメンバー関数呼び出し式の第一オペランドとしてのみ現れることができる(<i:snip language="cpp">obj.func(a)</i:snip>)。
+これは<i:cpp-std section="expr.ref" paragraph="4.3.2" />で定められている。
+この記事は規格を読んだ後書き直した。
+</i:summary>
 
 <i:body>
 <p>
-次のコードはエラーである。
+概要の通り。例：
 </p>
 
 <i:code language="cpp">class A {
@@ -31,7 +38,7 @@ int main() {
 </i:code>
 
 <p>
-Clangだとこういうエラーが出る。
+Clangのエラー
 </p>
 
 <i:code lang="terminal">2017-05-14-memcall.cpp:8:5: error: reference to non-static member function must be called; did you mean to call it with no arguments?
@@ -40,13 +47,6 @@ Clangだとこういうエラーが出る。
         ()
 1 error generated.
 </i:code>
-
-<p>
-
-どうやら非staticメンバー関数には出現できる環境に制限があるっぽい。
-具体的に規格のどこで決められているのだろうか?
-
-</p>
 
 </i:body>
 
