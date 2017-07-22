@@ -14,8 +14,9 @@ title: "非staticメンバー関数は呼ぶことしかできない([expr.ref]/
 </i:title>
 
 <i:summary>
-クラス型オブジェクトの非staticメンバー関数への参照 <i:snip language="cpp">obj.func</i:snip>
-はメンバー関数呼び出し式の第一オペランドとしてのみ現れることができる(<i:snip language="cpp">obj.func(a)</i:snip>)。
+C++では、クラス型オブジェクトの非staticメンバー関数への参照 <i:snip language="cpp">a.func</i:snip>
+はメンバー関数呼び出し式の第一オペランドとしてのみ出現可能(<i:snip language="cpp">a.func()</i:snip>)であり、
+代入式の右辺にしたりアドレスを取ったりすることはできない。
 これは<i:cpp-std section="expr.ref" paragraph="4.3.2" />で定められている。
 この記事は規格を読んだ後書き直した。
 </i:summary>
@@ -38,7 +39,7 @@ int main() {
 </i:code>
 
 <p>
-Clangのエラー
+Clangのエラーメッセージ
 </p>
 
 <i:code lang="terminal">2017-05-14-memcall.cpp:8:5: error: reference to non-static member function must be called; did you mean to call it with no arguments?
@@ -48,6 +49,34 @@ Clangのエラー
 1 error generated.
 </i:code>
 
+<p>
+  関数ポインターにdecayすることができないのでこのような仕様になっているのだろう。
+  非staticメンバー関数への参照はオブジェクトとメンバー関数と2つの情報をもつが、
+  非staticメンバー関数の実体は普通ひとつなので、関数ポインターにするとオブジェクトの情報が失われてしまうから。
+</p>
+
+<i:section sid="solution">
+<i:title>解決策</i:title>
+<p>
+  ラムダにする。
+</p>
+<i:code lang="cpp">#include &lt;iostream&gt;
+
+class B {
+  public:
+  const int func(int x) { return x * x; }
+};
+
+int main() {
+  B b;
+  const auto f = [&amp;b](int x) { return b.func(x); };
+  std::cout &lt;&lt; f(5) &lt;&lt; std::endl;
+  return 0;
+}
+</i:code>
+</i:section>
+
 </i:body>
 
 </i:article>
+2017-05-16-reference-to-non-static-member
