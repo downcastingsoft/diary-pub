@@ -17,10 +17,10 @@ title: "`new (void(*[i])())`と書けない理由"
 
 <i:summary>
   <i:snip>i</i:snip>が定数式でないとき、
-  <i:snip>new (void(*[i])())</i:snip>という式は不適格(ill-formed)である。
-  <i:snip>new int[i]</i:snip>や<i:snip>new (void(*[10])())</i:snip>が
-  適格であることを考えるとこれは驚くべきことである。
-  この記事では、C++におけるnew-expressionの定義からこの式が適格でないことを示す。
+  <i:snip>new (void(*[i])())</i:snip>という式はC++として不適格(ill-formed)である。
+  これは括弧で囲まれた型名はnew-type-idになれないことから従う。
+  なお仮引数リストで終わる型名もnew-type-idになれないので、
+  <i:snip>new void(*[i])()</i:snip>も不適格である。
 </i:summary>
 
 <i:body>
@@ -90,7 +90,9 @@ noptr new declarator = "[", expression, "]", [ attribute specifier seq ] (* #3 *
 </i:code>
 
 <p>
-new-expression の規則は2つあり、 #1 は括弧で囲まれていない型(new-type-id)、 #2 は括弧で囲まれた型を受け入れるために定義されている。
+new-expressionの規則は2つあり、
+#1 は括弧で囲まれていない型名( new-type-id )、
+#2 は括弧で囲まれた型名( <i:snip>(</i:snip>type-id<i:snip>)</i:snip> )を受け入れるために定義されている。
 </p>
 
 <i:code language="cpp">void func() {
@@ -101,7 +103,7 @@ new-expression の規則は2つあり、 #1 は括弧で囲まれていない型
 
 <p>
 規則 #3 が定数式とは限らない式を要素数にもつ配列を作ることを許している。
-#3 で添字演算子の中身が expression なので、ここには非定数式を入れることができる。
+#3 で添字演算子の中身がexpressionなので、ここには非定数式を入れることができる。
 </p>
 
 <i:code language="cpp">void func() {
@@ -109,21 +111,21 @@ new-expression の規則は2つあり、 #1 は括弧で囲まれていない型
   new int[i]; // OK
   new int[i][30]; // OK
   // new int[30][i]; - error
-  // 規則 #4 により、最も外側(最も左側)以外の添字演算子の中身は定数式でなければならない
+  // 規則 #4 により、最も外側(最も左側)以外の添字演算 子の中身は定数式でなければならない
 }
 </i:code>
 
-たとえば <i:snip>new int[i]</i:snip> という式は、
+たとえば<i:snip>new int[i]</i:snip>という式は、
 
 <pre>
-new-expression: <i:snip>new int[i]</i:snip>
+new-expression : <i:snip>new int[i]</i:snip>
   [ "::" ]
   "new" : <i:snip>new</i:snip>
   [ new-placement ]
   new-type-id : <i:snip>int[i]</i:snip>
-    type-specifier: <i:snip>int</i:snip>
-    new-declarator: <i:snip>[i]</i:snip>
-      noptr-new-declarator: <i:snip>[i]</i:snip>
+    type-specifier : <i:snip>int</i:snip>
+    new-declarator : <i:snip>[i]</i:snip>
+      noptr-new-declarator : <i:snip>[i]</i:snip>
       "[" : <i:snip>[</i:snip>
         expression : <i:snip>i</i:snip>
         "]" : <i:snip>]</i:snip>
@@ -139,11 +141,11 @@ new-expression: <i:snip>new int[i]</i:snip>
 </i:section>
 
 <i:section sid="new-type-id-syntax">
-<i:title>new-type-idについてもう少し詳しく見る</i:title>
+<i:title>new-type-idは括弧で囲まれていない</i:title>
 <p>
-さっき new-type-id は括弧で囲まれていないと書いたが、それは本当だろうか。
-今度は type-specifier-seq の定義を見てみよう。
-type-specifier-seq は new-type-id の先頭の要素だ。
+さっきnew-type-idは括弧で囲まれていないと書いたが、それは本当だろうか。
+今度はtype-specifier-seqの定義を見てみよう。
+type-specifier-seqはnew-type-idの先頭の要素だ。
 </p>
 
 <i:code language="ebnf">type specifier seq = type specifier, [ attribute specifier seq ]
@@ -156,29 +158,29 @@ type specifier = simple type specifier
 </i:code>
 
 <p>
-simple-type-specifier の先頭に来るのは
+simple-type-specifierの先頭に来るのは
 型名、
 名前空間名、
 <i:snip>decltype</i:snip>、
 <i:snip>::</i:snip>
-のいずれか
-<i:footnote fid="simple-type-specifier">
+のいずれか<i:footnote fid="simple-type-specifier">
   これは嘘で本当はもっとあるが、いずれにせよ開き括弧は含まれていないのでとりあえず無視する
 </i:footnote>。
 
-elaborated-type-specifier の先頭に来るのは
+elaborated-type-specifierの先頭に来るのは
 <i:snip>class</i:snip>、
 <i:snip>struct</i:snip>、
 <i:snip>union</i:snip>、
 <i:snip>enum</i:snip>
 のいずれか。
 
-typename-specifier の先頭に来るのは <i:snip>typename</i:snip>。
+typename-specifierの先頭に来るのは<i:snip>typename</i:snip>。
 
-cv-qualifier はそのままCV修飾子。
+cv-qualifierはそのままCV修飾子。
 
-というわけで type-specifier は開き括弧では始まらないというのは本当だった。
-たとえば次のようなコードは書けない。
+というわけで type-specifierは開き括弧では始まらないというのは本当だった。
+type-specifier-seqが開き括弧で始まらないので括弧で囲まれた式がnew-type-idになることもない。
+これは考えてみると当然で、たとえば次のようなコードが書けないことからも分かる。
 </p>
 
 <i:code language="cpp">void func() {
@@ -196,7 +198,8 @@ cv-qualifier はそのままCV修飾子。
   <i:snip>new (void(*[i])())</i:snip>はnew-expressionではない
 </i:title>
 <p>
-最初の例に出てきた<i:snip>new (void(*[i])())</i:snip>についてここで改めて考える。これがnew-expressionだと仮定しよう。
+最初の例に出てきた<i:snip>new (void(*[i])())</i:snip>についてここで改めて考える。
+これがnew-expressionだと仮定しよう。
 </p>
 
 <p>
@@ -204,16 +207,16 @@ cv-qualifier はそのままCV修飾子。
 type-specifier-seqは開き括弧では始まらないからだ。
 ということは、
 <i:snip>(void(*[i])())</i:snip>はtype-idを括弧で括ったものでなければならないが、
-<i:snip>i<i:snip> は定数式でないので当然type-idにはなれない。
+<i:snip>i</i:snip>は定数式でないので当然type-idにはなれない。
 </p>
 
 <p>
 まとめると、<i:snip>new (void(*[i])())</i:snip>はnew-expressionではない。
 もしそうなら<i:snip>(void(*[i])())</i:snip>はnew-type-idである、
-または<i:snip>void(*[i])()</i:snip>はtype-idである、
+または <i:snip>void(*[i])()</i:snip>はtype-idである、
 のいずれかが成り立たなければならないが、
-new-type-idは括弧で始まることはないし、
-<i:snip>i</i:snip>はconstant-expressionではないからだ。
+new-type-idは括弧で囲まれることはないし、
+<i:snip>i</i:snip>は定数式ではないからだ。
 
 というわけではじめに載せたコードは正しくない。
 
@@ -266,13 +269,34 @@ parameters and qualifiers = "(", parameter declaration clause, ")", [ cv qualifi
 
 </i:code>
     <p>
-      noptr-new-declaratorはnoptr-abstract-declaratorとは異なり、引数リスト(#1)をもつことができない。
+      noptr-new-declaratorはnoptr-abstract-declaratorとは異なり、parameters-and-qualifiers(#1)をもつことができない。
       このため<i:snip>void (*[i])()</i:snip>はnew-type-idになれない。引数リストをもつからだ。
       <i:snip>i</i:snip>が定数式でないのでtype-idになることもできない。
       このあたりの話は<i:cpp-std section="expr.new" paragraph="4"/>にも書いてある。
     </p>
-</i:section>
+  </i:section>
 
+  <i:section sid="solution-std-vector">
+    <i:title>方法3: <i:snip>std::vector</i:snip>を使う</i:title>
+    <i:code language="cpp">void func() {
+  int i = 10;
+  std::vector&lt;void(*)()&gt; vf(i);
+}
+</i:code>
+  </i:section>
+
+  <i:section sid="solution-std-function">
+    <i:title>方法4: <i:snip>std::function</i:snip>を使う</i:title>
+    <i:code language="cpp">void func() {
+  int i = 10;
+  std::function&lt;void()&gt; *pf = new std::function&lt;void()&gt;[i];
+</i:code>
+  </i:section>
+
+<p>
+個人的には非定数要素数配列の要素数を添字演算子の中に入れる記法は仕様を無意味に複雑にするだけで良くなかったと思う。
+<i:snip>new{i} int</i:snip>みたいにすれば多少マシになったのではないか。
+</p>
 </i:body>
 
 </i:article>
