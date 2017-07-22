@@ -12,10 +12,12 @@
 
   <xsl:template match="i:article">
     <article>
-      <xsl:apply-templates select="i:title" />
-      <xsl:if test="i:summary">
-        <xsl:apply-templates select="i:summary" />
-      </xsl:if>
+      <header id="header">
+        <xsl:apply-templates select="i:title" />
+        <xsl:if test="i:summary">
+          <xsl:apply-templates select="i:summary" />
+        </xsl:if>
+      </header>
       <xsl:apply-templates select="i:body" />
 
       <xsl:if test="//i:footnote">
@@ -131,11 +133,9 @@
   </xsl:template>
 
   <xsl:template match="i:summary">
-    <section id="summary">
-      <p>
-        <xsl:apply-templates />
-      </p>
-    </section>
+    <p>
+      <xsl:apply-templates />
+    </p>
   </xsl:template>
 
   <xsl:template match="i:title">
