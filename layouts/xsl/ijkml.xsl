@@ -142,6 +142,15 @@
     <xsl:variable name="parents" select="ancestor::i:section"/>
     <xsl:variable name="level" select="1 + count($parents)"/>
     <xsl:element name="{concat('h', string($level))}">
+      <xsl:if test="../@sid">
+        <xsl:attribute name="class">section-heading</xsl:attribute>
+        <a class="section-anchor">
+          <xsl:attribute name="href">
+            <xsl:value-of select="concat('#section-', string(../@sid))" />
+          </xsl:attribute>
+          <xsl:text>🔗</xsl:text>
+        </a>
+      </xsl:if>
       <xsl:apply-templates />
     </xsl:element>
   </xsl:template>

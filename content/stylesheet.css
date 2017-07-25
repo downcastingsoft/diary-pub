@@ -43,3 +43,20 @@ code {
 #header {
   border-bottom: thin solid black;
 }
+
+a.section-anchor {
+  float: left;
+  margin-left: -1.5em;
+  speak: none;
+  text-decoration: none;
+  visibility: hidden;
+}
+
+.section-heading:hover > a.section-anchor {
+  visibility: visible;
+}
+
+.section-heading {
+  padding-left: 1.5em;
+  margin-left: -1.5em;
+}
