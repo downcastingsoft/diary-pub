@@ -7,9 +7,9 @@
 </head>
 <body>
   <ul>
-    <% @items.find_all("/articles/**/index.xml").each do |item| %>
+    <% @items.find_all("/article/**/index.xml").each do |item| %>
       <% pp item %>
-      <% r = %r[/articles/\d{4}/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<slug>[^\/]+)/index\.xml] %>
+      <% r = %r[/article/\d{4}/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<slug>[^\/]+)/index\.xml] %>
       <% m = item.identifier.to_s.match(r) %>
       <li>
         <a href="/article/<%= m[:year] %>/<%= m[:month] %>/<%= m[:day] %>/<%= m[:slug] %>/">

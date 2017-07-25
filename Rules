@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-compile '/articles/**/*.xml' do
+compile '/article/**/*.xml' do
   filter :ijkml, file: "/xsl/ijkml.xsl"
   layout '/default.*'
 end
@@ -21,7 +21,7 @@ end
 compile '/**/*' do
 end
 
-route %r[/articles/\d{4}/(\d{4})-(\d{2})-(\d{2})-([^\/]+)/([^\/.]+).xml] do |year, month, day, slug, filename|
+route %r[/article/\d{4}/(\d{4})-(\d{2})-(\d{2})-([^\/]+)/([^\/.]+).xml] do |year, month, day, slug, filename|
   "/article/#{year}/#{month}/#{day}/#{slug}/#{filename}.html"
 end
 
