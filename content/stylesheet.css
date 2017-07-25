@@ -49,11 +49,10 @@ a.section-anchor {
   margin-left: -1.5em;
   speak: none;
   text-decoration: none;
-  visibility: hidden;
 }
 
-.section-heading:hover > a.section-anchor {
-  visibility: visible;
+.section-heading:hover > a.section-anchor::before {
+  content: "🔗";
 }
 
 .section-heading {

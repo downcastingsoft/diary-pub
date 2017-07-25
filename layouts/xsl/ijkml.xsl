@@ -148,7 +148,6 @@
           <xsl:attribute name="href">
             <xsl:value-of select="concat('#section-', string(../@sid))" />
           </xsl:attribute>
-          <xsl:text>🔗</xsl:text>
         </a>
       </xsl:if>
       <xsl:apply-templates />
