@@ -1,0 +1,167 @@
+---
+created_at: 2017-08-17
+last_updated_at: 2017-08-17
+title: "draft: 現在の特殊化(current instantiation)の定義"
+---
+<?xml version="1.0"?>
+<i:article xmlns:i="https://ijkml.example.com/">
+
+<i:head>
+</i:head>
+
+<i:title>
+現在の特殊化(current instantiation)の定義
+</i:title>
+
+<i:summary>
+現在の特殊化(current instantiation<i:std-cpp section="temp.dep.type" paragraph="1"/>)の定義とコード例.
+</i:summary>
+
+<i:body>
+<i:section>
+<i:title>定義</i:title>
+<p>
+クラステンプレートの定義の中で, ある名前が"今"定義しているクラス(テンプレートを特殊化して得られるクラス型)
+を参照しているとき, その名前は現在の特殊化を参照しているという. 厳密には,
+</p>
+<i:quote>
+<p>
+§17.7.2.1 Dependent types
+A name refers to the current instantiation if it is
+in the definition of a class template,
+a nested class of a class template,
+a member of a class template,
+or a member of a nested class of a class template, the injected-class-name of the class template or nested class,
+in the definition of a primary class template or a member of a primary class template,
+the name of the class template followed by the template argument list of the primary template
+(as described below) enclosed in <i:snip>&lt;&gt;</i:snip> (or an equivalent template alias specialization),
+in the definition of a nested class of a class template,
+the name of the nested class referenced as a member of the current instantiation, or
+in the definition of a partial specialization or a member of a partial specialization,
+the name of the class template followed by the template argument list of the partial specialization
+enclosed in <i:snip>&lt;&gt;</i:snip> (or an equivalent template alias specialization).
+If the nth template parameter is a parameter pack,
+the nth template argument is a pack expansion whose pattern is the name of the parameter pack.
+</p>
+<p>
+(拙訳)
+ある名前が<strong>現在の特殊化</strong>を参照しているとは, その名前が,
+
+クラステンプレート, クラステンプレート内にネストされたクラス, クラステンプレートのメンバー, 
+またはクラステンプレート内にネストされたクラスのメンバーの定義内の,
+当該クラステンプレートまたはその中にネストされた当該クラスを指す注入されたクラス名であるか,
+
+プライマリークラステンプレートまたはプライマリークラステンプレートのメンバーの定義内の,
+当該クラステンプレート名に,
+当該プライマリークラステンプレートの引数リストと同じ実引数リスト(後述)を
+<i:snip>&lt;&gt;</i:snip>で括ったものを後置したもの
+(またはエイリアステンプレートの特殊化で, これと等価なもの)であるか,
+
+クラステンプレート内にネストされたクラスの定義内の,
+ネストされた当該クラスの名前であって,
+[別の]現在の特殊化に対するメンバーアクセス式の右辺にあるようなものであるか, または,
+
+テンプレートの部分特殊化またはテンプレートの部分特殊化のメンバーの定義内の,
+当該クラステンプレート名に,
+該当するテンプレートの部分特殊化の引数リストと同じ実引数リストを
+<i:snip>&lt;&gt;</i:snip>で括ったものを後置したもの
+(またはエイリアステンプレートの特殊化で, これと等価なもの)であるときをいう.
+[この場合, ]もしもn番目のテンプレート仮引数がパラメーターパックであるならば,
+n番目のテンプレート実引数は対応するパラメーターパック名のパック展開でなければならない.
+</p>
+</i:quote>
+</i:section>
+
+<i:section>
+<i:title>例</i:title>
+
+<i:section>
+<i:title>(1a.1)</i:title>
+<i:code language="cpp">template&lt;typename T&gt;
+class c1 {
+  using name1 = c1; // (1a.1) x (1b.1)
+};
+</i:code>
+(1a.1)x(1b.2)は存在しない.
+</i:section>
+
+<i:section>
+<i:title>(1a.2)</i:title>
+<i:code language="cpp">template&lt;typename T&gt;
+class c1 {
+  class c2 {
+    using name2 = c1; // (1a.2) x (1b.1)
+    using name3 = c2; // (1a.2) x (1b.2)
+  };
+};
+</i:code>
+</i:section>
+
+<i:section>
+<i:title>(1a.3)</i:title>
+<i:code language="cpp">template&lt;typename T&gt;
+class c1 {
+  void func1() {
+    using name4 = c1; // (1a.3) x (1b.1)
+                      // (1a.3) x (1b.2)
+  }
+};
+</i:code>
+</i:section>
+
+<i:section>
+<i:title>(1a.4)</i:title>
+<i:code language="cpp">template&lt;typename T&gt;
+class c1 {
+  class c3 {
+    void func2() {
+      using name5 = c1; // (1a.4) x (1b.1)
+      using name6 = c3; // (1a.4) x (1b.2)
+    }
+  };
+};
+</i:code>
+</i:section>
+
+<i:section>
+<i:title>(2)</i:title>
+<i:code language="cpp">template&lt;typename T&gt;
+class c4 {
+  using name7 = c4&lt;T&gt;; // (2.1)
+
+  void func() {
+    using name8 = c4&lt;T&gt;; // (2.2)
+  }
+};
+</i:code>
+</i:section>
+
+<i:section>
+<i:title>(3)</i:title>
+<i:code language="cpp">template&lt;typename T&gt;
+</i:code>
+</i:section>
+
+<i:section>
+<i:title>(4)</i:title>
+<i:code language="cpp">template &lt;typename T&gt;
+class c7 { };
+
+template&gt;typename T&gt;
+class c7&lt;T**&gt; {
+  using name10 = c7&lt;T**&gt; // (4)
+};
+
+template&lt;typename T, typename... U&gt;
+class c8 { };
+
+template&lt;typename... U&gt;
+class c8&lt;void, U...&gt; {
+  using name11 = c8&lt;void, U...&gt;;
+};
+</i:code>
+</i:section>
+
+</i:section>
+</i:body>
+</i:article>
