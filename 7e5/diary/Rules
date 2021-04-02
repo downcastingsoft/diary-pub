@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 
 compile '/{article,draft}/**/*.xml' do
-  filter :ijkml, file: "/xsl/ijkml.xsl"
+  layout '/xsl/ijkml.xsl'
   layout '/default.*'
 end
+layout '/xsl/ijkml.xsl', :xsl
 
 compile '/**/*.html' do
   layout '/default.*'
