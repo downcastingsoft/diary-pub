@@ -11,7 +11,7 @@
       <% m = item.identifier.to_s.match(r) %>
       <li>
         <a href="/article/<%= m[:year] %>/<%= m[:month] %>/<%= m[:day] %>/<%= m[:slug] %>/">
-          <%= m[:year] %><%= m[:month] %>/<%= m[:day] %>: <%= item[:title] %>
+          <%= m[:year] %>/<%= m[:month] %>/<%= m[:day] %>: <%= item[:title] %>
         </a>
       </li>
     <% end %>
