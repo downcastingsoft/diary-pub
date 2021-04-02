@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<% require 'pp' %>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -8,7 +7,6 @@
 <body>
   <ul>
     <% @items.find_all("/article/**/index.xml").each do |item| %>
-      <% pp item %>
       <% r = %r[/article/\d{4}/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<slug>[^\/]+)/index\.xml] %>
       <% m = item.identifier.to_s.match(r) %>
       <li>
