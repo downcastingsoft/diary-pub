@@ -72,3 +72,8 @@ checks:
     # E.g.:
     #   exclude: ['^/server_status']
     exclude: []
+
+base_url: https://www.downcastingsoft.net/7e5/diary
+title: diary
+author_name: hnagamin
+author_uri: https://www.downcastingsoft.net/7e5/diary/
