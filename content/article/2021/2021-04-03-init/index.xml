@@ -1,8 +1,9 @@
 ---
 kind: article
-created_at: 2021/04/03 01:00:00
-updated_at: 2021/04/03 13:19:00
+created_at: 2021-04-03 01:00:00
+updated_at: 2021-04-03 13:19:00
 title: "最初の記事"
+slug: init
 ---
 <?xml version="1.0"?>
 <i:article xmlns:i="https://ijkml.example.com/">

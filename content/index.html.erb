@@ -6,12 +6,11 @@
 </head>
 <body>
   <ul>
-    <% @items.find_all("/article/**/index.xml").each do |item| %>
-      <% r = %r[/article/\d{4}/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<slug>[^\/]+)/index\.xml] %>
-      <% m = item.identifier.to_s.match(r) %>
+    <% sorted_articles.each do |item| %>
+      <% d = item[:created_at] %>
       <li>
-        <a href="./article/<%= m[:year] %>/<%= m[:month] %>/<%= m[:day] %>/<%= m[:slug] %>/">
-          <%= m[:year] %>/<%= m[:month] %>/<%= m[:day] %>: <%= item[:title] %>
+        <a href="./article/<%= d.year %>/<%= d.month %>/<%= d.mday %>/<%= item[:slug] %>/">
+          <%= d.year %>/<%= d.month %>/<%= d.mday %>: <%= item[:title] %>
         </a>
       </li>
     <% end %>
