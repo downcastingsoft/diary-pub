@@ -14,6 +14,18 @@
     <article>
       <header id="header">
         <xsl:apply-templates select="i:title" />
+        <div>
+          author:
+          <a>
+            <xsl:attribute name="href">
+              <xsl:value-of select="/i:article/i:head/i:author-url" />
+              <xsl:value-of select="@fid" />
+            </xsl:attribute>
+            <xsl:value-of select="/i:article/i:head/i:author" />
+          </a>, created at: <xsl:apply-templates select="/i:article/i:head/i:created-at"
+          />, updated at: <xsl:apply-templates select="/i:article/i:head/i:updated-at"
+          />
+        </div>
         <xsl:if test="i:summary">
           <xsl:apply-templates select="i:summary" />
         </xsl:if>
