@@ -15,11 +15,12 @@
       <header id="header">
         <xsl:apply-templates select="i:title" />
         <div>
-          author:
-          <xsl:value-of select="/i:article/i:head/i:author"
-          />, created at: <xsl:apply-templates select="/i:article/i:head/i:created-at"
-          />, updated at: <xsl:apply-templates select="/i:article/i:head/i:updated-at"
-          />
+          <xsl:text>author: </xsl:text>
+          <xsl:value-of select="/i:article/i:head/i:author/text()"/>
+          <xsl:text>, created at: </xsl:text>
+          <xsl:value-of select="/i:article/i:head/i:created-at/text()"/>
+          <xsl:text>, updated at: </xsl:text>
+          <xsl:value-of select="/i:article/i:head/i:updated-at/text()"/>
         </div>
         <xsl:if test="i:summary">
           <xsl:apply-templates select="i:summary" />
