@@ -15,6 +15,13 @@ compile '/**/*.css'do
   write item.identifier.to_s
 end
 
+compile '/**/*.html.erb' do
+  filter :erb
+  layout '/default.html'
+  filter :relativize_paths, type: :html5, select: ['*/@href']
+  write item.identifier.without_ext
+end
+
 compile '/**/*.erb' do
   filter :erb
   write item.identifier.without_ext
