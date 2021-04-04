@@ -3,6 +3,7 @@
 compile '/{article,draft}/**/*.xml' do
   layout '/xsl/ijkml.xsl'
   layout '/default.*'
+  filter :relativize_paths, type: :html5, select: ['*/@href']
 end
 layout '/xsl/ijkml.xsl', :xsl
 
