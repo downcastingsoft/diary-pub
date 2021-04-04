@@ -172,15 +172,9 @@
     </title>
   </xsl:template>
 
-  <xsl:template match="@id" />
-
-  <xsl:template match="node() | @*">
+  <xsl:template match="*|@*|text()">
     <xsl:copy>
-      <xsl:apply-templates />
+      <xsl:apply-templates select="*|@*|text()" />
     </xsl:copy>
-  </xsl:template>
-
-  <xsl:template match="text()">
-    <xsl:copy-of select="." />
   </xsl:template>
 </xsl:stylesheet>
