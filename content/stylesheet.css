@@ -1,8 +1,6 @@
 body {
   background: #fff;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 900px;
+  margin: 0;
 }
 
 a.link-footnote {
@@ -36,12 +34,30 @@ code {
   border-top: thin solid black;
 }
 
+#site-nav {
+  background: #222;
+  color: #fff;
+  margin-top: 0px;
+}
+
+a.nav-item {
+  text-decoration: none;
+  color: #fff;
+}
+
 #site-fotter {
+  max-width: 74rem;
+  margin: auto;
   border-top: thin solid black;
 }
 
 #header {
   border-bottom: thin solid black;
+}
+
+main {
+  max-width: 74rem;
+  margin: auto;
 }
 
 a.section-anchor {
