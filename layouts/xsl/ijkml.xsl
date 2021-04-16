@@ -2,7 +2,7 @@
 <xsl:stylesheet
   version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:i="https://ijkml.example.com/"
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML"
   exclude-result-prefixes="i">
   <xsl:output
     encoding="UTF-8"

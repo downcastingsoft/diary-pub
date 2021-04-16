@@ -6,7 +6,7 @@ title: "最初の記事"
 slug: init
 ---
 <?xml version="1.0"?>
-<i:article xmlns:i="https://ijkml.example.com/">
+<i:article xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
 
 <i:head>
   <i:author>hnagamin</i:author>
