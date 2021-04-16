@@ -41,6 +41,7 @@ code {
 }
 
 a.nav-item {
+  margin: 8px;
   text-decoration: none;
   color: #fff;
 }
@@ -53,6 +54,10 @@ a.nav-item {
 
 #header {
   border-bottom: thin solid black;
+}
+
+#page-container {
+  margin: 8px;
 }
 
 main {
