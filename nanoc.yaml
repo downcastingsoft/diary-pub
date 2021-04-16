@@ -77,3 +77,11 @@ base_url: https://www.downcastingsoft.net/7e5/diary
 title: diary
 author_name: hnagamin
 author_uri: https://www.downcastingsoft.net/7e5/diary/
+
+environments:
+  default:
+    build: production
+  prod:
+    build: production
+  dev:
+    build: development

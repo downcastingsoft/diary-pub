@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
+preprocess do
+  if @config[:build] != 'development'
+    items.delete_if { |item| item[:publish] == false }
+  end
+end
+
 compile '/{article,draft}/**/*.xml' do
   layout '/xsl/ijkml.xsl'
   layout '/default.*'
