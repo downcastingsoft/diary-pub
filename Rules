@@ -36,8 +36,13 @@ end
 compile '/**/*' do
 end
 
-route %r[/article/\d{4}/(\d{4})-(\d{2})-(\d{2})-([^\/]+)/([^\/.]+).xml] do |year, month, day, slug, filename|
-  "/article/#{year}/#{month}/#{day}/#{slug}/#{filename}.html"
+route %r|/article/\d{4}/[^\/]+/([^\/.]+).xml| do
+  d = item[:created_at]
+  slug = item[:slug]
+  filename = File.basename(item[:content_filename], ".xml")
+  "/article/%04d/%02d/%02d/%s/%s.html" % [
+    d.year, d.month, d.day, slug, filename
+  ]
 end
 
 route %r[/draft/([^\/]+)/([^\/.]+).xml] do |slug, filename|
