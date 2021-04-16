@@ -85,3 +85,7 @@ blockquote {
   border-left: 3px solid #ccc;
   padding-left: 30px;
 }
+
+.article-metadata, .article-metadata * {
+  font-size: 0.8rem;
+}

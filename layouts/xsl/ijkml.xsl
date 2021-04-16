@@ -14,17 +14,19 @@
     <article>
       <header id="header">
         <xsl:apply-templates select="i:title" />
-        <div>
-          <xsl:text>author: </xsl:text>
-          <xsl:value-of select="/i:article/i:head/i:author/text()"/>
-          <xsl:text>, created at: </xsl:text>
-          <xsl:value-of select="/i:article/i:head/i:created-at/text()"/>
-          <xsl:text>, updated at: </xsl:text>
-          <xsl:value-of select="/i:article/i:head/i:updated-at/text()"/>
+        <div class="article-metadata">
+          <div>
+            <xsl:text>author: </xsl:text>
+            <xsl:value-of select="/i:article/i:head/i:author/text()"/>
+            <xsl:text>, created at: </xsl:text>
+            <xsl:value-of select="/i:article/i:head/i:created-at/text()"/>
+            <xsl:text>, updated at: </xsl:text>
+            <xsl:value-of select="/i:article/i:head/i:updated-at/text()"/>
+          </div>
+          <xsl:if test="i:summary">
+            <xsl:apply-templates select="i:summary" />
+          </xsl:if>
         </div>
-        <xsl:if test="i:summary">
-          <xsl:apply-templates select="i:summary" />
-        </xsl:if>
       </header>
       <xsl:apply-templates select="i:body" />
 
