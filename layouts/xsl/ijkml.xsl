@@ -26,6 +26,16 @@
           <xsl:if test="i:summary">
             <xsl:apply-templates select="i:summary" />
           </xsl:if>
+          <xsl:if test="/i:article/i:body/i:section">
+            <details id="table-of-contents">
+              <summary>目次</summary>
+              <ol>
+              <xsl:for-each select="/i:article/i:body/i:section">
+                <xsl:call-template name="section-title-list"/>
+              </xsl:for-each>
+              </ol>
+            </details>
+          </xsl:if>
         </div>
       </header>
       <xsl:apply-templates select="i:body" />
@@ -56,6 +66,25 @@
         </section>
       </xsl:if>
     </article>
+  </xsl:template>
+
+  <xsl:template name="section-title-list">
+    <li class="toc-item">
+      <a>
+        <xsl:attribute name="href">
+          <xsl:text>#section-</xsl:text>
+          <xsl:value-of select="@sid"/>
+        </xsl:attribute>
+        <xsl:apply-templates select="i:title/node()" />
+      </a>
+      <xsl:if test="i:section">
+        <ol>
+          <xsl:for-each select="i:section">
+            <xsl:call-template name="section-title-list" />
+          </xsl:for-each>
+        </ol>
+      </xsl:if>
+    </li>
   </xsl:template>
 
   <xsl:template match="i:body">
