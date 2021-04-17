@@ -22,13 +22,17 @@ a.targetable:target {
   background: #c9fbc9;
 }
 
-code {
+code.prettyprint {
   background: #f1f1f1;
   display: inline-block;
   width: 100%;
   margin: 0;
   border: none;
   padding: 8px;
+}
+
+code {
+  background: #f1f1f1;
 }
 
 #footnotes {
