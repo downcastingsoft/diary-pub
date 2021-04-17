@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML"
+>
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2021-04-16 22:46:00</i:created-at>
+  <i:updated-at>2021-04-16 22:46:00</i:updated-at>
+</i:head>
+
+<i:title>MathML 入力システムの実装</i:title>
+
+<i:summary>
+MathML (Mathematical Markup Language) は数式を記述するためのマークアップ言語である．
+この記事では，Web ブラウザ上で動作する MathML 入力システム mathml-lifoinput について述べる．
+mathml-lifoinput は XML 木構造を帰りがけ順で記述することにより MathML 文書を入力する．
+出力される MathML の構造を細かく制御できる点に特徴がある．
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+  <i:title>はじめに</i:title>
+  <i:p>
+    ブログに MathML で数式を入力しようと思ったので，MathML 入力システムを作った．
+    <a href="https://www.downcastingsoft.net/7e5/mathml-lifoinput/">mathml-lifoinput</a>
+    <a href="https://github.com/1995hnagamin/mathml-lifoinput"
+    >1995hnagamin/mathml-lifoinput</a>
+
+    XML を帰りがけ順で記述する入力システムというものは，わざわざ自作しなくても既に誰かがやっていそうだが，
+    React の勉強もかねて自分で作ってみることにした．
+  </i:p>
+  <i:p>
+    たとえば，
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mfrac>
+          <mrow>
+            <mrow>
+              <mo>-</mo>
+              <mi>b</mi>
+            </mrow>
+            <mo>&#x00b1;</mo>
+            <msqrt>
+              <mrow>
+                <msup>
+                  <mi>b</mi>
+                  <mn>2</mn>
+                </msup>
+                <mo>-</mo>
+                <mrow>
+                  <mn>4</mn>
+                  <mo>&#x2062;</mo>
+                  <mi>a</mi>
+                  <mo>&#x2062;</mo>
+                  <mi>c</mi>
+                </mrow>
+              </mrow>
+            </msqrt>
+          </mrow>
+          <mrow>
+            <mn>2</mn>
+            <mo>&#x2062;</mo>
+            <mi>a</mi>
+          </mrow>
+        </mfrac>
+      </mrow>
+    </math>
+    という数式を書きたい場合は，次のように入力する．
+    </i:p>
+<i:code>x
+=
+-
+b
+mrow 2
+&amp;PlusMinus;
+b
+2
+msup
+-
+4
+a
+c
+\packit 3
+mrow 3
+msqrt
+mrow 3
+2
+a
+\packit 2
+mfrac
+mrow 3
+</i:code>
+    <i:p>
+      こうすると，次のような XML が生成される．
+    </i:p>
+<i:code>&lt;mrow&gt;
+  &lt;mi&gt;x&lt;/mi&gt;
+  &lt;mo&gt;=&lt;/mo&gt;
+  &lt;mfrac&gt;
+    &lt;mrow&gt;
+      &lt;mrow&gt;
+        &lt;mo&gt;-&lt;/mo&gt;
+        &lt;mi&gt;b&lt;/mi&gt;
+      &lt;/mrow&gt;
+      &lt;mo&gt;&amp;#xB1;&lt;/mo&gt;
+      &lt;msqrt&gt;
+        &lt;mrow&gt;
+          &lt;msup&gt;
+            &lt;mi&gt;b&lt;/mi&gt;
+            &lt;mn&gt;2&lt;/mn&gt;
+          &lt;/msup&gt;
+          &lt;mo&gt;-&lt;/mo&gt;
+          &lt;mrow&gt;
+            &lt;mn&gt;4&lt;/mn&gt;
+            &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+            &lt;mi&gt;a&lt;/mi&gt;
+            &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+            &lt;mi&gt;c&lt;/mi&gt;
+          &lt;/mrow&gt;
+        &lt;/mrow&gt;
+      &lt;/msqrt&gt;
+    &lt;/mrow&gt;
+    &lt;mrow&gt;
+      &lt;mn&gt;2&lt;/mn&gt;
+      &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+      &lt;mi&gt;a&lt;/mi&gt;
+    &lt;/mrow&gt;
+  &lt;/mfrac&gt;
+&lt;/mrow&gt;
+</i:code>
+</i:section>
+
+<i:section sid="feature">
+  <i:title>機能</i:title>
+
+  <i:section sid="token-elem">
+    <i:title>トークン要素の入力</i:title>
+    <i:p>
+      トークン要素 (token elements) は，数や識別子など数式を構成する基本要素を表現するための XML 要素である．
+      MathML 3 では次の6つのトークン要素が定義されている．
+    </i:p>
+    <ul>
+      <li>識別子を表現する <i:snip>&lt;mi&gt;</i:snip> 要素</li>
+      <li>数を表現する <i:snip>&lt;mn&gt;</i:snip> 要素</li>
+      <li>演算子，関係記号，括弧類，区切り記号，アクセント記号などを表現する <i:snip>&lt;mo&gt;</i:snip> 要素</li>
+      <li>テキストを表現する <i:snip>&lt;mtext&gt;</i:snip> 要素</li>
+      <li>(計算機科学において) 文字列リテラルを表現する <i:snip>&lt;ms&gt;</i:snip> 要素</li>
+      <li>空白を表現する <i:snip>&lt;mspace&gt;</i:snip> 要素</li>
+    </ul>
+    <i:p>
+      mathml-lifoinput は，現在のところ
+      <i:snip>&lt;mi&gt;</i:snip>, <i:snip>&lt;mn&gt;</i:snip>, <i:snip>&lt;mo&gt;</i:snip>
+      要素の入力に対応している．
+    </i:p>
+    <i:p>
+      <i:snip>&lt;mi&gt;</i:snip> 要素を作成するには，<i:snip>mi "{入力したい識別子}"</i:snip> という形式で入力を行う．
+      たとえば， sin という識別子を入力するには <i:snip>mi "sin"</i:snip> と入力する．
+      識別子がアルファベット1文字の場合は，<i:snip>mi "</i:snip>, <i:snip>"</i:snip> の部分を省略できる．
+    </i:p>
+<i:code>mi "sin"
+mi "x"
+x             // これは，2行目と同じ
+</i:code>
+    <i:p>
+      こうすると，<i:snip>&lt;mi&gt;sin&lt;mi&gt;</i:snip>, <i:snip>&lt;mi&gt;x&lt;mi&gt;</i:snip>,
+      <i:snip>&lt;mi&gt;x&lt;mi&gt;</i:snip> がスタックにプッシュされる．
+    </i:p>
+    <i:p>
+      <i:snip>&lt;mn&gt;</i:snip> 要素を作成するには，入力したい数値をそのまま入力する．
+    </i:p>
+<i:code>1.234
+-100
+</i:code>
+    <i:p>
+      こうすると，<i:snip>&lt;mn&gt;1.234&lt;/mn&gt;</i:snip>, <i:snip>&lt;mn&gt;-100&lt;/mn&gt;</i:snip>
+      がスタックにプッシュされる．
+    </i:p>
+    <i:p>
+      <i:snip>&lt;mo&gt;</i:snip> 要素を作成するには，入力したい演算子をそのまま入力する．
+      現在のところ，<i:snip>+</i:snip>, <i:snip>-</i:snip>, <i:snip>&amp;PlusMinus;</i:snip>, <i:snip>,</i:snip>,
+      <i:snip>[</i:snip>, <i:snip>]</i:snip>, <i:snip>(</i:snip>, <i:snip>)</i:snip>, <i:snip>{</i:snip>, <i:snip>}</i:snip>,
+      <i:snip>=</i:snip>, <i:snip>&lt;</i:snip>, <i:snip>&gt;</i:snip>
+      <i:snip></i:snip>
+      にのみ対応している．
+    </i:p>
+<i:code>+
+-
+&amp;PlusMinus;
+&lt;
+</i:code>
+    <i:p>
+      こうすると，
+      <i:snip>&lt;mo&gt;+&lt;/mo&gt;</i:snip>,
+      <i:snip>&lt;mo&gt;-&lt;/mo&gt;</i:snip>,
+      <i:snip>&lt;mo&gt;&amp;#xB1;&lt;/mo&gt;</i:snip>,
+      <i:snip>&lt;mo&gt;&amp;lt;&lt;/mo&gt;</i:snip>
+      がスタックにプッシュされる．
+    </i:p>
+  </i:section>
+
+  <i:section sid="mrow">
+    <i:title><i:snip>&lt;mrow&gt;</i:snip> 要素の入力</i:title>
+  </i:section>
+
+  <i:section sid="attribute">
+    <i:title>属性の入力</i:title>
+  </i:section>
+
+  <i:section sid="macro">
+    <i:title>マクロ</i:title>
+  </i:section>
+</i:section>
+
+<i:section sid="future-work">
+  <i:title>今後の課題</i:title>
+  <i:section sid="content-markup">
+    <i:title>内容 MathML に対応する</i:title>
+    <i:p>
+      Content MathML に対応したい．
+    </i:p>
+  </i:section>
+  <i:section sid="semicolon">
+    <i:title>複数行入力に対応する</i:title>
+<i:code>x ; =
+-;b;mrow 2; &amp;PlusMinus; ; b;2;msup; -; 4;a;c;\packit 3; mrow 3; msqrt; mrow 3
+2;a;\packit 2
+mfrac
+mrow 3
+</i:code>
+  </i:section>
+</i:section>
+
+</i:body>
+</i:article>
