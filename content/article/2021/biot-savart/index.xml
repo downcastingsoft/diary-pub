@@ -1,0 +1,598 @@
+<?xml version="1.0"?>
+<i:article xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2021-07-12</i:created-at>
+  <i:updated-at>2021-07-12</i:updated-at>
+</i:head>
+
+<i:title>
+ビオ・サバールの法則とローレンツ変換
+</i:title>
+
+<i:summary>
+点電荷がつくる静電界の式とローレンツ変換からビオ・サバールの法則を導出する．
+</i:summary>
+
+<i:body>
+
+<i:p>
+先週の輪講でビオ・サバールの法則について計算したのでここにメモしておく．
+</i:p>
+
+<i:p>
+静止した観測者から見て，時刻
+<math>
+  <mrow>
+    <mi>t</mi>
+    <mo>=</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+に電荷 <math><mi>q</mi></math> が位置
+<math>
+  <mrow>
+    <mo>(</mo>
+    <mrow>
+      <mrow>
+        <mo>-</mo>
+        <mi>R</mi>
+      </mrow>
+      <mo>,</mo>
+      <mn>0</mn>
+      <mo>,</mo>
+      <mn>0</mn>
+    </mrow>
+    <mo>)</mo>
+  </mrow>
+</math>
+を速度
+<math>
+  <mrow>
+    <mi mathvariant="bold-italic">v</mi>
+    <mo>=</mo>
+    <mrow>
+      <mo>(</mo>
+      <mrow>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mi>v</mi>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+で通過する状況を考える．
+この電荷が原点につくる磁界を計算するため，まず電荷と同じ速度で運動する慣性系で考える．
+</i:p>
+
+<i:p>
+位置
+<math>
+  <mrow>
+    <mo>(</mo>
+    <mrow>
+      <mrow>
+        <mo>-</mo>
+        <mi>R</mi>
+      </mrow>
+      <mo>,</mo>
+      <mn>0</mn>
+      <mo>,</mo>
+      <mn>0</mn>
+    </mrow>
+    <mo>)</mo>
+  </mrow>
+</math>
+にある静止した電荷 <math><mi>q</mi></math> が原点につくる電界を考えると，これは
+<math>
+  <mrow>
+    <mi mathvariant="bold-italic">E</mi>
+    <mo>=</mo>
+    <mrow>
+      <mo>(</mo>
+      <mrow>
+        <mfrac>
+          <mi>q</mi>
+          <mrow>
+            <mn>4</mn>
+            <mo>&InvisibleTimes;</mo>
+            <mi>π</mi>
+            <mo>&InvisibleTimes;</mo>
+            <msub>
+              <mi>ε</mi>
+              <mn>0</mn>
+            </msub>
+            <mo>&InvisibleTimes;</mo>
+            <msup>
+              <mi>R</mi>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+        </mfrac>
+        <mo>,</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>0</mn>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+である．
+また，
+<math>
+  <mrow>
+    <mi mathvariant="bold-italic">B</mi>
+    <mo>=</mo>
+    <mrow>
+      <mo>(</mo>
+      <mrow>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>0</mn>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+である．
+これをローレンツ変換すれば
+<math display="block">
+  <mrow>
+    <msubsup>
+      <mi>B</mi>
+      <mi>x</mi>
+      <mo>'</mo>
+    </msubsup>
+    <mo>=</mo>
+    <mrow>
+      <mfrac>
+        <mn>1</mn>
+        <msqrt>
+          <mrow>
+            <mn>1</mn>
+            <mo>-</mo>
+            <msup>
+              <mi>β</mi>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+        </msqrt>
+      </mfrac>
+      <mo>&InvisibleTimes;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <msub>
+            <mi>B</mi>
+            <mi>x</mi>
+          </msub>
+          <mo>+</mo>
+          <mrow>
+            <mfrac>
+              <mi>v</mi>
+              <msup>
+                <mi>c</mi>
+                <mn>2</mn>
+              </msup>
+            </mfrac>
+            <mo>&InvisibleTimes;</mo>
+            <msub>
+              <mi>E</mi>
+              <mi>y</mi>
+            </msub>
+          </mrow>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+<math display="block">
+  <mrow>
+    <msubsup>
+      <mi>B</mi>
+      <mi>y</mi>
+      <mo>'</mo>
+    </msubsup>
+    <mo id="eq1-equals">=</mo>
+    <mrow>
+      <mfrac>
+        <mn>1</mn>
+        <msqrt>
+          <mrow>
+            <mn>1</mn>
+            <mo>-</mo>
+            <msup>
+              <mi>β</mi>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+        </msqrt>
+      </mfrac>
+      <mo>&InvisibleTimes;</mo>
+      <mrow>
+        <mo>(</mo>
+        <msub>
+          <mi>B</mi>
+          <mi>y</mi>
+        </msub>
+        <mo>+</mo>
+        <mrow>
+          <mfrac>
+            <mi>v</mi>
+            <msup>
+              <mi>c</mi>
+              <mn>2</mn>
+            </msup>
+          </mfrac>
+          <mo>&InvisibleTimes;</mo>
+          <msub>
+            <mi>E</mi>
+            <mi>x</mi>
+          </msub>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo linebreak="newline" linebreakstyle="before" indentalign="id" indenttarget="eq1-equals">=</mo>
+    <mrow>
+      <mfrac>
+        <mi>v</mi>
+        <mrow>
+          <msup>
+            <mi>c</mi>
+            <mn>2</mn>
+          </msup>
+          <mo>&InvisibleTimes;</mo>
+          <msqrt>
+            <mrow>
+              <mn>1</mn>
+              <mo>-</mo>
+              <msup>
+                <mi>β</mi>
+                <mn>2</mn>
+              </msup>
+            </mrow>
+          </msqrt>
+        </mrow>
+      </mfrac>
+      <mo>&InvisibleTimes;</mo>
+      <mfrac>
+        <mi>q</mi>
+        <mrow>
+          <mn>4</mn>
+          <mo>&InvisibleTimes;</mo>
+          <mi>π</mi>
+          <mo>&InvisibleTimes;</mo>
+          <msub>
+            <mi>ε</mi>
+            <mn>0</mn>
+          </msub>
+          <mo>&InvisibleTimes;</mo>
+          <msup>
+            <mi>R</mi>
+            <mn>2</mn>
+          </msup>
+        </mrow>
+      </mfrac>
+    </mrow>
+    <mo linebreak="newline" linebreakstyle="before" indentalign="id" indenttarget="eq1-equals">≈</mo>
+    <mrow>
+      <msub>
+        <mi>μ</mi>
+        <mn>0</mn>
+      </msub>
+      <mo>&InvisibleTimes;</mo>
+      <mi>v</mi>
+      <mo>&InvisibleTimes;</mo>
+      <mfrac>
+        <mi>q</mi>
+        <mrow>
+          <mn>4</mn>
+          <mo>&InvisibleTimes;</mo>
+          <mi>π</mi>
+          <mo>&InvisibleTimes;</mo>
+          <msup>
+            <mi>R</mi>
+            <mn>2</mn>
+          </msup>
+        </mrow>
+      </mfrac>
+    </mrow>
+  </mrow>
+</math>
+<math display="block">
+  <mrow>
+    <msubsup>
+      <mi>B</mi>
+      <mi>z</mi>
+      <mo>'</mo>
+    </msubsup>
+    <mo>=</mo>
+    <msub>
+      <mi>B</mi>
+      <mi>z</mi>
+    </msub>
+    <mo>=</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+よって，静止した観測者は磁界
+<math>
+  <mrow>
+    <msup>
+      <mi mathvariant="bold-italic">H</mi>
+      <mo>'</mo>
+    </msup>
+    <mo>=</mo>
+    <mrow>
+      <mfrac>
+        <mn>1</mn>
+        <msub>
+          <mi>μ</mi>
+          <mn>0</mn>
+        </msub>
+      </mfrac>
+      <mo>&InvisibleTimes;</mo>
+      <msup>
+        <mi mathvariant="bold-italic">B</mi>
+        <mo>'</mo>
+      </msup>
+    </mrow>
+    <mo>≈</mo>
+    <mrow>
+      <mo>(</mo>
+      <mrow>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mfrac>
+          <mrow>
+            <mi>q</mi>
+            <mo>&InvisibleTimes;</mo>
+            <mi>v</mi>
+          </mrow>
+          <mrow>
+            <mn>4</mn>
+            <mo>&InvisibleTimes;</mo>
+            <mi>π</mi>
+            <mo>&InvisibleTimes;</mo>
+            <msup>
+              <mi>R</mi>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+        </mfrac>
+        <mo>,</mo>
+        <mn>0</mn>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+を感じることになる．
+</i:p>
+
+<i:p>
+ここまで運動する電荷が原点につくる磁界を考えてきた．
+<math display="block">
+  <mrow>
+    <msup>
+      <mi mathvariant="bold-italic">B</mi>
+      <mo>'</mo>
+    </msup>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mi>γ</mi>
+        <mo>&InvisibleTimes;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mi mathvariant="bold-italic">B</mi>
+            <mo>-</mo>
+            <mfrac>
+              <mrow>
+                <mi mathvariant="bold-italic">v</mi>
+                <mo>×</mo>
+                <mi mathvariant="bold-italic">E</mi>
+              </mrow>
+              <msup>
+                <mi>c</mi>
+                <mn>2</mn>
+              </msup>
+            </mfrac>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+      <mo>+</mo>
+      <mrow>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mn>1</mn>
+            <mo>-</mo>
+            <mi>γ</mi>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+        <mo>&InvisibleTimes;</mo>
+        <msub>
+          <mi mathvariant="bold-italic">B</mi>
+          <mo>‖</mo>
+        </msub>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+<math display="block">
+  <mrow>
+    <msup>
+      <mi mathvariant="bold-italic">B</mi>
+      <mo>'</mo>
+    </msup>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mo>-</mo>
+        <mfrac>
+          <mrow>
+            <mi>γ</mi>
+            <mo>&InvisibleTimes;</mo>
+            <mi mathvariant="bold-italic">v</mi>
+          </mrow>
+          <msup>
+            <mi>c</mi>
+            <mn>2</mn>
+          </msup>
+        </mfrac>
+      </mrow>
+      <mo>×</mo>
+      <mfrac>
+        <mrow>
+          <mi>q</mi>
+          <mo>&InvisibleTimes;</mo>
+          <mi mathvariant="bold-italic">Δx</mi>
+        </mrow>
+        <mrow>
+          <mn>4</mn>
+          <mo>&InvisibleTimes;</mo>
+          <mi>π</mi>
+          <mo>&InvisibleTimes;</mo>
+          <msub>
+            <mi>ε</mi>
+            <mn>0</mn>
+          </msub>
+          <mo>&InvisibleTimes;</mo>
+          <msup>
+            <mi>R</mi>
+            <mn>3</mn>
+          </msup>
+        </mrow>
+      </mfrac>
+    </mrow>
+    <mo>≈</mo>
+    <mrow>
+      <mrow>
+        <mo>-</mo>
+        <msub>
+          <mi>μ</mi>
+          <mn>0</mn>
+        </msub>
+        <mo>&InvisibleTimes;</mo>
+        <mi>q</mi>
+        <mo>&InvisibleTimes;</mo>
+        <mi mathvariant="bold-italic">v</mi>
+      </mrow>
+      <mo>×</mo>
+      <mfrac>
+        <mi mathvariant="bold-italic">Δx</mi>
+        <mrow>
+          <mn>4</mn>
+          <mo>&InvisibleTimes;</mo>
+          <mi>π</mi>
+          <mo>&InvisibleTimes;</mo>
+          <msup>
+            <mrow>
+              <mo>|</mo>
+              <mi mathvariant="bold-italic">Δx</mi>
+              <mo>|</mo>
+            </mrow>
+            <mn>3</mn>
+          </msup>
+        </mrow>
+      </mfrac>
+    </mrow>
+  </mrow>
+</math>
+よって，
+<math>
+  <mrow>
+    <mrow>
+      <mi>q</mi>
+      <mo>&InvisibleTimes;</mo>
+      <mi mathvariant="bold-italic">v</mi>
+    </mrow>
+    <mo>=</mo>
+    <mrow>
+      <mi>I</mi>
+      <mo>&InvisibleTimes;</mo>
+      <mrow>
+        <mi>d</mi>
+        <mo>&ApplyFunction;</mo>
+        <mi mathvariant="bold-italic">s</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+とすれば
+<math display="block">
+  <mrow>
+    <msup>
+      <mi mathvariant="bold-italic">H</mi>
+      <mo>'</mo>
+    </msup>
+    <mo>=</mo>
+    <mrow>
+      <mfrac>
+        <mn>1</mn>
+        <msub>
+          <mi>μ</mi>
+          <mn>0</mn>
+        </msub>
+      </mfrac>
+      <mo>&InvisibleTimes;</mo>
+      <msup>
+        <mi mathvariant="bold-italic">B</mi>
+        <mo>'</mo>
+      </msup>
+    </mrow>
+    <mo>≈</mo>
+    <mfrac>
+      <mrow>
+        <mrow>
+          <mo>-</mo>
+          <mi>I</mi>
+          <mo>&InvisibleTimes;</mo>
+          <mrow>
+            <mi>d</mi>
+            <mo>&ApplyFunction;</mo>
+            <mi mathvariant="bold-italic">s</mi>
+          </mrow>
+        </mrow>
+        <mo>&InvisibleTimes;</mo>
+        <mo>×</mo>
+        <mo>&InvisibleTimes;</mo>
+        <mi mathvariant="bold-italic">Δx</mi>
+      </mrow>
+      <mrow>
+        <mn>4</mn>
+        <mo>&InvisibleTimes;</mo>
+        <mi>π</mi>
+        <mo>&InvisibleTimes;</mo>
+        <msup>
+          <mrow>
+            <mo>|</mo>
+            <mi mathvariant="bold-italic">Δx</mi>
+            <mo>|</mo>
+          </mrow>
+          <mn>3</mn>
+        </msup>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>
+</i:p>
+
+</i:body>
+
+</i:article>
