@@ -129,7 +129,7 @@
         <xsl:value-of select="@fid" />
       </xsl:attribute>
 
-      <xsl:text/><xsl:value-of select="$num"/><xsl:text/>
+      <xsl:text/>*<xsl:value-of select="$num"/><xsl:text/>
     </a>
   </xsl:template>
 

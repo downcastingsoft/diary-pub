@@ -37,6 +37,7 @@ code {
 
 #footnotes {
   border-top: thin solid black;
+  margin-bottom: 8px;
 }
 
 #site-nav {
@@ -58,6 +59,7 @@ a.nav-item {
 }
 
 #header {
+  padding-bottom: 8px;
   border-bottom: thin solid black;
 }
 
