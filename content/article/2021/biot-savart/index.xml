@@ -439,8 +439,26 @@
 <math>
   <mi mathvariant="bold-italic">v</mi>
 </math>
-で通過する電荷 <math><mi>q</mi></math> が位置 <math><mi mathvariant="bold-italic">r</mi></math> につくる磁界を計算したい．
-再び電荷と同じ速度で移動する慣性系 <math><mi>K</mi></math> を考える．
+で通過する電荷 <math><mi>q</mi></math> が位置
+<math>
+  <msup>
+    <mi mathvariant="bold-italic">r</mi>
+    <mo>'</mo>
+  </msup>
+</math>
+につくる磁界を計算したい．
+再び電荷と同じ速度で移動する慣性系 <math><mi>K</mi></math> で考える．
+</i:p>
+
+<i:p>
+<math><mi>K</mi></math> 系と
+<math>
+  <msup>
+    <mi>K</mi>
+    <mo>'</mo>
+  </msup>
+</math>
+系の電磁界の間には
 <math display="block">
   <mrow>
     <msup>
@@ -493,6 +511,11 @@
     </mrow>
   </mrow>
 </math>
+という関係がある<i:footnote fid="arfken-eq17.84">
+  Arfken, G. B., Weber, H. J., &amp; Harris, F. E. (2013).
+  Mathematical Methods for Physicists: A Comprehensive Guide, seventh edition (pp. 867-868).
+  Academic Press.
+</i:footnote>．
 ただし
 <math>
   <msub>
@@ -512,85 +535,198 @@
   </mrow>
 </math>
 に平行な成分である．
+<math><mi>K</mi></math>
+系では
 <math>
   <mrow>
-    <mrow>
-      <mi mathvariant="bold-italic">B</mi>
-      <mo>=</mo>
-      <mi mathvariant="bold-italic">o</mi>
-    </mrow>
-    <mo>,</mo>
-    <mrow>
-      <mi mathvariant="bold-italic">E</mi>
-      <mo>=</mo>
-      <mrow>
-        <mrow>
-          <mi>q</mi>
-          <mo>&#x2062;</mo>
-          <msub>
-            <mi mathvariant="bold-italic">e</mi>
-            <mi mathvariant="normal">r</mi>
-          </msub>
-        </mrow>
-        <mo>/</mo>
-        <mrow>
-          <mn>4</mn>
-          <mo>&#x2062;</mo>
-          <mi>&#x3C0;</mi>
-          <mo>&#x2062;</mo>
-          <msub>
-            <mi>&#x3B5;</mi>
-            <mn>0</mn>
-          </msub>
-          <mo>&#x2062;</mo>
-          <msup>
-            <mi>R</mi>
-            <mn>2</mn>
-          </msup>
-        </mrow>
-      </mrow>
-      <mo>=</mo>
-      <mrow>
-        <mrow>
-          <mi>q</mi>
-          <mo>&#x2062;</mo>
-          <mi mathvariant="bold-italic">&#x394;x</mi>
-        </mrow>
-        <mo>/</mo>
-        <mrow>
-          <mn>4</mn>
-          <mo>&#x2062;</mo>
-          <mi>&#x3C0;</mi>
-          <mo>&#x2062;</mo>
-          <msub>
-            <mi>&#x3B5;</mi>
-            <mn>0</mn>
-          </msub>
-          <mo>&#x2062;</mo>
-          <msup>
-            <mrow>
-              <mo>|</mo>
-              <mi mathvariant="bold-italic">&#x394;x</mi>
-              <mo>|</mo>
-            </mrow>
-            <mn>3</mn>
-          </msup>
-        </mrow>
-      </mrow>
-    </mrow>
+    <mi mathvariant="bold-italic">B</mi>
+    <mo>=</mo>
+    <mi mathvariant="bold-italic">o</mi>
+  </mrow>
+</math>．
+また，
+<math>
+  <msup>
+    <mi mathvariant="bold-italic">r</mi>
+    <mo>&#x27;</mo>
+  </msup>
+</math>
+の速度に垂直・平行な成分に関する分解を
+<math>
+  <mrow>
+  <msup>
+    <mi mathvariant="bold-italic">r</mi>
+    <mo>&#x27;</mo>
+  </msup>
+  <mo>=</mo>
+  <mrow>
+    <msubsup>
+      <mi mathvariant="bold-italic">r</mi>
+      <mo>&#x22A5;</mo>
+      <mo>&#x27;</mo>
+    </msubsup>
+    <mo>+</mo>
+    <msubsup>
+      <mi mathvariant="bold-italic">r</mi>
+      <mo>&#x2225;</mo>
+      <mo>&#x27;</mo>
+    </msubsup>
+  </mrow>
   </mrow>
 </math>
-だから
+とすると，電界は
+<math display="block">
+  <mrow>
+  <mi mathvariant="bold-italic">E</mi>
+  <mo>=</mo>
+  <mfrac>
+    <mrow>
+      <mi>q</mi>
+      <mo>&#x2062;</mo>
+      <mi mathvariant="bold-italic">r</mi>
+    </mrow>
+    <mrow>
+      <mn>4</mn>
+      <mo>&#x2062;</mo>
+      <mi>&#x3C0;</mi>
+      <mo>&#x2062;</mo>
+      <msub>
+        <mi>&#x3B5;</mi>
+        <mn>0</mn>
+      </msub>
+      <mo>&#x2062;</mo>
+      <msup>
+        <mrow>
+          <mo>|</mo>
+          <mi mathvariant="bold-italic">r</mi>
+          <mo>|</mo>
+        </mrow>
+        <mn>3</mn>
+      </msup>
+    </mrow>
+  </mfrac>
+  <mo>=</mo>
+  <mfrac>
+    <mrow>
+      <mi>q</mi>
+      <mo>&#x2062;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <msubsup>
+            <mi mathvariant="bold-italic">r</mi>
+            <mo>&#x22A5;</mo>
+            <mo>&#x27;</mo>
+          </msubsup>
+          <mo>+</mo>
+          <mrow>
+            <mi>&#x3B3;</mi>
+            <mo>&#x2062;</mo>
+            <msubsup>
+              <mi mathvariant="bold-italic">r</mi>
+              <mo>&#x2225;</mo>
+              <mo>&#x27;</mo>
+            </msubsup>
+          </mrow>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mrow>
+      <mn>4</mn>
+      <mo>&#x2062;</mo>
+      <mi>&#x3C0;</mi>
+      <mo>&#x2062;</mo>
+      <msub>
+        <mi>&#x3B5;</mi>
+        <mn>0</mn>
+      </msub>
+      <mo>&#x2062;</mo>
+      <msup>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <msup>
+              <msubsup>
+                <mi>r</mi>
+                <mo>&#x22A5;</mo>
+                <mo>&#x27;</mo>
+              </msubsup>
+              <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <mrow>
+              <msup>
+                <mi>&#x3B3;</mi>
+                <mn>2</mn>
+              </msup>
+              <mo>&#x2062;</mo>
+              <msup>
+                <msubsup>
+                  <mi>r</mi>
+                  <mo>&#x2225;</mo>
+                  <mo>&#x27;</mo>
+                </msubsup>
+                <mn>2</mn>
+              </msup>
+            </mrow>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+        <mrow>
+          <mn>3</mn>
+          <mo>/</mo>
+          <mn>2</mn>
+        </mrow>
+      </msup>
+    </mrow>
+  </mfrac>
+  <mo>&#x2248;</mo>
+  <mfrac>
+    <mrow>
+      <mi>q</mi>
+      <mo>&#x2062;</mo>
+      <msup>
+        <mi mathvariant="bold-italic">r</mi>
+        <mo>&#x27;</mo>
+      </msup>
+    </mrow>
+    <mrow>
+      <mn>4</mn>
+      <mo>&#x2062;</mo>
+      <mi>&#x3C0;</mi>
+      <mo>&#x2062;</mo>
+      <msub>
+        <mi>&#x3B5;</mi>
+        <mn>0</mn>
+      </msub>
+      <mo>&#x2062;</mo>
+      <msup>
+        <mrow>
+          <mo>|</mo>
+          <msup>
+            <mi mathvariant="bold-italic">r</mi>
+            <mo>&#x27;</mo>
+          </msup>
+          <mo>|</mo>
+        </mrow>
+        <mn>3</mn>
+      </msup>
+    </mrow>
+  </mfrac>
+  </mrow>
+</math>
+と表される．
+以上より
 <math display="block">
   <mrow>
     <msup>
       <mi mathvariant="bold-italic">B</mi>
       <mo>'</mo>
     </msup>
-    <mo>=</mo>
+    <mo>≈</mo>
     <mrow>
       <mrow>
-        <mo>-</mo>
         <mfrac>
           <mrow>
             <mi>γ</mi>
@@ -608,7 +744,10 @@
         <mrow>
           <mi>q</mi>
           <mo>&InvisibleTimes;</mo>
-          <mi mathvariant="bold-italic">Δx</mi>
+          <msup>
+            <mi mathvariant="bold-italic">r</mi>
+            <mo>'</mo>
+          </msup>
         </mrow>
         <mrow>
           <mn>4</mn>
@@ -623,7 +762,10 @@
           <msup>
             <mrow>
               <mo>|</mo>
-              <mi mathvariant="bold-italic">Δx</mi>
+                <msup>
+                  <mi mathvariant="bold-italic">r</mi>
+                  <mo>'</mo>
+                </msup>
               <mo>|</mo>
             </mrow>
             <mn>3</mn>
@@ -634,7 +776,6 @@
     <mo>≈</mo>
     <mrow>
       <mrow>
-        <mo>-</mo>
         <msub>
           <mi>μ</mi>
           <mn>0</mn>
@@ -646,7 +787,10 @@
       </mrow>
       <mo>×</mo>
       <mfrac>
-        <mi mathvariant="bold-italic">Δx</mi>
+        <msup>
+          <mi mathvariant="bold-italic">r</mi>
+          <mo>'</mo>
+        </msup>
         <mrow>
           <mn>4</mn>
           <mo>&InvisibleTimes;</mo>
@@ -655,7 +799,10 @@
           <msup>
             <mrow>
               <mo>|</mo>
-              <mi mathvariant="bold-italic">Δx</mi>
+              <msup>
+                <mi mathvariant="bold-italic">r</mi>
+                <mo>'</mo>
+              </msup>
               <mo>|</mo>
             </mrow>
             <mn>3</mn>
@@ -685,7 +832,21 @@
     </mrow>
   </mrow>
 </math>
-とすれば
+とすれば<i:footnote fid="ids">
+  電流素片
+  <math>
+    <mrow>
+    <mi>I</mi>
+    <mo>&InvisibleTimes;</mo>
+    <mrow>
+      <mi>d</mi>
+      <mo>&ApplyFunction;</mo>
+      <mi mathvariant="bold-italic">s</mi>
+    </mrow>
+  </mrow>
+  </math>
+  の次元は「電流×長さ」である．
+</i:footnote>
 <math display="block">
   <mrow>
     <msup>
@@ -711,7 +872,6 @@
     <mfrac>
       <mrow>
         <mrow>
-          <mo>-</mo>
           <mi>I</mi>
           <mo>&InvisibleTimes;</mo>
           <mrow>
@@ -723,7 +883,10 @@
         <mo>&InvisibleTimes;</mo>
         <mo>×</mo>
         <mo>&InvisibleTimes;</mo>
-        <mi mathvariant="bold-italic">Δx</mi>
+        <msup>
+          <mi mathvariant="bold-italic">r</mi>
+          <mo>'</mo>
+        </msup>
       </mrow>
       <mrow>
         <mn>4</mn>
@@ -733,7 +896,10 @@
         <msup>
           <mrow>
             <mo>|</mo>
-            <mi mathvariant="bold-italic">Δx</mi>
+            <msup>
+              <mi mathvariant="bold-italic">r</mi>
+              <mo>'</mo>
+            </msup>
             <mo>|</mo>
           </mrow>
           <mn>3</mn>
@@ -742,11 +908,28 @@
     </mfrac>
   </mrow>
 </math>
+となる．
 </i:p>
 
 <i:p>
 ローレンツ変換の式からビオ・サバールの法則が導出されることはどこかで耳にしたことがあったが，
 自分で計算したことはなかった．
+実際に計算してみると
+<math>
+  <mrow>
+    <mi mathvariant="bold-italic">r</mi>
+    <mo>/</mo>
+    <msup>
+      <mrow>
+        <mo>|</mo>
+        <mi mathvariant="bold-italic">r</mi>
+        <mo>|</mo>
+      </mrow>
+      <mn>3</mn>
+    </msup>
+  </mrow>
+</math>
+の項の由来が分かりやすい．
 </i:p>
 
 </i:body>
