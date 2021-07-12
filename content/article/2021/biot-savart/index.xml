@@ -18,14 +18,21 @@
 <i:body>
 
 <i:p>
-先週の輪講でビオ・サバールの法則について計算したのでここにメモしておく．
+先週の輪講でビオ・サバールの法則について議論したのでここにメモしておく．
 </i:p>
 
 <i:p>
-静止した観測者から見て，時刻
+静止した観測者
+<math>
+  <msup><mi>K</mi><mo>'</mo></msup>
+</math>
+から見て，時刻
 <math>
   <mrow>
-    <mi>t</mi>
+    <msup>
+      <mi>t</mi>
+      <mo>'</mo>
+    </msup>
     <mo>=</mo>
     <mn>0</mn>
   </mrow>
@@ -47,7 +54,7 @@
     <mo>)</mo>
   </mrow>
 </math>
-を速度
+を小さい速度
 <math>
   <mrow>
     <mi mathvariant="bold-italic">v</mi>
@@ -66,7 +73,7 @@
   </mrow>
 </math>
 で通過する状況を考える．
-この電荷が原点につくる磁界を計算するため，まず電荷と同じ速度で運動する慣性系で考える．
+この電荷が原点につくる磁界を計算するため，まず電荷と同じ速度で運動する慣性系 <math><mi>K</mi></math> で考える．
 </i:p>
 
 <i:p>
@@ -121,8 +128,7 @@
       <mo>)</mo>
     </mrow>
   </mrow>
-</math>
-である．
+</math>．
 また，
 <math>
   <mrow>
@@ -140,8 +146,7 @@
       <mo>)</mo>
     </mrow>
   </mrow>
-</math>
-である．
+</math>．
 これをローレンツ変換すれば
 <math display="block">
   <mrow>
@@ -159,7 +164,13 @@
             <mn>1</mn>
             <mo>-</mo>
             <msup>
-              <mi>β</mi>
+              <mrow>
+                <mo>(</mo>
+                  <mi>v</mi>
+                  <mo>/</mo>
+                  <mi>c</mi>
+                <mo>)</mo>
+              </mrow>
               <mn>2</mn>
             </msup>
           </mrow>
@@ -176,7 +187,10 @@
           <mo>+</mo>
           <mrow>
             <mfrac>
-              <mi>v</mi>
+              <mrow>
+                <mo>-</mo>
+                <mi>v</mi>
+              </mrow>
               <msup>
                 <mi>c</mi>
                 <mn>2</mn>
@@ -212,7 +226,13 @@
             <mn>1</mn>
             <mo>-</mo>
             <msup>
-              <mi>β</mi>
+              <mrow>
+                <mo>(</mo>
+                  <mi>v</mi>
+                  <mo>/</mo>
+                  <mi>c</mi>
+                <mo>)</mo>
+              </mrow>
               <mn>2</mn>
             </msup>
           </mrow>
@@ -225,10 +245,13 @@
           <mi>B</mi>
           <mi>y</mi>
         </msub>
-        <mo>+</mo>
+        <mo>-</mo>
         <mrow>
           <mfrac>
-            <mi>v</mi>
+            <mrow>
+              <mo>-</mo>
+              <mi>v</mi>
+            </mrow>
             <msup>
               <mi>c</mi>
               <mn>2</mn>
@@ -258,7 +281,13 @@
               <mn>1</mn>
               <mo>-</mo>
               <msup>
-                <mi>β</mi>
+                <mrow>
+                  <mo>(</mo>
+                    <mi>v</mi>
+                    <mo>/</mo>
+                    <mi>c</mi>
+                  <mo>)</mo>
+                </mrow>
                 <mn>2</mn>
               </msup>
             </mrow>
@@ -326,7 +355,20 @@
     <mn>0</mn>
   </mrow>
 </math>
-よって，静止した観測者は磁界
+ここで
+<math>
+  <mrow>
+    <mrow>
+      <mi>v</mi>
+      <mo>/</mo>
+      <mi>c</mi>
+    </mrow>
+    <mo>≈</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+を使った．
+上式より，静止した観測者は磁界
 <math>
   <mrow>
     <msup>
@@ -382,7 +424,23 @@
 </i:p>
 
 <i:p>
-ここまで運動する電荷が原点につくる磁界を考えてきた．
+今度は，時刻
+<math>
+  <mrow>
+    <msup>
+      <mi>t</mi>
+      <mo>'</mo>
+    </msup>
+    <mo>=</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+において原点を速度
+<math>
+  <mi mathvariant="bold-italic">v</mi>
+</math>
+で通過する電荷 <math><mi>q</mi></math> が位置 <math><mi mathvariant="bold-italic">r</mi></math> につくる磁界を計算したい．
+再び電荷と同じ速度で移動する慣性系 <math><mi>K</mi></math> を考える．
 <math display="block">
   <mrow>
     <msup>
@@ -401,6 +459,7 @@
             <mo>-</mo>
             <mfrac>
               <mrow>
+                <mo>-</mo>
                 <mi mathvariant="bold-italic">v</mi>
                 <mo>×</mo>
                 <mi mathvariant="bold-italic">E</mi>
@@ -434,6 +493,94 @@
     </mrow>
   </mrow>
 </math>
+ただし
+<math>
+  <msub>
+    <mi mathvariant="bold-italic">B</mi>
+    <mo>‖</mo>
+  </msub>
+</math>
+は
+<math>
+  <mi mathvariant="bold-italic">B</mi>
+</math>
+の
+<math>
+  <mrow>
+    <mo>-</mo>
+    <mi mathvariant="bold-italic">v</mi>
+  </mrow>
+</math>
+に平行な成分である．
+<math>
+  <mrow>
+    <mrow>
+      <mi mathvariant="bold-italic">B</mi>
+      <mo>=</mo>
+      <mi mathvariant="bold-italic">o</mi>
+    </mrow>
+    <mo>,</mo>
+    <mrow>
+      <mi mathvariant="bold-italic">E</mi>
+      <mo>=</mo>
+      <mrow>
+        <mrow>
+          <mi>q</mi>
+          <mo>&#x2062;</mo>
+          <msub>
+            <mi mathvariant="bold-italic">e</mi>
+            <mi mathvariant="normal">r</mi>
+          </msub>
+        </mrow>
+        <mo>/</mo>
+        <mrow>
+          <mn>4</mn>
+          <mo>&#x2062;</mo>
+          <mi>&#x3C0;</mi>
+          <mo>&#x2062;</mo>
+          <msub>
+            <mi>&#x3B5;</mi>
+            <mn>0</mn>
+          </msub>
+          <mo>&#x2062;</mo>
+          <msup>
+            <mi>R</mi>
+            <mn>2</mn>
+          </msup>
+        </mrow>
+      </mrow>
+      <mo>=</mo>
+      <mrow>
+        <mrow>
+          <mi>q</mi>
+          <mo>&#x2062;</mo>
+          <mi mathvariant="bold-italic">&#x394;x</mi>
+        </mrow>
+        <mo>/</mo>
+        <mrow>
+          <mn>4</mn>
+          <mo>&#x2062;</mo>
+          <mi>&#x3C0;</mi>
+          <mo>&#x2062;</mo>
+          <msub>
+            <mi>&#x3B5;</mi>
+            <mn>0</mn>
+          </msub>
+          <mo>&#x2062;</mo>
+          <msup>
+            <mrow>
+              <mo>|</mo>
+              <mi mathvariant="bold-italic">&#x394;x</mi>
+              <mo>|</mo>
+            </mrow>
+            <mn>3</mn>
+          </msup>
+        </mrow>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+だから
 <math display="block">
   <mrow>
     <msup>
@@ -474,7 +621,11 @@
           </msub>
           <mo>&InvisibleTimes;</mo>
           <msup>
-            <mi>R</mi>
+            <mrow>
+              <mo>|</mo>
+              <mi mathvariant="bold-italic">Δx</mi>
+              <mo>|</mo>
+            </mrow>
             <mn>3</mn>
           </msup>
         </mrow>
@@ -591,6 +742,11 @@
     </mfrac>
   </mrow>
 </math>
+</i:p>
+
+<i:p>
+ローレンツ変換の式からビオ・サバールの法則が導出されることはどこかで耳にしたことがあったが，
+自分で計算したことはなかった．
 </i:p>
 
 </i:body>
