@@ -21,6 +21,9 @@
 先週の輪講でビオ・サバールの法則について議論したのでここにメモしておく．
 </i:p>
 
+<i:section sid="step1">
+<i:title>真横を通過する電荷がつくる磁界</i:title>
+
 <i:p>
 静止した観測者
 <math>
@@ -428,6 +431,11 @@
 </math>
 を感じることになる．
 </i:p>
+
+</i:section>
+
+<i:section sid="step2">
+<i:title>一般の場合</i:title>
 
 <i:p>
 今度は，時刻
@@ -878,6 +886,11 @@
 となる．
 </i:p>
 
+</i:section>
+
+<i:section sid="conclusion">
+<i:title>感想</i:title>
+
 <i:p>
 ローレンツ変換の式からビオ・サバールの法則が導出されることはどこかで耳にしたことがあったが，
 自分で計算したことはなかった．
@@ -894,6 +907,8 @@
 </math>
 の項の由来が分かりやすい．
 </i:p>
+
+</i:section>
 
 </i:body>
 
