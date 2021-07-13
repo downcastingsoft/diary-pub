@@ -731,8 +731,6 @@
         <mrow>
           <mo>(</mo>
           <mrow>
-            <mi mathvariant="bold-italic">r</mi>
-            <mo>+</mo>
             <mrow>
               <mfrac>
                 <mrow>
@@ -850,35 +848,27 @@
               </msup>
               <mo>&#x2062;</mo>
               <mrow>
-                <mo>(</mo>
-                <mrow>
-                  <mi mathvariant="bold-italic">r</mi>
-                  <mo>+</mo>
+                <mfrac>
                   <mrow>
-                    <mfrac>
-                      <mrow>
-                        <mn>3</mn>
-                        <mo>&#x2062;</mo>
-                        <msubsup>
-                          <mi>r</mi>
-                          <mo>&#x2225;</mo>
-                          <mn>2</mn>
-                        </msubsup>
-                      </mrow>
-                      <mrow>
-                        <mn>2</mn>
-                        <mo>&#x2062;</mo>
-                        <msup>
-                          <mi>r</mi>
-                          <mn>2</mn>
-                        </msup>
-                      </mrow>
-                    </mfrac>
+                    <mn>3</mn>
                     <mo>&#x2062;</mo>
-                    <mi mathvariant="bold-italic">r</mi>
+                    <msubsup>
+                      <mi>r</mi>
+                      <mo>&#x2225;</mo>
+                      <mn>2</mn>
+                    </msubsup>
                   </mrow>
-                </mrow>
-                <mo>)</mo>
+                  <mrow>
+                    <mn>2</mn>
+                    <mo>&#x2062;</mo>
+                    <msup>
+                      <mi>r</mi>
+                      <mn>2</mn>
+                    </msup>
+                  </mrow>
+                </mfrac>
+                <mo>&#x2062;</mo>
+                <mi mathvariant="bold-italic">r</mi>
               </mrow>
             </mrow>
           </mrow>
