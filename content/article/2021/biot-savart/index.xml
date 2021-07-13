@@ -617,14 +617,10 @@
       </msub>
       <mo>&#x2062;</mo>
       <msup>
-        <mrow>
-          <mo>|</mo>
-          <msup>
-            <mi mathvariant="bold-italic">r</mi>
-            <mo>'</mo>
-          </msup>
-          <mo>|</mo>
-        </mrow>
+        <msup>
+          <mi>r</mi>
+          <mo>'</mo>
+        </msup>
         <mn>3</mn>
       </msup>
     </mrow>
@@ -719,11 +715,7 @@
       </msub>
       <mo>&#x2062;</mo>
       <msup>
-        <mrow>
-          <mo>|</mo>
-          <mi mathvariant="bold-italic">r</mi>
-          <mo>|</mo>
-        </mrow>
+        <mi>r</mi>
         <mn>3</mn>
       </msup>
     </mrow>
@@ -768,11 +760,7 @@
           </msub>
           <mo>&InvisibleTimes;</mo>
           <msup>
-            <mrow>
-              <mo>|</mo>
-              <mi mathvariant="bold-italic">r</mi>
-              <mo>|</mo>
-            </mrow>
+            <mi>r</mi>
             <mn>3</mn>
           </msup>
         </mrow>
@@ -799,11 +787,7 @@
           <mi>π</mi>
           <mo>&InvisibleTimes;</mo>
           <msup>
-            <mrow>
-              <mo>|</mo>
-              <mi mathvariant="bold-italic">r</mi>
-              <mo>|</mo>
-            </mrow>
+            <mi>r</mi>
             <mn>3</mn>
           </msup>
         </mrow>
@@ -884,11 +868,7 @@
         <mi>π</mi>
         <mo>&InvisibleTimes;</mo>
         <msup>
-          <mrow>
-            <mo>|</mo>
-            <mi mathvariant="bold-italic">r</mi>
-            <mo>|</mo>
-          </mrow>
+          <mi>r</mi>
           <mn>3</mn>
         </msup>
       </mrow>
@@ -907,11 +887,7 @@
     <mi mathvariant="bold-italic">r</mi>
     <mo>/</mo>
     <msup>
-      <mrow>
-        <mo>|</mo>
-        <mi mathvariant="bold-italic">r</mi>
-        <mo>|</mo>
-      </mrow>
+      <mi>r</mi>
       <mn>3</mn>
     </msup>
   </mrow>
