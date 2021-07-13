@@ -1,0 +1,25 @@
+#! /usr/bin/env ruby
+
+def sed(file, pattern, replacement)
+  buf = open(file, 'r') do |fi|
+    fi.read.gsub pattern, replacement
+  end
+  open(file, 'w') do |fo|
+    fo.write buf
+  end
+end
+
+now = Time.now
+p now
+
+sed(
+  'index.yaml',
+  /^updated_at:.*$/,
+  "updated_at: #{now.strftime '%Y-%m-%dT%H:%M:%S%:z'}"
+)
+
+sed(
+  'index.xml',
+  /<i:updated-at>.*<\/i:updated-at>/,
+  "<i:updated-at>#{now.strftime '%Y-%m-%d %H:%M:%S'}</i:updated-at>"
+)
