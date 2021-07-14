@@ -96,10 +96,10 @@ msup
 4
 a
 c
-\packit 4
+\packit 3
 mrow 3
 msqrt
-mrow 3
+mrow 4
 2
 a
 \packit 2
@@ -154,7 +154,7 @@ mrow 3
 
 <i:p>
 トークン要素 (token elements) は，数や識別子など数式を構成する基本要素を表現するための XML 要素である．
-MathML 3 では次の6つのトークン要素が定義されている．
+MathML 3 では次の6つのトークン要素が定義されている（<a href="https://www.w3.org/TR/MathML3/chapter3-d.html#presm.tokel">§3.2</a>）．
 <ul>
   <li>識別子を表現する <i:snip>&lt;mi&gt;</i:snip> 要素</li>
   <li>数を表現する <i:snip>&lt;mn&gt;</i:snip> 要素</li>
@@ -178,8 +178,8 @@ mi "x"
 x             // これは，2行目と同じ
 </i:code>
 
-こうすると，<i:snip>&lt;mi&gt;sin&lt;mi&gt;</i:snip>, <i:snip>&lt;mi&gt;x&lt;mi&gt;</i:snip>,
-<i:snip>&lt;mi&gt;x&lt;mi&gt;</i:snip> がスタックにプッシュされる．
+こうすると，<i:snip>&lt;mi&gt;sin&lt;/mi&gt;</i:snip>, <i:snip>&lt;mi&gt;x&lt;/mi&gt;</i:snip>,
+<i:snip>&lt;mi&gt;x&lt;/mi&gt;</i:snip> がスタックにプッシュされる．
 </i:p>
 
 <i:p>
@@ -336,20 +336,33 @@ c
 
 <i:p>
 Content MathML に対応したい．
+そのためには2つのアプローチがあると思う．
+ひとつは自明なサポート，すなわち，
+content MathML を単に木構造と見て，対応する命令（<i:snip>apply</i:snip>, <i:snip>eq</i:snip> など）を追加する方法．
+この場合は命令の仕様が決まっているので，スタック上でどのように表示するかだけを検討すればよい．
+MathML の構造を細かく制御できる点が mathml-lifoinput の特徴であるからこれらも実装する必要があると思う．
 </i:p>
+
+<i:p>
+もうひとつは，presentation MathML と content MathML の内容を同期しながら編集する方法．
+この場合は特別なモードとして実装した方がよいと思う．
+</i:p>
+
+
 </i:section> <!-- @sid="content-markup" -->
 
 <i:section sid="semicolon">
-<i:title>複数行入力に対応する</i:title>
+<i:title>複数命令入力に対応する</i:title>
 
 <i:p>
+今のところ各行で1命令だけを受理する仕組みになっているので，たまに不便と感じることがある．
 <i:code>x ; =
 -;b;mrow 2; &amp;PlusMinus; ; b;2;msup; -; 4;a;c;\packit 3; mrow 3; msqrt; mrow 3
 2;a;\packit 2
 mfrac
 mrow 3
 </i:code>
-と入力できるようにしたい．
+のように，1行に複数の命令を入力できるようにしたい．
 </i:p>
 
 </i:section> <!-- @sid="semicolon" -->
@@ -358,7 +371,8 @@ mrow 3
 <i:title>React のパフォーマンスチューニング</i:title>
 
 <i:p>
-react-window を使うとよさそう？
+今のところあまり困っていないが，React の勉強も兼ねてパフォーマンスチューニングの方法を学んでみたい．
+スタックの部分に react-window を使うとよさそう？
 </i:p>
 
 </i:section> <!-- @sid="react" -->
