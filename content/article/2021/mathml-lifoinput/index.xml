@@ -24,10 +24,23 @@ mathml-lifoinput は XML の木構造を帰りがけ順で記述することに�
 <i:title>はじめに</i:title>
 
 <i:p>
-ブログに MathML で数式を入力しようと思ったので，MathML 入力システムを作った．
-<a href="https://www.downcastingsoft.net/7e5/mathml-lifoinput/">mathml-lifoinput</a>
+ブログに MathML+MathJax で数式を表示することにした．
+しかし，MathML を手打ちするのは大変だったので，入力システムを作った．
+<a href="https://www.downcastingsoft.net/7e5/mathml-lifoinput/"
+>https://www.downcastingsoft.net/7e5/mathml-lifoinput/</a>
+からアクセスできる．
+</i:p>
+
+<figure>
+  <video src="https://i.gyazo.com/96e51e2b659a66ff88b54d19ec050f5b.mp4" controls="" playsinline=""></video>
+  <figcaption>入力の様子</figcaption>
+</figure>
+
+<i:p>
+Git リポジトリは
 <a href="https://github.com/1995hnagamin/mathml-lifoinput"
 >1995hnagamin/mathml-lifoinput</a>
+にある．
 
 XML を帰りがけ順で記述する入力システムというものは，わざわざ自作しなくても既に誰かがやっていそうだが，
 React の勉強もかねて自分で作ってみることにした．
@@ -41,10 +54,8 @@ React の勉強もかねて自分で作ってみることにした．
     <mo>=</mo>
     <mfrac>
       <mrow>
-        <mrow>
-          <mo>-</mo>
-          <mi>b</mi>
-        </mrow>
+        <mo>-</mo>
+        <mi>b</mi>
         <mo>&#x00b1;</mo>
         <msqrt>
           <mrow>
@@ -72,13 +83,11 @@ React の勉強もかねて自分で作ってみることにした．
   </mrow>
 </math>
 という数式を書きたい場合は，次のように入力する．
-</i:p>
 
 <i:code>x
 =
 -
 b
-mrow 2
 &amp;PlusMinus;
 b
 2
@@ -87,7 +96,7 @@ msup
 4
 a
 c
-\packit 3
+\packit 4
 mrow 3
 msqrt
 mrow 3
@@ -98,19 +107,15 @@ mfrac
 mrow 3
 </i:code>
 
-<i:p>
 こうすると，次のような XML が生成される．
-</i:p>
 
 <i:code>&lt;mrow&gt;
   &lt;mi&gt;x&lt;/mi&gt;
   &lt;mo&gt;=&lt;/mo&gt;
   &lt;mfrac&gt;
     &lt;mrow&gt;
-      &lt;mrow&gt;
-        &lt;mo&gt;-&lt;/mo&gt;
-        &lt;mi&gt;b&lt;/mi&gt;
-      &lt;/mrow&gt;
+      &lt;mo&gt;-&lt;/mo&gt;
+      &lt;mi&gt;b&lt;/mi&gt;
       &lt;mo&gt;&amp;#xB1;&lt;/mo&gt;
       &lt;msqrt&gt;
         &lt;mrow&gt;
@@ -137,6 +142,7 @@ mrow 3
   &lt;/mfrac&gt;
 &lt;/mrow&gt;
 </i:code>
+</i:p>
 
 </i:section> <!-- @sid="intro" -->
 
@@ -149,7 +155,6 @@ mrow 3
 <i:p>
 トークン要素 (token elements) は，数や識別子など数式を構成する基本要素を表現するための XML 要素である．
 MathML 3 では次の6つのトークン要素が定義されている．
-</i:p>
 <ul>
   <li>識別子を表現する <i:snip>&lt;mi&gt;</i:snip> 要素</li>
   <li>数を表現する <i:snip>&lt;mn&gt;</i:snip> 要素</li>
@@ -158,7 +163,6 @@ MathML 3 では次の6つのトークン要素が定義されている．
   <li>（計算機科学において）文字列リテラルを表現する <i:snip>&lt;ms&gt;</i:snip> 要素</li>
   <li>空白を表現する <i:snip>&lt;mspace&gt;</i:snip> 要素</li>
 </ul>
-<i:p>
 mathml-lifoinput は，現在のところ
 <i:snip>&lt;mi&gt;</i:snip>, <i:snip>&lt;mn&gt;</i:snip>, <i:snip>&lt;mo&gt;</i:snip>
 要素の入力に対応している．
@@ -168,14 +172,12 @@ mathml-lifoinput は，現在のところ
 <i:snip>&lt;mi&gt;</i:snip> 要素を作成するには，<i:snip>mi "{入力したい識別子}"</i:snip> という形式で入力を行う．
 たとえば， sin という識別子を入力するには <i:snip>mi "sin"</i:snip> と入力する．
 識別子がアルファベット1文字の場合は，<i:snip>mi "</i:snip>, <i:snip>"</i:snip> の部分を省略できる．
-</i:p>
 
 <i:code>mi "sin"
 mi "x"
 x             // これは，2行目と同じ
 </i:code>
 
-<i:p>
 こうすると，<i:snip>&lt;mi&gt;sin&lt;mi&gt;</i:snip>, <i:snip>&lt;mi&gt;x&lt;mi&gt;</i:snip>,
 <i:snip>&lt;mi&gt;x&lt;mi&gt;</i:snip> がスタックにプッシュされる．
 </i:p>
@@ -184,7 +186,6 @@ x             // これは，2行目と同じ
 <i:snip>&lt;mn&gt;</i:snip> 要素を作成するには，<i:snip>mn "{入力したい数値表現}"</i:snip> という形式で入力を行う．
 たとえば， 123を入力するには <i:snip>mn "123"</i:snip> と入力する．
 一部の数値表現に対しては <i:snip>mn "</i:snip>, <i:snip>"</i:snip> の部分を省略できる．
-</i:p>
 
 <i:code>mn "0xFFEF"
 2
@@ -192,7 +193,6 @@ x             // これは，2行目と同じ
 2.1e10
 </i:code>
 
-<i:p>
 こうすると，
 <i:snip>&lt;mn&gt;0xFFEF&lt;/mn&gt;</i:snip>,
 <i:snip>&lt;mn&gt;2&lt;/mn&gt;</i:snip>,
@@ -205,19 +205,15 @@ x             // これは，2行目と同じ
 <i:snip>&lt;mo&gt;</i:snip> 要素を作成するには，<i:snip>mo "{入力したい演算子}"</i:snip> という形式で入力を行う．
 たとえば， +を入力するには <i:snip>mo "+"</i:snip> と入力する．
 一部の演算子に対しては <i:snip>mo "</i:snip>, <i:snip>"</i:snip> の部分を省略できる
-（現在のところ，<i:snip>+</i:snip>, <i:snip>-</i:snip>, <i:snip>&amp;PlusMinus;</i:snip>, <i:snip>,</i:snip>,
-<i:snip>[</i:snip>, <i:snip>]</i:snip>, <i:snip>(</i:snip>, <i:snip>)</i:snip>, <i:snip>{</i:snip>, <i:snip>}</i:snip>,
-<i:snip>=</i:snip>, <i:snip>&lt;</i:snip>, <i:snip>&gt;</i:snip>
-<i:snip></i:snip>
-にのみ対応している）．
-</i:p>
+（<a href="https://github.com/1995hnagamin/mathml-lifoinput/blob/825bb1da498509a654b1019463baed4c31e779a4/src/App.tsx#L19-L34"
+>App.tsx</a> も参照）．
+
 <i:code>mo "+"
 -
 &amp;PlusMinus;
 &lt;
 </i:code>
 
-<i:p>
 こうすると，
 <i:snip>&lt;mo&gt;+&lt;/mo&gt;</i:snip>,
 <i:snip>&lt;mo&gt;-&lt;/mo&gt;</i:snip>,
@@ -238,7 +234,6 @@ x             // これは，2行目と同じ
 たとえば，<i:snip>mrow 3</i:snip> と入力すると，スタックから3つの要素がポップされ，
 この3つの要素を子要素としてもつ <i:snip>mrow</i:snip> 要素がプッシュされる．
 子要素はプッシュされた順に並べられる．
-</i:p>
 
 <i:code>a
 +
@@ -246,18 +241,13 @@ b
 mrow 3
 </i:code>
 
-<i:p>
 こうすると，
-</i:p>
-
 <i:code>&lt;mrow&gt;
   &lt;mi&gt;a&lt;/mi&gt;
   &lt;mo&gt;+&lt;/mo&gt;
   &lt;mi&gt;b&lt;/mi&gt;
 &lt;/mrow&gt;
 </i:code>
-
-<i:p>
 がスタックにプッシュされる．
 </i:p>
 
@@ -270,15 +260,19 @@ mrow 3
 分数を入力するには <i:snip>&lt;mfrac&gt;</i:snip> 要素を用いる．
 <i:snip>mfrac</i:snip> と入力すると，スタックから2つの要素がポップされ，
 これらを子要素としてもつ <i:snip>&lt;mfrac&gt;</i:snip> 要素がプッシュされる．
-</i:p>
 
 <i:code>a
 b
 mfrac
 </i:code>
+こうすると，
+<i:code>&lt;mfrac&gt;
+  &lt;mi&gt;a&lt;/mi&gt;
+  &lt;mi&gt;b&lt;/mi&gt;
+&lt;/mfrac&gt;
+</i:code>
+がスタックにプッシュされる．
 
-<i:p>
-yee
 </i:p>
 
 </i:section> <!-- @sid="mfrac" -->
@@ -290,13 +284,11 @@ yee
 スタックの先頭にある XML 要素に属性を追加するには，
 <i:snip>@{属性名}="{値}"</i:snip> という形式で入力を行う．
 たとえば，
-</i:p>
 
 <i:code>A
 @mathvariant="fraktur"
 </i:code>
 
-<i:p>
 こうすると，
 <i:snip>&lt;mi mathvariant="fraktur"&gt;A&lt;/mi&gt;</i:snip>
 (<math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="fraktur">A</mi></math>)
@@ -307,6 +299,31 @@ yee
 
 <i:section sid="macro">
 <i:title>マクロ</i:title>
+
+<i:p>
+入力を楽にするためにいくつかの特殊な命令を定義している．
+たとえば，いくつかの変数の積を入力したいときは，
+<i:code>4
+&amp;InvisibleTimes;
+a
+&amp;InvisibleTimes;
+c
+mrow 5
+</i:code>
+のように入力すればよいが，これは少し面倒である．
+そこで， <i:snip>\packit</i:snip> 命令が定義されている．
+<i:snip>\packit {要素の数}</i:snip> という形式で入力を行うと，
+与えられた数の要素をスタックからポップし，
+<i:snip>&amp;InvisibleTimes;</i:snip> 演算子ではさんだ上でこれらをまとめた
+<i:snip>mrow</i:snip> 要素がプッシュされる．
+
+<i:code>4
+a
+c
+\packit 3
+</i:code>
+</i:p>
+
 </i:section> <!-- @sid="macro" -->
 
 </i:section> <!-- @sid="feature" -->
@@ -325,13 +342,13 @@ Content MathML に対応したい．
 <i:section sid="semicolon">
 <i:title>複数行入力に対応する</i:title>
 
+<i:p>
 <i:code>x ; =
 -;b;mrow 2; &amp;PlusMinus; ; b;2;msup; -; 4;a;c;\packit 3; mrow 3; msqrt; mrow 3
 2;a;\packit 2
 mfrac
 mrow 3
 </i:code>
-<i:p>
 と入力できるようにしたい．
 </i:p>
 
