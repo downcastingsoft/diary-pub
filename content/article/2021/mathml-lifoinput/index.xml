@@ -5,16 +5,16 @@
 
 <i:head>
   <i:author>hnagamin</i:author>
-  <i:created-at>2021-04-16 22:46:00</i:created-at>
-  <i:updated-at>2021-04-16 22:46:00</i:updated-at>
+  <i:created-at>2021-07-14 13:10:47</i:created-at>
+  <i:updated-at>2021-07-14 13:10:47</i:updated-at>
 </i:head>
 
-<i:title>スタックベースの MathML 入力システム</i:title>
+<i:title>スタックベースの MathML 入力システム mathml-lifoinput</i:title>
 
 <i:summary>
 MathML (Mathematical Markup Language) は数式を記述するためのマークアップ言語である．
 この記事では，Web ブラウザ上で動作する MathML 入力システム mathml-lifoinput について述べる．
-mathml-lifoinput は XML 木構造を帰りがけ順で記述することにより MathML 文書を入力する．
+mathml-lifoinput は XML の木構造を帰りがけ順で記述することにより MathML 文書を入力する．
 出力される MathML の構造を細かく制御できる点に特徴がある．
 </i:summary>
 
