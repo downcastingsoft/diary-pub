@@ -328,11 +328,6 @@ c
 
 </i:section> <!-- @sid="feature" -->
 
-<i:section sid="implementation">
-<i:title>実装</i:title>
-
-</i:section> <!-- @sid="implementation" -->
-
 <i:section sid="future-work">
 <i:title>今後の課題</i:title>
 
