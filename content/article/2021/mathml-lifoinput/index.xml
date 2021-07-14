@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML"
+>
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2021-07-14 23:56:12</i:created-at>
+  <i:updated-at>2021-07-14 23:56:12</i:updated-at>
+</i:head>
+
+<i:title>スタックベースの MathML 入力システム mathml-lifoinput</i:title>
+
+<i:summary>
+MathML (Mathematical Markup Language) は数式を記述するためのマークアップ言語である．
+この記事では，Web ブラウザ上で動作する MathML 入力システム mathml-lifoinput について述べる．
+mathml-lifoinput は XML の木構造を帰りがけ順で記述することにより MathML 文書を入力する．
+出力される MathML の構造を細かく制御できる点に特徴がある．
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+<i:title>はじめに</i:title>
+
+<i:p>
+ブログに MathML+MathJax で数式を表示することにした．
+しかし，MathML を手打ちするのは大変だったので，入力システムを作った．
+<a href="https://www.downcastingsoft.net/7e5/mathml-lifoinput/"
+>https://www.downcastingsoft.net/7e5/mathml-lifoinput/</a>
+からアクセスできる．
+</i:p>
+
+<figure>
+  <video src="https://i.gyazo.com/96e51e2b659a66ff88b54d19ec050f5b.mp4" controls="" playsinline=""></video>
+  <figcaption>入力の様子</figcaption>
+</figure>
+
+<i:p>
+Git リポジトリは
+<a href="https://github.com/1995hnagamin/mathml-lifoinput"
+>1995hnagamin/mathml-lifoinput</a>
+にある．
+
+XML を帰りがけ順で記述する入力システムというものは，わざわざ自作しなくても既に誰かがやっていそうだが，
+React の勉強もかねて自分で作ってみることにした．
+</i:p>
+
+<i:p>
+たとえば，
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mfrac>
+      <mrow>
+        <mo>-</mo>
+        <mi>b</mi>
+        <mo>&#x00b1;</mo>
+        <msqrt>
+          <mrow>
+            <msup>
+              <mi>b</mi>
+              <mn>2</mn>
+            </msup>
+            <mo>-</mo>
+            <mrow>
+              <mn>4</mn>
+              <mo>&#x2062;</mo>
+              <mi>a</mi>
+              <mo>&#x2062;</mo>
+              <mi>c</mi>
+            </mrow>
+          </mrow>
+        </msqrt>
+      </mrow>
+      <mrow>
+        <mn>2</mn>
+        <mo>&#x2062;</mo>
+        <mi>a</mi>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>
+という数式を書きたい場合は，次のように入力する．
+
+<i:code>x
+=
+-
+b
+&amp;PlusMinus;
+b
+2
+msup
+-
+4
+a
+c
+\packit 3
+mrow 3
+msqrt
+mrow 4
+2
+a
+\packit 2
+mfrac
+mrow 3
+</i:code>
+
+こうすると，次のような XML が生成される．
+
+<i:code>&lt;mrow&gt;
+  &lt;mi&gt;x&lt;/mi&gt;
+  &lt;mo&gt;=&lt;/mo&gt;
+  &lt;mfrac&gt;
+    &lt;mrow&gt;
+      &lt;mo&gt;-&lt;/mo&gt;
+      &lt;mi&gt;b&lt;/mi&gt;
+      &lt;mo&gt;&amp;#xB1;&lt;/mo&gt;
+      &lt;msqrt&gt;
+        &lt;mrow&gt;
+          &lt;msup&gt;
+            &lt;mi&gt;b&lt;/mi&gt;
+            &lt;mn&gt;2&lt;/mn&gt;
+          &lt;/msup&gt;
+          &lt;mo&gt;-&lt;/mo&gt;
+          &lt;mrow&gt;
+            &lt;mn&gt;4&lt;/mn&gt;
+            &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+            &lt;mi&gt;a&lt;/mi&gt;
+            &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+            &lt;mi&gt;c&lt;/mi&gt;
+          &lt;/mrow&gt;
+        &lt;/mrow&gt;
+      &lt;/msqrt&gt;
+    &lt;/mrow&gt;
+    &lt;mrow&gt;
+      &lt;mn&gt;2&lt;/mn&gt;
+      &lt;mo&gt;&amp;#x2062;&lt;/mo&gt;
+      &lt;mi&gt;a&lt;/mi&gt;
+    &lt;/mrow&gt;
+  &lt;/mfrac&gt;
+&lt;/mrow&gt;
+</i:code>
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
+
+<i:section sid="feature">
+<i:title>機能</i:title>
+
+<i:section sid="token-elem">
+<i:title>トークン要素の入力</i:title>
+
+<i:p>
+トークン要素 (token elements) は，数や識別子など数式を構成する基本要素を表現するための XML 要素である．
+MathML 3 では次の6つのトークン要素が定義されている（<a href="https://www.w3.org/TR/MathML3/chapter3-d.html#presm.tokel">§3.2</a>）．
+<ul>
+  <li>識別子を表現する <i:snip>&lt;mi&gt;</i:snip> 要素</li>
+  <li>数を表現する <i:snip>&lt;mn&gt;</i:snip> 要素</li>
+  <li>演算子，関係記号，括弧類，区切り記号，アクセント記号などを表現する <i:snip>&lt;mo&gt;</i:snip> 要素</li>
+  <li>テキストを表現する <i:snip>&lt;mtext&gt;</i:snip> 要素</li>
+  <li>（計算機科学において）文字列リテラルを表現する <i:snip>&lt;ms&gt;</i:snip> 要素</li>
+  <li>空白を表現する <i:snip>&lt;mspace&gt;</i:snip> 要素</li>
+</ul>
+mathml-lifoinput は，現在のところ
+<i:snip>&lt;mi&gt;</i:snip>, <i:snip>&lt;mn&gt;</i:snip>, <i:snip>&lt;mo&gt;</i:snip>
+要素の入力に対応している．
+</i:p>
+
+<i:p>
+<i:snip>&lt;mi&gt;</i:snip> 要素を作成するには，<i:snip>mi "{入力したい識別子}"</i:snip> という形式で入力を行う．
+たとえば， sin という識別子を入力するには <i:snip>mi "sin"</i:snip> と入力する．
+識別子がアルファベット1文字の場合は，<i:snip>mi "</i:snip>, <i:snip>"</i:snip> の部分を省略できる．
+
+<i:code>mi "sin"
+mi "x"
+x             // これは，2行目と同じ
+</i:code>
+
+こうすると，<i:snip>&lt;mi&gt;sin&lt;/mi&gt;</i:snip>, <i:snip>&lt;mi&gt;x&lt;/mi&gt;</i:snip>,
+<i:snip>&lt;mi&gt;x&lt;/mi&gt;</i:snip> がスタックにプッシュされる．
+</i:p>
+
+<i:p>
+<i:snip>&lt;mn&gt;</i:snip> 要素を作成するには，<i:snip>mn "{入力したい数値表現}"</i:snip> という形式で入力を行う．
+たとえば， 123を入力するには <i:snip>mn "123"</i:snip> と入力する．
+一部の数値表現に対しては <i:snip>mn "</i:snip>, <i:snip>"</i:snip> の部分を省略できる．
+
+<i:code>mn "0xFFEF"
+2
+0.123
+2.1e10
+</i:code>
+
+こうすると，
+<i:snip>&lt;mn&gt;0xFFEF&lt;/mn&gt;</i:snip>,
+<i:snip>&lt;mn&gt;2&lt;/mn&gt;</i:snip>,
+<i:snip>&lt;mn&gt;0.123&lt;/mn&gt;</i:snip>,
+<i:snip>&lt;mn&gt;2.1e10&lt;/mn&gt;</i:snip>
+がスタックにプッシュされる．
+</i:p>
+
+<i:p>
+<i:snip>&lt;mo&gt;</i:snip> 要素を作成するには，<i:snip>mo "{入力したい演算子}"</i:snip> という形式で入力を行う．
+たとえば， +を入力するには <i:snip>mo "+"</i:snip> と入力する．
+一部の演算子に対しては <i:snip>mo "</i:snip>, <i:snip>"</i:snip> の部分を省略できる
+（<a href="https://github.com/1995hnagamin/mathml-lifoinput/blob/825bb1da498509a654b1019463baed4c31e779a4/src/App.tsx#L19-L34"
+>App.tsx</a> も参照）．
+
+<i:code>mo "+"
+-
+&amp;PlusMinus;
+&lt;
+</i:code>
+
+こうすると，
+<i:snip>&lt;mo&gt;+&lt;/mo&gt;</i:snip>,
+<i:snip>&lt;mo&gt;-&lt;/mo&gt;</i:snip>,
+<i:snip>&lt;mo&gt;&amp;#xB1;&lt;/mo&gt;</i:snip>,
+<i:snip>&lt;mo&gt;&amp;lt;&lt;/mo&gt;</i:snip>
+がスタックにプッシュされる．
+</i:p>
+
+</i:section> <!-- @sid="token-elem" -->
+
+<i:section sid="mrow">
+
+<i:title><i:snip>&lt;mrow&gt;</i:snip> 要素の入力</i:title>
+
+<i:p>
+<i:snip>&lt;mrow&gt;</i:snip> 要素は，いくつかの要素をグループ化してひとつにまとめるための要素である．
+<i:snip>&lt;mrow&gt;</i:snip> 要素を作成するには，<i:snip>mrow {子要素の数}</i:snip>という形式で入力を行う．
+たとえば，<i:snip>mrow 3</i:snip> と入力すると，スタックから3つの要素がポップされ，
+この3つの要素を子要素としてもつ <i:snip>mrow</i:snip> 要素がプッシュされる．
+子要素はプッシュされた順に並べられる．
+
+<i:code>a
++
+b
+mrow 3
+</i:code>
+
+こうすると，
+<i:code>&lt;mrow&gt;
+  &lt;mi&gt;a&lt;/mi&gt;
+  &lt;mo&gt;+&lt;/mo&gt;
+  &lt;mi&gt;b&lt;/mi&gt;
+&lt;/mrow&gt;
+</i:code>
+がスタックにプッシュされる．
+</i:p>
+
+</i:section> <!-- @sid="mrow" -->
+
+<i:section sid="mfrac">
+<i:title>分数の入力</i:title>
+
+<i:p>
+分数を入力するには <i:snip>&lt;mfrac&gt;</i:snip> 要素を用いる．
+<i:snip>mfrac</i:snip> と入力すると，スタックから2つの要素がポップされ，
+これらを子要素としてもつ <i:snip>&lt;mfrac&gt;</i:snip> 要素がプッシュされる．
+
+<i:code>a
+b
+mfrac
+</i:code>
+こうすると，
+<i:code>&lt;mfrac&gt;
+  &lt;mi&gt;a&lt;/mi&gt;
+  &lt;mi&gt;b&lt;/mi&gt;
+&lt;/mfrac&gt;
+</i:code>
+がスタックにプッシュされる．
+
+</i:p>
+
+</i:section> <!-- @sid="mfrac" -->
+
+<i:section sid="attribute">
+<i:title>属性の入力</i:title>
+
+<i:p>
+スタックの先頭にある XML 要素に属性を追加するには，
+<i:snip>@{属性名}="{値}"</i:snip> という形式で入力を行う．
+たとえば，
+
+<i:code>A
+@mathvariant="fraktur"
+</i:code>
+
+こうすると，
+<i:snip>&lt;mi mathvariant="fraktur"&gt;A&lt;/mi&gt;</i:snip>
+(<math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="fraktur">A</mi></math>)
+がスタックにプッシュされる．
+</i:p>
+
+</i:section> <!-- @sid="attribute" -->
+
+<i:section sid="macro">
+<i:title>マクロ</i:title>
+
+<i:p>
+入力を楽にするためにいくつかの特殊な命令を定義している．
+たとえば，いくつかの変数の積を入力したいときは，
+<i:code>4
+&amp;InvisibleTimes;
+a
+&amp;InvisibleTimes;
+c
+mrow 5
+</i:code>
+のように入力すればよいが，これは少し面倒である．
+そこで， <i:snip>\packit</i:snip> 命令が定義されている．
+<i:snip>\packit {要素の数}</i:snip> という形式で入力を行うと，
+与えられた数の要素をスタックからポップし，
+<i:snip>&amp;InvisibleTimes;</i:snip> 演算子ではさんだ上でこれらをまとめた
+<i:snip>mrow</i:snip> 要素がプッシュされる．
+
+<i:code>4
+a
+c
+\packit 3
+</i:code>
+</i:p>
+
+</i:section> <!-- @sid="macro" -->
+
+</i:section> <!-- @sid="feature" -->
+
+<i:section sid="future-work">
+<i:title>今後の課題</i:title>
+
+<i:section sid="content-markup">
+<i:title>内容 MathML に対応する</i:title>
+
+<i:p>
+Content MathML に対応したい．
+そのためには2つのアプローチがあると思う．
+ひとつは自明なサポート，すなわち，
+content MathML を単に木構造と見て，対応する命令（<i:snip>apply</i:snip>, <i:snip>eq</i:snip> など）を追加する方法．
+この場合は命令の仕様が決まっているので，スタック上でどのように表示するかだけを検討すればよい．
+MathML の構造を細かく制御できる点が mathml-lifoinput の特徴であるからこれらも実装する必要があると思う．
+</i:p>
+
+<i:p>
+もうひとつは，presentation MathML と content MathML の内容を同期しながら編集する方法．
+この場合は特別なモードとして実装した方がよいと思う．
+</i:p>
+
+
+</i:section> <!-- @sid="content-markup" -->
+
+<i:section sid="semicolon">
+<i:title>複数命令入力に対応する</i:title>
+
+<i:p>
+今のところ各行で1命令だけを受理する仕組みになっているので，たまに不便と感じることがある．
+<i:code>x ; =
+-;b;mrow 2; &amp;PlusMinus; ; b;2;msup; -; 4;a;c;\packit 3; mrow 3; msqrt; mrow 3
+2;a;\packit 2
+mfrac
+mrow 3
+</i:code>
+のように，1行に複数の命令を入力できるようにしたい．
+</i:p>
+
+</i:section> <!-- @sid="semicolon" -->
+
+<i:section sid="react">
+<i:title>React のパフォーマンスチューニング</i:title>
+
+<i:p>
+今のところあまり困っていないが，React の勉強も兼ねてパフォーマンスチューニングの方法を学んでみたい．
+スタックの部分に react-window を使うとよさそう？
+</i:p>
+
+</i:section> <!-- @sid="react" -->
+
+</i:section> <!-- @sid="future-work" -->
+
+</i:body>
+</i:article>
