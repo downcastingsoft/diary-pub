@@ -37,7 +37,12 @@ code {
 
 figure {
   display: block;
+  max-width: 90%;
   text-align: center;
+}
+
+video {
+  width: 100%;
 }
 
 #footnotes {
