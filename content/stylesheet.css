@@ -36,7 +36,7 @@ code {
 }
 
 pre {
-  overflow:auto;
+  overflow-x: auto;
 }
 
 figure {
@@ -50,7 +50,7 @@ video {
 }
 
 mjx-container {
-  overflow: auto;
+  overflow-x: auto;
 }
 
 #footnotes {
