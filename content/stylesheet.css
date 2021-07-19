@@ -35,14 +35,22 @@ code {
   background: #f1f1f1;
 }
 
+pre {
+  overflow:auto;
+}
+
 figure {
   display: block;
-  max-width: 90%;
+  max-width: 100%;
   text-align: center;
 }
 
 video {
   width: 100%;
+}
+
+mjx-container {
+  overflow: auto;
 }
 
 #footnotes {
