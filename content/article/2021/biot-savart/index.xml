@@ -521,11 +521,7 @@
     </mrow>
   </mrow>
 </math>
-という関係がある<i:footnote fid="arfken-eq17.84">
-  Arfken, G. B., Weber, H. J., &amp; Harris, F. E. (2013).
-  Mathematical Methods for Physicists: A Comprehensive Guide, seventh edition (pp. 867-868).
-  Academic Press.
-</i:footnote>．
+という関係がある<i:cite bid="arfken2013">pp. 867-868</i:cite>．
 ただし
 <math>
   <msubsup>
@@ -1074,5 +1070,14 @@
 </i:section>
 
 </i:body>
+
+<i:bibliography>
+  <i:bib-entry bid="arfken2013" key="AWH">
+    Arfken, G. B., Weber, H. J., &amp; Harris, F. E. (2013).
+    <i:italic>Mathematical Methods for Physicists: A Comprehensive Guide</i:italic>.
+    (7th edition).
+    Academic Press.
+  </i:bib-entry>
+</i:bibliography>
 
 </i:article>
