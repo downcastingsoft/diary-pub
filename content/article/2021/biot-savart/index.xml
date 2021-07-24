@@ -4,7 +4,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2021-07-13 04:30:00</i:created-at>
-  <i:updated-at>2021-07-13 13:37:39</i:updated-at>
+  <i:updated-at>2021-07-24 16:48:31</i:updated-at>
 </i:head>
 
 <i:title>ビオ・サバールの法則とローレンツ変換</i:title>
@@ -1066,6 +1066,7 @@
     記法の変更，
     セクションの設定，
     その他細かい変更</li>
+  <li>2021-07-24: 脚注ではなく参考文献欄を使うようにした</li>
 </ul>
 </i:section>
 
