@@ -53,6 +53,9 @@ mjx-container {
 
 #footnotes {
   border-top: thin solid black;
+}
+
+#bibliography {
   margin-bottom: 8px;
 }
 

@@ -4,7 +4,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2021-07-13 04:30:00</i:created-at>
-  <i:updated-at>2021-07-13 13:37:39</i:updated-at>
+  <i:updated-at>2021-07-24 16:48:31</i:updated-at>
 </i:head>
 
 <i:title>ビオ・サバールの法則とローレンツ変換</i:title>
@@ -521,11 +521,7 @@
     </mrow>
   </mrow>
 </math>
-という関係がある<i:footnote fid="arfken-eq17.84">
-  Arfken, G. B., Weber, H. J., &amp; Harris, F. E. (2013).
-  Mathematical Methods for Physicists: A Comprehensive Guide, seventh edition (pp. 867-868).
-  Academic Press.
-</i:footnote>．
+という関係がある<i:cite bid="arfken2013">pp. 867-868</i:cite>．
 ただし
 <math>
   <msubsup>
@@ -1070,9 +1066,19 @@
     記法の変更，
     セクションの設定，
     その他細かい変更</li>
+  <li>2021-07-24: 脚注ではなく参考文献欄を使うようにした</li>
 </ul>
 </i:section>
 
 </i:body>
+
+<i:bibliography>
+  <i:bib-entry bid="arfken2013" key="AWH">
+    Arfken, G. B., Weber, H. J., &amp; Harris, F. E. (2013).
+    <i:italic>Mathematical Methods for Physicists: A Comprehensive Guide</i:italic>.
+    (7th edition).
+    Academic Press.
+  </i:bib-entry>
+</i:bibliography>
 
 </i:article>

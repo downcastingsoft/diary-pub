@@ -65,6 +65,9 @@
           </xsl:for-each>
         </section>
       </xsl:if>
+
+      <xsl:apply-templates select="i:bibliography" />
+
     </article>
   </xsl:template>
 
@@ -201,6 +204,44 @@
     <title>
       <xsl:apply-templates />
     </title>
+  </xsl:template>
+
+  <xsl:template match="i:bibliography">
+    <section id="bibliography">
+      <h2>参考文献</h2>
+      <xsl:apply-templates select="i:bib-entry" />
+    </section>
+  </xsl:template>
+
+  <xsl:template match="i:bib-entry">
+    <div class="targetable">
+      <xsl:attribute name="id">
+        <xsl:text>bib-entry-</xsl:text>
+        <xsl:value-of select="@bid" />
+      </xsl:attribute>
+
+      <xsl:text>[</xsl:text>
+      <xsl:value-of select="@key" />
+      <xsl:text>] </xsl:text>
+      <xsl:apply-templates />
+    </div>
+  </xsl:template>
+
+  <xsl:template match="i:cite">
+    <xsl:variable name="id" select="@bid" />
+    <xsl:text>[</xsl:text>
+    <a>
+      <xsl:attribute name="href">
+        <xsl:text>#bib-entry-</xsl:text>
+        <xsl:value-of select="$id" />
+      </xsl:attribute>
+      <xsl:value-of select="/i:article/i:bibliography/i:bib-entry[@bid=($id)]/@key" />
+      <xsl:if test="*|text()">
+        <xsl:text>, </xsl:text>
+        <xsl:apply-templates />
+      </xsl:if>
+    </a>
+    <xsl:text>]</xsl:text>
   </xsl:template>
 
   <xsl:template match="*|@*|text()">
