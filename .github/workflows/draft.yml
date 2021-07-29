@@ -1,8 +1,5 @@
-name: Production deploy
-on:
-  push:
-    branches:
-      - main
+name: Deploy preview
+on: pull_request
 
 jobs:
   build-diary:
@@ -18,7 +15,7 @@ jobs:
     - name: Publish
       uses: netlify/actions/cli@master
       with:
-        args: deploy --dir=output --prod
+        args: deploy --dir=output
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
