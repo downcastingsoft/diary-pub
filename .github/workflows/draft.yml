@@ -1,8 +1,5 @@
-name: Production deploy
-on:
-  push:
-    branches:
-      - main
+name: Deploy preview
+on: pull_request
 
 jobs:
   build-diary:
@@ -16,7 +13,7 @@ jobs:
     - run: bundle exec nanoc
 
     - uses: actions/setup-node@v1
-    - run: npx -y --verbose netlify-cli deploy --dir=output --prod
+    - run: npx -y --verbose netlify-cli deploy --dir=output
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
