@@ -13,9 +13,7 @@ jobs:
     - run: bundle exec nanoc
 
     - name: Publish
-      uses: netlify/actions/cli@master
-      with:
-        args: deploy --dir=output
+      run: npx -y netlify-cli deploy --dir=output
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
