@@ -1,0 +1,455 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2021-11-27 17:10:45</i:created-at>
+  <i:updated-at>2021-11-27 17:10:45</i:updated-at>
+</i:head>
+
+<i:title>多項式環のちょっとかっこいい定義</i:title>
+
+<i:summary>
+多項式環を，数列空間上の線形変換がなす環の部分環として定義する．
+</i:summary>
+
+<i:body>
+
+<i:section sid="def">
+<i:title>定義</i:title>
+
+<i:p>
+
+<math><mi>K</mi></math> を（可換）体とする．
+<math><mi>K</mi></math> 上の列であって非零の項が有限個しかないものの全体を
+<math><mi>V</mi></math> とおく．
+
+<math><mi>V</mi></math> は要素ごとの和とスカラー倍によって <math><mi>K</mi></math> 上のベクトル空間となる．
+
+<math><mi>V</mi></math> 上の線形変換の全体を
+<math><mi>R</mi></math> とおく．
+<math><mi>R</mi></math> は値ごとの和と関数合成によって環をなす．
+
+<math>
+  <mrow>
+    <mi>X</mi>
+    <mo>∈</mo>
+    <mi>R</mi>
+  </mrow>
+</math>
+を
+<math display="block">
+  <mrow>
+    <mrow>
+      <msub>
+        <mrow>
+          <mo>(</mo>
+          <mi>X</mi>
+          <mo>&ApplyFunction;</mo>
+          <mi>a</mi>
+          <mo>)</mo>
+        </mrow>
+        <mn>0</mn>
+      </msub>
+      <mo>=</mo>
+      <mn>0</mn>
+    </mrow>
+    <mo>,</mo>
+    <mrow>
+      <msub>
+        <mrow>
+          <mo>(</mo>
+          <mi>X</mi>
+          <mo>&ApplyFunction;</mo>
+          <mi>a</mi>
+          <mo>)</mo>
+        </mrow>
+        <mrow>
+          <mi>n</mi>
+          <mo>+</mo>
+          <mn>1</mn>
+        </mrow>
+      </msub>
+      <mo>=</mo>
+      <msub>
+        <mi>a</mi>
+        <mi>n</mi>
+      </msub>
+    </mrow>
+  </mrow>
+</math>
+で定義する．
+<math><mi>X</mi></math>
+が生成する部分環 <math><mi>P</mi></math> を
+<math><mi>K</mi></math>
+上の一変数多項式環という．
+</i:p>
+
+<i:section sid="soundness">
+<i:title>確認すべき事項</i:title>
+
+<i:section sid="sequence-space-vec">
+<i:title><math><mi>V</mi></math> がベクトル空間であること</i:title>
+
+<i:p>
+<math><mi>K</mi></math> 上の列とは，自然数の全体集合 <math><mi mathvariant="bold">N</mi></math> から
+<math><mi>K</mi></math> への写像
+<math>
+  <mrow>
+    <mrow>
+      <mi>a</mi>
+      <mo>:</mo>
+      <mi mathvariant="bold">N</mi>
+      <mo>→</mo>
+      <mi>K</mi>
+    </mrow>
+    <mo>,</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>↦</mo>
+      <msub>
+        <mi>a</mi>
+        <mi>n</mi>
+      </msub>
+    </mrow>
+  </mrow>
+</math>
+のことである．
+<math><mi>K</mi></math> 上の列の全体集合を
+<math>
+  <msup>
+    <mi>K</mi>
+    <mi mathvariant="bold">N</mi>
+  </msup>
+</math>
+と書く．
+これを用いると， <math><mi>V</mi></math> は
+<math display="block">
+  <mrow>
+    <mi>V</mi>
+    <mo>=</mo>
+    <mrow>
+      <mo>{</mo>
+        <mrow>
+          <mi>a</mi>
+          <mo>∈</mo>
+          <msup>
+            <mi>K</mi>
+            <mi mathvariant="bold">N</mi>
+          </msup>
+        </mrow>
+        <mo>|</mo>
+        <mrow>
+          <mo>∃</mo>
+          <mi>m</mi>
+          <mo>,</mo>
+          <mo>∀</mo>
+          <mi>n</mi>
+          <mo>,</mo>
+          <mrow>
+            <mi>n</mi>
+            <mo>≧</mo>
+            <mi>m</mi>
+          </mrow>
+          <mo>&#x21d2;</mo>
+          <mrow>
+            <msub>
+              <mi>a</mi>
+              <mi>n</mi>
+            </msub>
+            <mo>=</mo>
+            <mn>0</mn>
+          </mrow>
+        </mrow>
+      <mo>}</mo>
+    </mrow>
+  </mrow>
+</math>
+と書ける．
+<math>
+  <msup>
+    <mi>K</mi>
+    <mi mathvariant="bold">N</mi>
+  </msup>
+</math>
+上の和とスカラー倍を次で定める．
+<math display="block">
+  <mrow>
+    <msub>
+      <mrow>
+        <mo>(</mo>
+        <mi>a</mi>
+        <mo>+</mo>
+        <mi>b</mi>
+        <mo>)</mo>
+      </mrow>
+      <mi>n</mi>
+    </msub>
+    <mo>=</mo>
+    <mrow>
+      <msub>
+        <mi>a</mi>
+        <mi>n</mi>
+      </msub>
+      <mo>+</mo>
+      <msub>
+        <mi>b</mi>
+        <mi>n</mi>
+      </msub>
+    </mrow>
+  </mrow>
+</math>
+
+<math display="block">
+  <mrow>
+    <msub>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>k</mi>
+          <mo>&#x2062;</mo>
+          <mi>a</mi>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+      <mi>n</mi>
+    </msub>
+    <mo>=</mo>
+    <mrow>
+      <mi>k</mi>
+      <mo>&#x2062;</mo>
+      <msub>
+        <mi>a</mi>
+        <mi>n</mi>
+      </msub>
+    </mrow>
+  </mrow>
+</math>
+
+<math><mi>V</mi></math> は加法，逆元を取る操作，スカラー倍で閉じているから
+<math>
+  <msup>
+    <mi>K</mi>
+    <mi mathvariant="bold">N</mi>
+  </msup>
+</math>
+の線形部分空間である．
+</i:p>
+
+</i:section> <!-- @sid="sequence-space-vec" -->
+
+<i:section sid="r-ring">
+<i:title><math><mi>R</mi></math> が環であること</i:title>
+</i:section> <!-- @sid="r-ring" -->
+
+<i:p>
+
+<math><mi>R</mi></math> 上の和と積を次で定める．
+
+<math display="block">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo>(</mo>
+        <mi>G</mi>
+        <mo>+</mo>
+        <mi>F</mi>
+        <mo>)</mo>
+      </mrow>
+      <mo>&#x2061;</mo>
+      <mi>a</mi>
+    </mrow>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mi>G</mi>
+        <mo>&#x2061;</mo>
+        <mi>a</mi>
+      </mrow>
+      <mo>+</mo>
+      <mrow>
+        <mi>F</mi>
+        <mo>&#x2061;</mo>
+        <mi>a</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+
+<math display="block">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>G</mi>
+          <mo>&#x2062;</mo>
+          <mi>F</mi>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+      <mo>&#x2061;</mo>
+      <mi>a</mi>
+    </mrow>
+    <mo>=</mo>
+    <mrow>
+      <mi>G</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>F</mi>
+          <mo>&#x2061;</mo>
+          <mi>a</mi>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+
+線形写像の全体はベクトル空間をなすから，特に加法のもとで可換群をなす．
+一方，関数合成は結合的かつ恒等写像を単位元にもつからモノイドである．
+線形写像の合成はまた線形写像で，また恒等写像は線形だから <math><mi>R</mi></math> は乗法で閉じており，モノイドをなす．
+各
+<math>
+  <mrow>
+    <mi>a</mi>
+    <mo>∈</mo>
+    <mi>X</mi>
+  </mrow>
+</math>
+における値を計算することで分配律が成り立つことも分かる．
+
+</i:p>
+
+<i:section sid="x-welldef">
+<i:title><math><mi>X</mi></math> が <math><mi>R</mi></math> の元であること</i:title>
+
+<i:p>
+<math><mi>X</mi></math> は非零の項を増やさないから <math><mi>V</mi></math> から <math><mi>V</mi></math> への写像．
+線形性は明らか．
+</i:p>
+
+</i:section> <!-- @sid="x-welldef" -->
+
+</i:section> <!-- @sid="soundness" -->
+
+</i:section> <!-- @sid="def" -->
+
+<i:section sid="identity">
+
+<i:title>通常の多項式環の定義と一致すること</i:title>
+
+<i:p>
+
+多項式環
+<math>
+  <mrow>
+    <mi>K</mi>
+    <mrow>
+      <mo>[</mo>
+      <mi>x</mi>
+      <mo>]</mo>
+    </mrow>
+  </mrow>
+</math>
+は <math><mi>V</mi></math> に和と積を定めたものとして定義されることが多い．
+同型
+<math>
+  <mrow>
+    <mrow>
+      <mi>&#x3C6;</mi>
+      <mo>:</mo>
+      <mi>P</mi>
+      <mo>&#x2192;</mo>
+      <mrow>
+        <mi>K</mi>
+        <mrow>
+          <mo>[</mo>
+          <mi>x</mi>
+          <mo>]</mo>
+        </mrow>
+      </mrow>
+    </mrow>
+    <mo>,</mo>
+    <mrow>
+      <mi>&#x3C8;</mi>
+      <mo>:</mo>
+      <mrow>
+        <mi>K</mi>
+        <mrow>
+          <mo>[</mo>
+          <mi>x</mi>
+          <mo>]</mo>
+        </mrow>
+      </mrow>
+      <mo>&#x2192;</mo>
+      <mi>P</mi>
+    </mrow>
+  </mrow>
+</math>
+は次で与えられる．
+
+<math display="block">
+  <mrow>
+    <mrow>
+      <mi>&#x3C6;</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>F</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <mrow>
+      <mi>F</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mi>&#x2026;</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+
+<math display="block">
+  <mrow>
+    <mrow>
+      <mi>&#x3C8;</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>p</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <mrow>
+      <mi>p</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>X</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+
+</i:p>
+
+</i:section> <!-- @sid="identity" -->
+
+</i:body>
+
+</i:article>
