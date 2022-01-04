@@ -1,0 +1,775 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2022-01-04 22:06:59</i:created-at>
+  <i:updated-at>2022-01-04 22:06:59</i:updated-at>
+</i:head>
+
+<i:title>1=0.999…</i:title>
+
+<i:summary>
+実数のアルキメデス性を使って 1=0.999… を説明する．
+</i:summary>
+
+<i:body>
+
+<i:section sid="assumption">
+<i:title>前提</i:title>
+
+<p>
+ここでは以下の5つの前提から出発して議論します．
+</p>
+
+<ul>
+  <li>(前提 A) <math><mn>0.999…</mn></math> という無限小数で表される実数が存在する．</li>
+  <li>(前提 B) <math><mn>0.999…</mn></math> は，<math><mn>1</mn></math> 以下である．</li>
+  <li>(前提 C)
+    <math><mn>0.999…</mn></math> は，
+    <math><mn>0.9</mn></math> より大きく，
+    <math><mn>0.99</mn></math> よりも大きく，
+    <math><mn>0.999</mn></math> よりも大きい．
+    一般に，
+    <math>
+      <mrow>
+        <mrow>
+          <mn>1</mn>
+          <mo>-</mo>
+          <msup>
+            <mn>10</mn>
+            <mrow>
+              <mo>-</mo>
+              <mi>n</mi>
+            </mrow>
+          </msup>
+        </mrow>
+        <mo>=</mo>
+        <mn>0.999…9</mn>
+      </mrow>
+    </math>
+    （9がn個）よりも大きい．
+  </li>
+  <li>(前提 D) 実数の加減乗除が定義されている．
+  </li>
+  <li>(前提 E)
+    任意の正の数 <math><mi>x</mi></math> に対して，
+    ある正整数 <math><mi>n</mi></math> が存在して，
+    <math>
+      <mrow>
+        <mrow>
+          <mi>n</mi>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>&gt;</mo>
+        <mn>1</mn>
+      </mrow>
+    </math>
+    が成り立つ．
+  </li>
+</ul>
+
+<p>
+以上の前提についてひとつずつ確認します．
+</p>
+
+<i:section sid="assumption-a">
+<i:title>前提 A：<math><mn>0.999…</mn></math> が存在する</i:title>
+
+<p>
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>=</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+を証明したいところですが，右辺の数が存在しないとそもそも意味がないので，存在すると仮定します．
+</p>
+
+</i:section> <!-- @sid="assumption-a" -->
+
+<i:section sid="assumption-b">
+<i:title>前提 B：<math><mrow><mn>0.999…</mn><mo>≦</mo><mn>1</mn></mrow></math></i:title>
+
+<p>
+これはなんとなく正しそうなので特に言うことはありません．
+</p>
+
+</i:section> <!-- @sid="assumption-b" -->
+
+<i:section sid="assumption-c">
+<i:title>前提 C：<math><mrow><mn>0.999…9</mn><mo>&lt;</mo><mn>0.999…</mn></mrow></math></i:title>
+
+<p>
+無限小数 <math><mn>0.999…</mn></math> で表される数は，
+有限小数 <math><mn>0.999…9</mn></math> で表される数よりも大きいということです．
+これもなんとなく正しそうなので特に言うことはありません．
+</p>
+
+</i:section> <!-- @sid="assumption-c" -->
+
+<i:section sid="assumption-d">
+<i:title>前提 D：加減乗除ができる</i:title>
+
+<p>
+</p>
+
+</i:section> <!-- @sid="assumption-d" -->
+
+<i:section sid="assumption-e">
+<i:title>前提 E：アルキメデスの性質</i:title>
+
+<p>
+要するに，どんなに小さい数であっても，それが正の数であれば，何倍かすると <math><mn>1</mn></math> より大きくなるということです．
+<math><mn>0.01</mn></math> は，<math><mn>101</mn></math> 倍すれば <math><mn>1</mn></math> より大きくなります．
+同じようなことがどんな小さい（正の）数に対しても成り立つと仮定します．
+</p>
+
+</i:section> <!-- @sid="assumption-d" -->
+
+</i:section> <!-- @sid="assumption" -->
+
+<i:section sid="proof">
+<i:title>
+「<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>=</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>」
+の証明
+</i:title>
+
+<p>
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.999…</mn>
+    </mrow>
+  </mrow>
+</math>
+という数を考えます．
+前提 A と前提 D より，こういう数は存在します．
+また，前提 B と前提 D より，<math><mi>x</mi></math> は <math><mn>0</mn></math> 以上です．
+<math><mi>x</mi></math> がどのくらい小さいかを考えてみます．
+</p>
+
+<p>
+前提 C より，
+<math>
+  <mrow>
+    <mn>0.999…</mn>
+    <mo>&gt;</mo>
+    <mn>0.9</mn>
+  </mrow>
+</math>
+です．
+これと前提 D を合わせると，
+<math display="block">
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.999…</mn>
+    </mrow>
+    <mo>&lt;</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.9</mn>
+    </mrow>
+    <mo>=</mo>
+    <mn>0.1</mn>
+  </mrow>
+</math>
+が成り立ちます．
+両辺を <math><mn>10</mn></math> 倍すると
+<math>
+  <mrow>
+    <mrow>
+      <mn>10</mn>
+      <mo>&#x2062;</mo>
+      <mi>x</mi>
+    </mrow>
+    <mo>&lt;</mo>
+    <mn>1</mn>
+  </mrow>
+</math>
+が分かります．
+</p>
+
+<p>
+さらに，
+<math>
+  <mrow>
+    <mn>0.999…</mn>
+    <mo>&gt;</mo>
+    <mn>0.99</mn>
+  </mrow>
+</math>
+でもあるので，
+<math display="block">
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.999…</mn>
+    </mrow>
+    <mo>&lt;</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.99</mn>
+    </mrow>
+    <mo>=</mo>
+    <mn>0.01</mn>
+  </mrow>
+</math>
+も成り立ちます．
+両辺を <math><mn>100</mn></math> 倍すると
+<math>
+  <mrow>
+    <mrow>
+      <mn>100</mn>
+      <mo>&#x2062;</mo>
+      <mi>x</mi>
+    </mrow>
+    <mo>&lt;</mo>
+    <mn>1</mn>
+  </mrow>
+</math>
+が分かります．
+</p>
+
+<p>
+さらに，
+<math>
+  <mrow>
+    <mn>0.999…</mn>
+    <mo>&gt;</mo>
+    <mn>0.999</mn>
+  </mrow>
+</math>
+でもあるので，
+<math display="block">
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.999…</mn>
+    </mrow>
+    <mo>&lt;</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.999</mn>
+    </mrow>
+    <mo>=</mo>
+    <mn>0.001</mn>
+  </mrow>
+</math>
+も成り立ちます．
+両辺を <math><mn>1000</mn></math> 倍すると
+<math>
+  <mrow>
+    <mrow>
+      <mn>1000</mn>
+      <mo>&#x2062;</mo>
+      <mi>x</mi>
+    </mrow>
+    <mo>&lt;</mo>
+    <mn>1</mn>
+  </mrow>
+</math>
+が分かります．
+</p>
+
+<p>
+一般化します．
+<math><mi>n</mi></math> を任意の正整数とします．
+このとき，前提 C より
+<math>
+  <mrow>
+    <mn>0.999…</mn>
+    <mo>&gt;</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <msup>
+        <mn>10</mn>
+        <mrow>
+          <mo>-</mo>
+          <mi>n</mi>
+        </mrow>
+      </msup>
+    </mrow>
+    <mo>=</mo>
+    <mn>0.999…9</mn>
+  </mrow>
+</math>
+なので，これと前提 D を合わせて
+<math display="block">
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.999…</mn>
+    </mrow>
+    <mo>&lt;</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mrow>
+        <mo>(</mo>
+        <mn>1</mn>
+        <mo>-</mo>
+        <msup>
+          <mn>10</mn>
+          <mrow>
+            <mo>-</mo>
+            <mi>n</mi>
+          </mrow>
+        </msup>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <msup>
+      <mn>10</mn>
+      <mrow>
+        <mo>-</mo>
+        <mi>n</mi>
+      </mrow>
+    </msup>
+  </mrow>
+</math>
+を得ます．
+両辺を <math><msup><mn>10</mn><mi>n</mi></msup></math> 倍すると
+<math>
+  <mrow>
+    <mrow>
+      <msup>
+        <mn>10</mn>
+        <mi>n</mi>
+      </msup>
+      <mo>&#x2062;</mo>
+      <mi>x</mi>
+    </mrow>
+    <mo>&lt;</mo>
+    <mn>1</mn>
+  </mrow>
+</math>
+です．
+ここで，ちょっと工夫して
+<math>
+  <mrow>
+    <mi>n</mi>
+    <mo>&#x2062;</mo>
+    <mi>x</mi>
+  </mrow>
+</math>
+と
+<math><mn>1</mn></math>
+を比べてみます．
+<math><mi>n</mi></math>
+は
+<math>
+  <msup>
+    <mn>10</mn>
+    <mi>n</mi>
+  </msup>
+</math>
+より小さいので，次の不等式が成立します．
+<math display="block">
+  <mrow>
+    <mrow>
+      <mi>n</mi>
+      <mo>&#x2062;</mo>
+      <mi>x</mi>
+    </mrow>
+    <mo>≦</mo>
+    <mrow>
+      <msup>
+        <mn>10</mn>
+        <mi>n</mi>
+      </msup>
+      <mo>&#x2062;</mo>
+      <mi>x</mi>
+    </mrow>
+    <mo>&lt;</mo>
+    <mn>1</mn>
+  </mrow>
+</math>
+つまり， <math><mi>x</mi></math> は何倍しても
+<math><mn>1</mn></math>
+より小さいままということです．
+</p>
+<p>
+さて，もともと
+<math><mi>x</mi></math> が
+<math><mn>0</mn></math>
+以上ということは分かっていました．
+つまり，
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+か，
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>&gt;</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+か，どちらかです．
+しかし，前提 E があるので
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>&gt;</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+はありえません．
+よって，
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+です．
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>-</mo>
+      <mn>0.999…</mn>
+    </mrow>
+  </mrow>
+</math>
+だったので，
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>=</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+ということが分かりました．
+</p>
+
+</i:section> <!-- @sid="proof" -->
+
+<i:section sid="countermeasures">
+<i:title>対策</i:title>
+
+<i:section sid="exp-fundamental">
+<i:title>超指数的に収束する列を用いる方法</i:title>
+
+<p>
+コーシー列による実数の構成法を復習します．
+実数環 <math><mi mathvariant="bold">R</mi></math> とは，
+コーシー列全体がなす環
+<math>
+  <mrow>
+    <mi>C</mi>
+    <mo>⊂</mo>
+    <msup>
+      <mi mathvariant="bold">Q</mi>
+      <mi mathvariant="bold">N</mi>
+    </msup>
+  </mrow>
+</math>
+をイデアル
+<math display="block">
+  <mrow>
+    <mi>I</mi>
+    <mo>=</mo>
+    <mrow>
+      <mo>{</mo>
+      <msubsup>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mi>a</mi>
+            <mi>n</mi>
+          </msub>
+          <mo>)</mo>
+        </mrow>
+        <mrow>
+          <mi>n</mi>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <mo>&#x221E;</mo>
+      </msubsup>
+      <mo>:</mo>
+      <mrow>
+        <mo>&#x2200;</mo>
+        <mrow>
+          <mi>&#x3B5;</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <mo>;</mo>
+        <mo>&#x2203;</mo>
+        <mrow>
+          <mi>N</mi>
+          <mo>&#x2208;</mo>
+          <mi mathvariant="bold">N</mi>
+        </mrow>
+        <mo>;</mo>
+        <mi>&#x2200;</mi>
+        <mrow>
+          <mi>n</mi>
+          <mo>&#x2208;</mo>
+          <mi mathvariant="bold">N</mi>
+        </mrow>
+        <mo>;</mo>
+        <mrow>
+          <mrow>
+            <mi>n</mi>
+            <mo>&gt;</mo>
+            <mi>N</mi>
+          </mrow>
+          <mo>&#x21D2;</mo>
+          <mrow>
+            <mrow>
+              <mo>|</mo>
+              <msub>
+                <mi>a</mi>
+                <mi>n</mi>
+              </msub>
+              <mo>|</mo>
+            </mrow>
+            <mo>&lt;</mo>
+            <mi>&#x3B5;</mi>
+          </mrow>
+        </mrow>
+      </mrow>
+      <mo>}</mo>
+    </mrow>
+  </mrow>
+</math>
+で割った環
+<math>
+  <mrow>
+    <mi>C</mi>
+    <mo>/</mo>
+    <mi>I</mi>
+  </mrow>
+</math>
+のことでした．
+ということで，もっと小さいイデアルで割れば
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>≠</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+にならないか？という疑問が自然に浮かびます．
+</p>
+
+<p>
+そこで，
+<math><mi>C</mi></math> の部分集合 <math><mi>J</mi></math> を
+<math display="block">
+  <mrow>
+    <mi>J</mi>
+    <mo>=</mo>
+    <mrow>
+      <mo>{</mo>
+      <msubsup>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mi>a</mi>
+            <mi>n</mi>
+          </msub>
+          <mo>)</mo>
+        </mrow>
+        <mrow>
+          <mi>n</mi>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <mo>&#x221E;</mo>
+      </msubsup>
+      <mo>:</mo>
+      <mrow>
+        <mo>&#x2200;</mo>
+        <mrow>
+          <mi>&#x3B5;</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <mo>;</mo>
+        <mo>&#x2203;</mo>
+        <mrow>
+          <mi>N</mi>
+          <mo>&#x2208;</mo>
+          <mi mathvariant="bold">N</mi>
+        </mrow>
+        <mo>;</mo>
+        <mo>&#x2200;</mo>
+        <mrow>
+          <mi>n</mi>
+          <mo>&#x2208;</mo>
+          <mi mathvariant="bold">N</mi>
+        </mrow>
+        <mo>;</mo>
+        <mrow>
+          <mrow>
+            <mi>n</mi>
+            <mo>&gt;</mo>
+            <mi>N</mi>
+          </mrow>
+          <mo>&#x21D2;</mo>
+          <mrow>
+            <mrow>
+              <mo>|</mo>
+              <msub>
+                <mi>a</mi>
+                <mi>n</mi>
+              </msub>
+              <mo>|</mo>
+            </mrow>
+            <mo>&lt;</mo>
+            <msup>
+              <mi>&#x3B5;</mi>
+              <mi>n</mi>
+            </msup>
+          </mrow>
+        </mrow>
+      </mrow>
+      <mo>}</mo>
+    </mrow>
+  </mrow>
+</math>
+で定義します．
+これはイデアルとなるので，商環
+<math>
+  <mrow>
+    <msup>
+      <mi mathvariant="bold">R</mi>
+      <mo>&#x27;</mo>
+    </msup>
+    <mo>=</mo>
+    <mrow>
+      <mi>C</mi>
+      <mo>/</mo>
+      <mi>J</mi>
+    </mrow>
+  </mrow>
+</math>
+が定義できます．
+<math><mn>1</mn></math> と <math><mn>0.999…</mn></math> を
+<math display="block">
+  <mrow>
+    <mn>1</mn>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mo>(</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+        <mo>&#x2026;</mo>
+        <mo>)</mo>
+      </mrow>
+      <mo>+</mo>
+      <mi>J</mi>
+    </mrow>
+  </mrow>
+</math>
+<math display="block">
+  <mrow>
+    <mn>0.999&#x2026;</mn>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mo>(</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mn>0.9</mn>
+        <mo>,</mo>
+        <mn>0.99</mn>
+        <mo>,</mo>
+        <mn>0.999</mn>
+        <mo>,</mo>
+        <mo>&#x2026;</mo>
+        <mo>)</mo>
+      </mrow>
+      <mo>+</mo>
+      <mi>J</mi>
+    </mrow>
+  </mrow>
+</math>
+で定義すると，
+<math>
+  <mrow>
+    <mrow>
+      <mo>(</mo>
+      <mn>1</mn>
+      <mo>,</mo>
+      <mn>0.1</mn>
+      <mo>,</mo>
+      <mn>0.01</mn>
+      <mo>,</mo>
+      <mn>0.001</mn>
+      <mo>,</mo>
+      <mo>&#x2026;</mo>
+      <mo>)</mo>
+    </mrow>
+    <mo>&#x2209;</mo>
+    <mi>J</mi>
+  </mrow>
+</math>
+つまり
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>≠</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+が成立します．
+</p>
+
+</i:section> <!-- @sid="exp-fundamental" -->
+
+i:section[sid=""]
+
+</i:section> <!-- @sid="countermeasures" -->
+
+</i:body>
+
+</i:article>
