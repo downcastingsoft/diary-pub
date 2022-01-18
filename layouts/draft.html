@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
+    <title>Draft: <%= @item[:title] %></title>
+    <link href="/stylesheet.css" rel="stylesheet" type="text/css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <nav id="site-nav">
+      <span>
+        <a class="nav-item" href="/">日記</a>
+      </span>
+    </nav>
+    <div id="page-container">
+      <p>
+        これは「<%= @item[:title] %>」という記事の下書きです．
+      </p>
+      <main>
+        <%= yield %>
+      </main>
+      <footer id="site-fotter">
+        <a href="/">Top</a>
+        <a href="/about/">About</a>
+        <a href="/atom.xml">Feed</a>
+        <a href="https://www.downcastingsoft.net/">www.downcastingsoft.net</a>
+      </footer>
+    </div>
+  </body>
+</html>
