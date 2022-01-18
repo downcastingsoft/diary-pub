@@ -12,6 +12,7 @@
 
 <i:summary>
 実数のアルキメデス性を使って 1=0.999… を説明する．
+また，1=0.999… が成立しないような数の体系についていくつか検討する．
 </i:summary>
 
 <i:body>
@@ -67,7 +68,24 @@
         <mn>1</mn>
       </mrow>
     </math>
-    が成り立つ．
+    が成り立つ<i:footnote fid="arch">
+      実際にはもっと強い条件が成立します．
+      つまり，任意の正の数 <math><mi>y</mi></math> に対して，
+      ある正整数 <math><mi>n</mi></math> が存在して
+      <math>
+        <mrow>
+          <mrow>
+            <mi>n</mi>
+            <mo>&#x2062;</mo>
+            <mi>x</mi>
+          </mrow>
+          <mo>&gt;</mo>
+          <mi>y</mi>
+        </mrow>
+      </math>
+      が成り立ちます．
+      この記事ではそこまで強い条件は使わないので省略しました．
+    </i:footnote>．
   </li>
 </ul>
 
@@ -76,7 +94,7 @@
 </p>
 
 <i:section sid="assumption-a">
-<i:title>前提 A：<math><mn>0.999…</mn></math> が存在する</i:title>
+<i:title>前提 A. <math><mn>0.999…</mn></math> が存在する</i:title>
 
 <p>
 <math>
@@ -92,7 +110,7 @@
 </i:section> <!-- @sid="assumption-a" -->
 
 <i:section sid="assumption-b">
-<i:title>前提 B：<math><mrow><mn>0.999…</mn><mo>≦</mo><mn>1</mn></mrow></math></i:title>
+<i:title>前提 B. <math><mrow><mn>0.999…</mn><mo>≦</mo><mn>1</mn></mrow></math></i:title>
 
 <p>
 これはなんとなく正しそうなので特に言うことはありません．
@@ -101,7 +119,7 @@
 </i:section> <!-- @sid="assumption-b" -->
 
 <i:section sid="assumption-c">
-<i:title>前提 C：<math><mrow><mn>0.999…9</mn><mo>&lt;</mo><mn>0.999…</mn></mrow></math></i:title>
+<i:title>前提 C. <math><mrow><mn>0.999…9</mn><mo>&lt;</mo><mn>0.999…</mn></mrow></math></i:title>
 
 <p>
 無限小数 <math><mn>0.999…</mn></math> で表される数は，
@@ -112,7 +130,7 @@
 </i:section> <!-- @sid="assumption-c" -->
 
 <i:section sid="assumption-d">
-<i:title>前提 D：加減乗除ができる</i:title>
+<i:title>前提 D. 加減乗除ができる</i:title>
 
 <p>
 </p>
@@ -120,7 +138,7 @@
 </i:section> <!-- @sid="assumption-d" -->
 
 <i:section sid="assumption-e">
-<i:title>前提 E：アルキメデスの性質</i:title>
+<i:title>前提 E. アルキメデスの性質</i:title>
 
 <p>
 要するに，どんなに小さい数であっても，それが正の数であれば，何倍かすると <math><mn>1</mn></math> より大きくなるということです．
@@ -487,6 +505,214 @@
 <i:section sid="countermeasures">
 <i:title>対策</i:title>
 
+<i:section sid="dual-num">
+<i:title>二重数に順序を入れる方法（うまくいかない）</i:title>
+
+<p>
+上の証明では実数のアルキメデス性が大きな役割を果たしていました．
+しかし，よく考えてみるとこれはずるいです．
+アルキメデス性を仮定することは，「実数の世界には無限小は存在しません」と宣言するのにほぼ等しいからです．
+無限小というものは，何倍しても <math><mn>1</mn></math> より小さい数であるはずです．
+</p>
+
+<p>
+以上のことを踏まえると，アルキメデスの性質が成り立たない数の体系を考えれば，
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>≠</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+が成り立つのではないか？という疑問が自然に浮かびます．
+しかし，そうとは限りません．
+無限小が存在する体系でも，
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>=</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+になってしまうことがあります．
+その例を以下に紹介します．
+</p>
+
+<p>
+多項式環
+<math>
+  <mrow>
+    <mi mathvariant="bold">R</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>[</mo>
+      <mi>ε</mi>
+      <mo>]</mo>
+    </mrow>
+  </mrow>
+</math>
+を
+<math>
+  <msup>
+    <mi>ε</mi>
+    <mn>2</mn>
+  </msup>
+</math>
+で割った環
+<math>
+  <mrow>
+    <mi>D</mi>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mi mathvariant="bold">R</mi>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>[</mo>
+          <mi>ε</mi>
+          <mo>]</mo>
+        </mrow>
+      </mrow>
+      <mo>/</mo>
+      <msup>
+        <mi>ε</mi>
+        <mn>2</mn>
+      </msup>
+    </mrow>
+  </mrow>
+</math>
+を二重数といいます．
+二重数の順序を
+<math display="block">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi>a</mi>
+        <mo>+</mo>
+        <mrow>
+          <mi>b</mi>
+          <mo>&#x2062;</mo>
+          <mi>&#x3B5;</mi>
+        </mrow>
+      </mrow>
+      <mo>&lt;</mo>
+      <mrow>
+        <mi>c</mi>
+        <mo>+</mo>
+        <mrow>
+          <mi>d</mi>
+          <mo>&#x2062;</mo>
+          <mi>&#x3B5;</mi>
+        </mrow>
+      </mrow>
+    </mrow>
+    <mo>&#x21D4;</mo>
+    <mrow>
+      <mrow>
+        <mi>a</mi>
+        <mo>&lt;</mo>
+        <mi>c</mi>
+      </mrow>
+      <mo>or</mo>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>a</mi>
+          <mo>=</mo>
+          <mi>c</mi>
+        </mrow>
+        <mo>and</mo>
+        <mrow>
+          <mi>b</mi>
+          <mo>&lt;</mo>
+          <mi>d</mi>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+で定義します<i:footnote fid="dual-ord">
+これは本稿独自の定義です．二重数の順序を議論している文献をご存知の方は教えてください．
+</i:footnote>．
+二重数の世界では，
+任意の正数
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>&gt;</mo>
+    <mn>0</mn>
+  </mrow>
+</math>
+に対して
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>&gt;</mo>
+    <mi>&#x3B5;</mi>
+  </mrow>
+</math>
+が成り立ち，
+<math>
+  <mi>ε</mi>
+</math>
+が「一次の無限小」のように振るまいます．
+二重数にこのような順序を導入すると，アルキメデスの性質は成り立ちません．
+</p>
+
+<p>
+それでは二重数の世界で
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>=</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+は成り立つでしょうか？
+残念ながら成り立ちます．
+これを示すためには，
+<math>
+  <mi mathvariant="bold">R</mi>
+</math>
+が
+<math>
+  <mi>D</mi>
+</math>
+の部分環になっていることと，
+<math>
+  <mi mathvariant="bold">R</mi>
+</math>
+が体をなすこと，そして
+<math>
+  <mi mathvariant="bold">R</mi>
+</math>
+が二重数の順序の定める位相のもとで完備になっていることを確認すればよいです．
+あとは上の証明と同じやり方によって
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>=</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+が証明できます．
+</p>
+
+<p>
+この例から分かるのは，実数に後付けで無限小を加えてもうまくいくとは限らないということです．
+<math>
+  <mrow>
+    <mn>1</mn>
+    <mo>=</mo>
+    <mn>0.999…</mn>
+  </mrow>
+</math>
+を崩すためには，極限の構造をもっと動かす必要があります．
+</p>
+
+</i:section>
+
 <i:section sid="exp-fundamental">
 <i:title>超指数的に収束する列を用いる方法</i:title>
 
@@ -546,29 +772,21 @@
         <mi>&#x2200;</mi>
         <mrow>
           <mi>n</mi>
-          <mo>&#x2208;</mo>
-          <mi mathvariant="bold">N</mi>
+          <mo>&gt;</mo>
+          <mi>N</mi>
         </mrow>
         <mo>;</mo>
         <mrow>
           <mrow>
-            <mi>n</mi>
-            <mo>&gt;</mo>
-            <mi>N</mi>
+            <mo>|</mo>
+            <msub>
+              <mi>a</mi>
+              <mi>n</mi>
+            </msub>
+            <mo>|</mo>
           </mrow>
-          <mo>&#x21D2;</mo>
-          <mrow>
-            <mrow>
-              <mo>|</mo>
-              <msub>
-                <mi>a</mi>
-                <mi>n</mi>
-              </msub>
-              <mo>|</mo>
-            </mrow>
-            <mo>&lt;</mo>
-            <mi>&#x3B5;</mi>
-          </mrow>
+          <mo>&lt;</mo>
+          <mi>&#x3B5;</mi>
         </mrow>
       </mrow>
       <mo>}</mo>
@@ -639,32 +857,24 @@
         <mo>&#x2200;</mo>
         <mrow>
           <mi>n</mi>
-          <mo>&#x2208;</mo>
-          <mi mathvariant="bold">N</mi>
+          <mo>&gt;</mo>
+          <mi>N</mi>
         </mrow>
         <mo>;</mo>
         <mrow>
           <mrow>
-            <mi>n</mi>
-            <mo>&gt;</mo>
-            <mi>N</mi>
-          </mrow>
-          <mo>&#x21D2;</mo>
-          <mrow>
-            <mrow>
-              <mo>|</mo>
-              <msub>
-                <mi>a</mi>
-                <mi>n</mi>
-              </msub>
-              <mo>|</mo>
-            </mrow>
-            <mo>&lt;</mo>
-            <msup>
-              <mi>&#x3B5;</mi>
+            <mo>|</mo>
+            <msub>
+              <mi>a</mi>
               <mi>n</mi>
-            </msup>
+            </msub>
+            <mo>|</mo>
           </mrow>
+          <mo>&lt;</mo>
+          <msup>
+            <mi>&#x3B5;</mi>
+            <mi>n</mi>
+          </msup>
         </mrow>
       </mrow>
       <mo>}</mo>
@@ -688,10 +898,10 @@
   </mrow>
 </math>
 が定義できます．
-<math><mn>1</mn></math> と <math><mn>0.999…</mn></math> を
+<math><mn>1'</mn></math> と <math><mn>0.9'9'9'…</mn></math> を
 <math display="block">
   <mrow>
-    <mn>1</mn>
+    <mn>1'</mn>
     <mo>=</mo>
     <mrow>
       <mrow>
@@ -712,7 +922,7 @@
 </math>
 <math display="block">
   <mrow>
-    <mn>0.999&#x2026;</mn>
+    <mn>0.9'9'9'&#x2026;</mn>
     <mo>=</mo>
     <mrow>
       <mrow>
@@ -756,17 +966,31 @@
 つまり
 <math>
   <mrow>
-    <mn>1</mn>
+    <mn>1'</mn>
     <mo>≠</mo>
-    <mn>0.999…</mn>
+    <mn>0.9'9'9'…</mn>
   </mrow>
 </math>
 が成立します．
 </p>
 
+<p>
+指数関数を超える速度で0に収束する列のみが <math><mi>J</mi></math> に属します．
+それ以外の，高々指数関数程度の速度で0に収束する列は，
+<math>
+  <msup>
+    <mi mathvariant="bold">R</mi>
+    <mo>&#x27;</mo>
+  </msup>
+</math>
+において無限小のようにふるまいます．
+</p>
+
 </i:section> <!-- @sid="exp-fundamental" -->
 
-i:section[sid=""]
+<i:section sid="p-adic">
+<i:title>p進数を用いる方法</i:title>
+</i:section>
 
 </i:section> <!-- @sid="countermeasures" -->
 
