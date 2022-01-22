@@ -3,7 +3,6 @@
 /output
 /tmp
 /vendor
-/Gemfile.lock
 .ruby-version
 
 *.swp
