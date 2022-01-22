@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby "3.0.1"
+ruby "3.1.0"
 
-gem 'nanoc', '~> 4.12', '< 4.12.4'
+gem 'nanoc', '~> 4.12'
 gem 'nokogiri', '~> 1.11'
 gem 'webrick'
 gem 'adsf'
