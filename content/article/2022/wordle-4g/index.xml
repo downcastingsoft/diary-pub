@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2022-01-23 17:46:15</i:created-at>
+  <i:updated-at>2022-01-23 17:46:15</i:updated-at>
+</i:head>
+
+<i:title>Wordle で最後の1文字を当てにくい単語</i:title>
+
+<i:summary>
+Wordle は，隠された5文字の英単語を当てるパズルゲームである．
+プレイヤーは6回まで解答でき，その度に
+「どの文字が使われているか」「文字が正しい位置で使われているか」というヒントが与えられる．
+この記事では，4文字を正しく当てた後，残りの1文字を絞り込むのが難しい単語を791語（111パターン）紹介する．
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+<i:title>はじめに</i:title>
+
+<i:p>
+<a href="https://www.powerlanguage.co.uk/wordle/">Wordle</a> は，
+Josh Wardle が2021年に発表したパズルゲームです <i:cite bid="victor2022"/>．
+このゲームの目的は，隠された5文字の英単語を正しく当てることです．
+プレイヤーは6回まで解答できます．
+ただし，"ABCDE" など辞書に載っていない単語を入力することはできません．
+解答後にヒントが与えられます．
+5文字のうち，正しい位置で使われている文字は緑色で，位置は正しくないが正解に含まれている文字は黄色で，正解に含まれていない文字は灰色で表示されます<i:footnote>
+ハイコントラストテーマでは，緑，黄色，灰色の代わりに赤，青，灰色が使われます．</i:footnote>．
+以下に "APPLE" と入力した場合の例を示します．
+5文字目が緑色，2文字目が黄色，それ以外が灰色なので，次のことが分かります．
+</i:p>
+<ul>
+  <li>正解の単語の5文字目は "E" である．</li>
+  <li>正解の単語は，1文字目か4文字目のどちらか一方に "P" を含む．</li>
+  <li>正解の単語は，"A" や "L" を含まない．</li>
+</ul>
+<a href="https://gyazo.com/e6d83d05f475a522641c18f8a63705ee"><img src="https://i.gyazo.com/e6d83d05f475a522641c18f8a63705ee.png" alt="Image from Gyazo" width="355"/></a>
+
+<i:p>
+このゲームで，最初に "SOUND" と入力し，4ヶ所が緑になったケースを考えます．
+正解の単語は "BOUND" でしょうか？　"FOUND" でしょうか？　
+最後の1文字を当てるのは簡単ではありません．
+特にハードモードでは，提示されたヒントを全て使わなければならないという制約があるため，運に頼るほかありません．
+こういったケースを避けるためには，残りの1文字を絞りにくい単語を知っておく必要があります．
+</i:p>
+
+<a href="https://gyazo.com/c4050a578d230dd7548a557915d83349"><img src="https://i.gyazo.com/c4050a578d230dd7548a557915d83349.png" alt="Image from Gyazo" width="355"/></a>
+
+<i:p>
+そこでこの記事では，上の"SOUND" のような，入力に注意を要する単語を集めました．
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
+
+<i:section sid="word-list">
+<i:title>単語リスト</i:title>
+
+<ul>
+  <li>(bar*s)  barbs, bards, bares, barfs, barks, barms, barns</li>
+  <li>(ba*es)  babes, bakes, bales, banes, bares, bases, bates</li>
+  <li>(bea*s)  beads, beaks, beams, beans, bears, beats, beaus</li>
+  <li>(bra*s)  brads, braes, brags, brans, brass, brats, brays</li>
+  <li>(ca*ed)  caged, caked, caned, caped, cared, cased, caved, cawed</li>
+  <li>(ca*es)  cafes, cages, cakes, canes, capes, cares, cases, caves</li>
+  <li>(cla*s)  clads, clams, clans, claps, class, claws, clays</li>
+  <li>(co*ed)  coded, coked, coned, cooed, coped, cored, cowed, coxed</li>
+  <li>(co*er)  coder, comer, coper, corer, cover, cower, coyer</li>
+  <li>(co*es)  codes, cokes, comes, cones, copes, cores, cotes, coves, coxes</li>
+  <li>(do*es)  doges, doles, domes, dopes, doses, dotes, doves, dozes</li>
+  <li>(fa*ed)  faced, faded, faked, famed, fared, fated, faxed, fazed</li>
+  <li>(fa*es)  faces, fades, fakes, fames, fares, fates, faxes, fazes</li>
+  <li>(fla*s)  flabs, flags, flaks, flams, flaps, flats, flaws, flays</li>
+  <li>(ga*es)  gages, gales, games, gapes, gases, gates, gazes</li>
+  <li>(goo*y)  goody, gooey, goofy, gooky, goony, goopy, goosy</li>
+  <li>(ha*es)  hades, hales, hames, hares, hates, haves, hazes</li>
+  <li>(la*er)  lacer, lager, laker, lamer, laser, later, laver, laxer, layer</li>
+  <li>(la*es)  laces, lades, lakes, lames, lanes, lases, laves, lazes</li>
+  <li>(lo*es)  lobes, lodes, loges, lopes, lores, loses, loves, loxes</li>
+  <li>(ma*es)  maces, makes, males, manes, mares, mates, mazes</li>
+  <li>(min*s)  minas, minds, mines, minis, minks, mints, minus</li>
+  <li>(mi*es)  mikes, miles, mimes, mines, mires, mites, mixes</li>
+  <li>(pa*ed)  paced, paged, paled, paned, pared, paved, pawed, payed</li>
+  <li>(pa*er)  pacer, pager, paler, paper, parer, pater, paver, pawer, payer</li>
+  <li>(pa*es)  paces, pages, pales, panes, pares, pates, paves</li>
+  <li>(po*es)  pokes, poles, pones, popes, pores, poses, poxes</li>
+  <li>(ra*ed)  raced, raged, raked, raped, rated, raved, rayed, razed</li>
+  <li>(ra*er)  racer, raker, raper, rarer, rater, raver, rawer, razer</li>
+  <li>(ra*es)  races, rages, rakes, rapes, rates, raves, razes</li>
+  <li>(ri*er)  ricer, rider, rifer, rimer, riper, riser, river</li>
+  <li>(ri*es)  rices, rides, riles, rimes, rises, rites, rives</li>
+  <li>(sa*er)  saber, safer, sager, saner, saver, sawer, sayer</li>
+  <li>(sa*es)  safes, sages, sakes, sales, sates, saves, saxes</li>
+  <li>(sha*e)  shade, shake, shale, shame, shape, share, shave</li>
+  <li>(sla*s)  slabs, slags, slams, slaps, slats, slaws, slays</li>
+  <li>(wa*ed)  waded, waged, waked, waled, waned, waved, waxed</li>
+  <li>(wa*er)  wader, wafer, wager, waker, water, waver, waxer</li>
+  <li>(wa*es)  wades, wages, wakes, wales, wanes, wares, waves, waxes</li>
+  <li>(*acks)  backs, hacks, jacks, lacks, packs, racks, sacks, tacks</li>
+  <li>(*ails)  bails, fails, hails, jails, mails, nails, pails, rails, sails, tails, vails, wails</li>
+  <li>(*aker)  baker, faker, laker, maker, raker, taker, waker</li>
+  <li>(*akes)  bakes, cakes, fakes, jakes, lakes, makes, rakes, sakes, takes, wakes</li>
+  <li>(*ales)  bales, dales, gales, hales, kales, males, pales, sales, tales, vales, wales</li>
+  <li>(*alls)  balls, calls, falls, galls, halls, malls, palls, walls</li>
+  <li>(*ames)  dames, fames, games, hames, lames, names, tames</li>
+  <li>(*anes)  banes, canes, janes, lanes, manes, panes, vanes, wanes</li>
+  <li>(*ards)  bards, cards, lards, nards, pards, wards, yards</li>
+  <li>(*ared)  bared, cared, dared, eared, fared, oared, pared, tared</li>
+  <li>(*ares)  bares, cares, dares, fares, hares, mares, nares, pares, tares, wares</li>
+  <li>(*arts)  carts, darts, farts, harts, marts, parts, tarts, warts</li>
+  <li>(*ases)  bases, cases, eases, gases, lases, oases, vases</li>
+  <li>(*atch)  batch, catch, hatch, latch, match, natch, patch, watch</li>
+  <li>(*ated)  bated, dated, fated, gated, hated, mated, rated, sated</li>
+  <li>(*ater)  cater, dater, eater, hater, later, mater, pater, rater, tater, water</li>
+  <li>(*ates)  bates, dates, fates, gates, hates, mates, nates, pates, rates, sates</li>
+  <li>(*atty)  batty, catty, fatty, natty, patty, ratty, tatty</li>
+  <li>(*aves)  caves, eaves, haves, laves, naves, paves, raves, saves, waves</li>
+  <li>(*azed)  dazed, fazed, gazed, hazed, lazed, mazed, razed</li>
+  <li>(*azes)  dazes, fazes, gazes, hazes, lazes, mazes, razes</li>
+  <li>(*eals)  deals, heals, meals, peals, reals, seals, teals, veals, weals, zeals</li>
+  <li>(*ears)  bears, dears, fears, gears, hears, nears, pears, rears, sears, tears, wears, years</li>
+  <li>(*eats)  beats, feats, heats, meats, peats, seats, teats</li>
+  <li>(*eeds)  deeds, feeds, heeds, needs, reeds, seeds, weeds</li>
+  <li>(*eeps)  beeps, deeps, jeeps, keeps, peeps, seeps, veeps, weeps</li>
+  <li>(*ells)  bells, cells, dells, fells, hells, jells, sells, tells, wells, yells</li>
+  <li>(*ends)  bends, fends, lends, mends, pends, rends, sends, tends, vends, wends</li>
+  <li>(*ents)  bents, cents, dents, gents, rents, tents, vents</li>
+  <li>(*ests)  bests, jests, nests, pests, rests, tests, vests, wests, zests</li>
+  <li>(*icks)  dicks, hicks, kicks, licks, micks, nicks, picks, sicks, ticks, wicks</li>
+  <li>(*ider)  aider, bider, cider, eider, hider, rider, wider</li>
+  <li>(*ight)  bight, eight, fight, light, might, night, right, sight, tight</li>
+  <li>(*ikes)  bikes, dikes, hikes, kikes, likes, mikes, pikes, tikes, yikes</li>
+  <li>(*iled)  ailed, filed, oiled, piled, riled, tiled, wiled</li>
+  <li>(*iles)  biles, files, miles, piles, riles, tiles, wiles</li>
+  <li>(*ills)  bills, cills, dills, fills, gills, hills, kills, mills, pills, rills, sills, tills, wills</li>
+  <li>(*ilts)  gilts, hilts, jilts, kilts, lilts, silts, tilts, wilts</li>
+  <li>(*inds)  binds, finds, hinds, kinds, minds, rinds, winds</li>
+  <li>(*ined)  dined, fined, lined, mined, pined, vined, wined</li>
+  <li>(*ines)  dines, fines, lines, mines, nines, pines, sines, tines, vines, wines</li>
+  <li>(*ings)  dings, jings, kings, lings, pings, rings, sings, tings, wings, zings</li>
+  <li>(*inks)  dinks, finks, jinks, kinks, links, minks, oinks, pinks, rinks, sinks, winks</li>
+  <li>(*ired)  aired, fired, hired, mired, sired, tired, wired</li>
+  <li>(*ires)  fires, hires, mires, sires, tires, vires, wires</li>
+  <li>(*ites)  bites, cites, kites, lites, mites, rites, sites</li>
+  <li>(*ives)  dives, fives, gives, hives, jives, lives, rives, wives</li>
+  <li>(*ocks)  bocks, cocks, docks, hocks, jocks, locks, mocks, pocks, rocks, socks</li>
+  <li>(*olls)  bolls, dolls, lolls, molls, polls, rolls, tolls</li>
+  <li>(*olly)  dolly, folly, golly, holly, jolly, lolly, molly, polly</li>
+  <li>(*ones)  bones, cones, hones, nones, pones, tones, zones</li>
+  <li>(*ooks)  books, cooks, gooks, hooks, kooks, looks, nooks, rooks, zooks</li>
+  <li>(*ooky)  booky, cooky, gooky, hooky, kooky, looky, nooky, rooky</li>
+  <li>(*oons)  boons, coons, goons, loons, moons, noons, toons</li>
+  <li>(*oots)  boots, coots, foots, hoots, loots, moots, roots, soots, toots</li>
+  <li>(*oped)  coped, doped, hoped, loped, moped, roped, toped</li>
+  <li>(*oper)  coper, doper, hoper, loper, moper, roper, toper</li>
+  <li>(*opes)  copes, dopes, hopes, lopes, mopes, popes, ropes, topes</li>
+  <li>(*ores)  bores, cores, fores, gores, lores, mores, pores, sores, yores</li>
+  <li>(*ound)  bound, found, hound, mound, pound, round, sound, wound</li>
+  <li>(*ouse)  douse, house, louse, mouse, rouse, souse, youse</li>
+  <li>(*owed)  bowed, cowed, lowed, mowed, rowed, sowed, towed, vowed, wowed</li>
+  <li>(*ower)  bower, cower, dower, lower, mower, power, rower, sower, tower, vower</li>
+  <li>(*rier)  brier, crier, drier, frier, prier, trier, wrier</li>
+  <li>(*ucks)  bucks, ducks, fucks, lucks, mucks, pucks, sucks, tucks</li>
+  <li>(*uffs)  buffs, cuffs, duffs, huffs, muffs, puffs, ruffs</li>
+  <li>(*ulls)  bulls, culls, dulls, fulls, gulls, hulls, lulls, mulls, nulls, pulls</li>
+  <li>(*umps)  bumps, dumps, humps, jumps, lumps, mumps, pumps, rumps, sumps</li>
+  <li>(*unks)  bunks, dunks, funks, gunks, hunks, junks, punks</li>
+  <li>(*unny)  bunny, funny, gunny, punny, runny, sunny, tunny</li>
+  <li>(*usts)  busts, dusts, gusts, lusts, musts, ousts, rusts</li>
+  <li>(*usty)  busty, dusty, fusty, gusty, lusty, musty, rusty</li>
+</ul>
+
+</i:section> <!-- @sid="word-list" -->
+
+<i:section sid="making">
+<i:title>単語リストの作成</i:title>
+
+<i:p>
+このリストは，Donald Knuth が公開している
+<a href="https://www-cs-faculty.stanford.edu/~knuth/sgb.html">sgb-words.txt, the 5757 five-letter words of English</a>
+をもとに作成しました．
+5×26^4=2284880 通りのパターンの中から，7語以上の単語にマッチするものを抽出し，111 個のパターン，791 語（延べ 892 語）の単語を得ました．
+リストの作成に使ったプログラムは
+<a href="https://github.com/1995hnagamin/sys-sandbox/blob/master/2022/hills/hills.cpp">github.com/1995hnagamin/sys-sandbox</a>
+にあります．
+</i:p>
+
+<i:p>
+本来であれば Wordle がゲーム内部にもっている辞書を使うべきですが，
+その辞書を作成しようとしてネタバレを食らった方がいるようなのでやめました <i:cite bid="mucow2022"/>．
+本当の Wordle の内部辞書には 2500 語程度の単語が収録されているようです <i:cite bid="victor2022"/>．
+</i:p>
+
+<i:p>
+各パターンにマッチする単語の数の分布を以下の表に示します．
+1語以上の単語にマッチするパターンは全部で 20859 個でした．
+"*ILLS" は 13 語にマッチし，これが最大でした．
+</i:p>
+
+<table style="text-align: right;">
+  <tr>
+    <td>マッチ単語数</td>
+    <td>パターン数</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>16039</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>3196</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>910</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>360</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>166</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>77</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>53</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>28</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>13</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>1</td>
+  </tr>
+</table>
+
+</i:section> <!-- @sid="making" -->
+
+<i:section sid="concl">
+<i:title>まとめ</i:title>
+
+<i:p>
+Wordle で最後の1文字を当てにくい単語を列挙しました．
+</i:p>
+<i:p>
+今後の課題として，文字の使用頻度を考慮して難易度を計算することが挙げられます．
+たとえば "jests", "vests", "wests", "zests" のように，使用頻度の低い文字を候補に含むパターンは，
+他のものに比べて当てにくいと考えられます．
+こういった情報を考慮すれば，運任せの局面を避けるのがもっと簡単になりそうです．
+</i:p>
+
+</i:section> <!-- @sid="concl" -->
+
+</i:body>
+
+<i:bibliography>
+  <i:bib-entry bid="victor2022" key="1">
+    Victor, D. (2022, January 3).
+    <i:italic>Wordle Is a Love Story</i:italic>.
+    The New York Times.
+    <a href="https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html">https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html</a>
+  </i:bib-entry>
+  <i:bib-entry bid="mucow2022" key="2">
+    mucow. (2022, January 16).
+    <i:italic>A note on Wordle's word list</i:italic>.
+    Reddit.
+    <a href="https://www.reddit.com/r/wordle/comments/s4tcw8/a_note_on_wordles_word_list/">https://www.reddit.com/r/wordle/comments/s4tcw8/a_note_on_wordles_word_list/</a>
+  </i:bib-entry>
+</i:bibliography>
+
+</i:article>
