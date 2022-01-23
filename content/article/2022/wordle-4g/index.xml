@@ -281,11 +281,11 @@ Wordle で最後の1文字を当てにくい単語を列挙しました．
 </i:section> <!-- @sid="concl" -->
 
 <i:section>
-<i:title>更新履歴</i:title>
+<i:title sid="history">更新履歴</i:title>
 <ul>
   <li>2022-01-23: 公開，微修正</li>
 </ul>
-</i:section>
+</i:section> <!-- @sid="history" -->
 
 </i:body>
 
