@@ -26,7 +26,7 @@ code.prettyprint {
   display: block;
   margin: 0;
   border: none;
-  padding: 8px;
+  padding: 0.5rem;
 }
 
 code {
@@ -53,11 +53,11 @@ mjx-container {
 
 #footnotes {
   border-top: thin solid black;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 #bibliography {
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 #site-nav {
@@ -67,7 +67,7 @@ mjx-container {
 }
 
 a.nav-item {
-  margin: 8px;
+  margin: 0.5rem;
   text-decoration: none;
   color: #fff;
 }
@@ -79,17 +79,29 @@ a.nav-item {
 }
 
 #header {
-  padding-bottom: 8px;
+  padding-bottom: 0.5rem;
   border-bottom: thin solid black;
 }
 
 #page-container {
-  margin: 8px;
+  margin: 0.5rem;
 }
 
 main {
   max-width: 74rem;
   margin: auto;
+}
+
+section.article {
+  margin-bottom: 2rem;
+}
+
+section.article h3 {
+  margin-bottom: 0.25rem;
+}
+
+section.article p {
+  margin-top: 0.25rem;
 }
 
 a.section-anchor {
@@ -109,7 +121,7 @@ a.section-anchor {
 
 blockquote {
   border-left: 3px solid #ccc;
-  padding-left: 30px;
+  padding-left: 4rem;
 }
 
 #table-of-contents ol {
