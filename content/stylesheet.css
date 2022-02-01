@@ -92,6 +92,18 @@ main {
   margin: auto;
 }
 
+section.article {
+  margin-bottom: 2rem;
+}
+
+section.article h3 {
+  margin-bottom: 0.25rem;
+}
+
+section.article p {
+  margin-top: 0.25rem;
+}
+
 a.section-anchor {
   float: left;
   margin-left: -1.5em;
