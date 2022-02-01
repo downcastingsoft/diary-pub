@@ -28,14 +28,14 @@ compile '/**/*.css'do
 end
 
 compile '/**/*.html.erb' do
-  filter :erb
+  filter :erb, trim_mode: '-'
   layout '/default.html'
   filter :relativize_paths, type: :html5, select: ['*/@href']
   write item.identifier.without_ext
 end
 
 compile '/**/*.erb' do
-  filter :erb
+  filter :erb, trim_mode: '-'
   write item.identifier.without_ext
 end
 
