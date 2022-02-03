@@ -66,4 +66,4 @@ route '/**/*.{html,md}' do
   end
 end
 
-layout '/**/*', :erb
+layout '/**/*', :erb, trim_mode: '-'
