@@ -65,5 +65,3 @@ route '/**/*.{html,md}' do
     item.identifier.without_ext + '/index.html'
   end
 end
-
-layout '/**/*', :erb
