@@ -11,9 +11,11 @@
 
     <meta property="og:title" content="<%= @item[:title] %>">
     <meta property="og:site_name" content="日記">
+    <%- if @item[:ogtype] -%>
+    <meta property="og:type" content="<%= @item[:ogtype] %>">
+    <%- end -%>
     <%- if @item[:kind] == 'article' -%>
     <meta property="og:description" content="<%= get_summary(@item.compiled_content).strip %>">
-    <meta property="og:type" content="article">
     <%- end -%>
   </head>
   <body>
