@@ -18,7 +18,9 @@ end
 compile '/draft/**/*.xml' do
   layout '/xsl/ijkml.xsl'
   layout '/draft.html.erb'
-  layout '/default.html.erb'
+  layout '/default.html.erb', locals: {
+    html_title: 'Draft: ' + @item[:title]
+  }
   filter :relativize_paths, type: :html5, select: ['*/@href']
 end
 
