@@ -4,16 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
-    <title>Draft: <%= @item[:title] %></title>
+    <title><%= (defined? html_title) ? html_title : @item[:title] %></title>
     <link href="/stylesheet.css" rel="stylesheet" type="text/css" />
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <meta property="og:title" content="<%= @item[:title] %>">
     <meta property="og:site_name" content="日記">
+    <%- if @item[:ogtype] -%>
+    <meta property="og:type" content="<%= @item[:ogtype] %>">
+    <%- end -%>
     <%- if @item[:kind] == 'article' -%>
     <meta property="og:description" content="<%= get_summary(@item.compiled_content).strip %>">
-    <meta property="og:type" content="article">
     <%- end -%>
   </head>
   <body>
@@ -23,9 +25,6 @@
       </span>
     </nav>
     <div id="page-container">
-      <p>
-        これは「<%= @item[:title] %>」という記事の下書きです．
-      </p>
       <main>
         <%= yield %>
       </main>
