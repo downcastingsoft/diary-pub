@@ -26,6 +26,7 @@ end
 
 compile '/**/*.html' do
   layout '/default.html.erb'
+  filter :relativize_paths, type: :html5, select: ['*/@href']
 end
 
 compile '/**/*.css'do
