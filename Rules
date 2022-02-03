@@ -18,6 +18,7 @@ compile '/draft/**/*.xml' do
   filter :relativize_paths, type: :html5, select: ['*/@href']
 end
 layout '/xsl/ijkml.xsl', :xsl
+layout '/**/*.erb', :erb, trim_mode: '-'
 
 compile '/**/*.html' do
   layout '/default.html.erb'
