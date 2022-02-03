@@ -15,7 +15,7 @@
     <%- if @item[:ogtype] -%>
     <meta property="og:type" content="<%= @item[:ogtype] %>">
     <%- end -%>
-    <%- if @item[:kind] == 'article' -%>
+    <%- if @item[:ogtype] == 'article' -%>
     <meta property="og:description" content="<%= get_summary(@item.compiled_content).strip %>">
     <%- end -%>
   </head>
