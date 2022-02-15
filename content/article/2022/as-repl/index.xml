@@ -1,0 +1,1066 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2022-02-15 19:23:31</i:created-at>
+  <i:updated-at>2022-02-15 19:23:31</i:updated-at>
+</i:head>
+
+<i:title>『キューネン 数学基礎論講義』の置換公理</i:title>
+
+<i:summary>
+『キューネン 数学基礎論講義』の置換公理図式は，よく知られる定義とは異なっている．
+キューネンの流儀では置換公理から内包公理（分出公理）を導くことはできないと思われる．
+置換公理をみたすが内包公理をみたさないモデルの構成を試みた．
+</i:summary>
+
+<i:body>
+
+<i:p>
+『キューネン 数学基礎論講義』（以下，『数学基礎論講義』）は，数理論理学の教科書である．
+ウィスコンシン大学マディソン校の大学院向け講座のノートをもとにして，
+Kenneth Kunen が 2009 年に出版し，藤田博司が 2016 年に和訳した <i:cite bid="kunen2016" />．
+この本の第 I 章では ZFC 集合論の公理が示されているが，その中で置換公理の書き方に疑問を抱いたのでここにまとめる．
+</i:p>
+
+<i:section sid="kunen">
+<i:title>Kunen による ZF 公理系の定義</i:title>
+
+<i:p>
+Kunen は，『数学基礎論講義』p.14 で ZFC の公理のリストを提示している．
+選択公理は今の議論に関係ないため一旦置いておく．
+残りの9種類の公理と公理図式を以下に示す<i:footnote fid="modif">記号は少し変えてある．</i:footnote>．
+</i:p>
+
+<ul>
+  <li>
+    (A0)
+    集合の存在．
+    <math display="block">
+    <mrow>
+      <mo>&#x2203;</mo>
+      <mi>x</mi>
+      <mrow>
+        <mo>(</mo>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mi>x</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    </math>
+  </li>
+  <li>
+    (A1)
+    外延性．
+    <math display="block">
+      <mrow>
+        <mo>&#x2200;</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mo>&#x2200;</mo>
+        <mi>y</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mo>&#x2200;</mo>
+            <mi>z</mi>
+            <mrow>
+              <mo>(</mo>
+              <mrow>
+                <mi>z</mi>
+                <mo>&#x2208;</mo>
+                <mi>x</mi>
+              </mrow>
+              <mo>&#x2194;</mo>
+              <mrow>
+                <mi>z</mi>
+                <mo>&#x2208;</mo>
+                <mi>y</mi>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+          <mo>&#x2192;</mo>
+          <mrow>
+            <mi>x</mi>
+            <mo>=</mo>
+            <mi>y</mi>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </li>
+  <li>
+    (A2)
+    基礎．
+    <math display="block">
+      <mrow>
+        <mo>&#x2200;</mo>
+        <mi>x</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mo>&#x2203;</mo>
+            <mi>y</mi>
+            <mrow>
+              <mo>(</mo>
+              <mi>y</mi>
+              <mo>&#x2208;</mo>
+              <mi>x</mi>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+          <mo>&#x2192;</mo>
+          <mrow>
+            <mo>&#x2203;</mo>
+            <mi>y</mi>
+            <mrow>
+              <mo>(</mo>
+              <mrow>
+                <mi>y</mi>
+                <mo>&#x2208;</mo>
+                <mi>x</mi>
+              </mrow>
+              <mo>&#x2227;</mo>
+              <mrow>
+                <mo>&#xAC;</mo>
+                <mo>&#x2203;</mo>
+                <mi>z</mi>
+                <mrow>
+                  <mo>(</mo>
+                  <mrow>
+                    <mi>z</mi>
+                    <mo>&#x2208;</mo>
+                    <mi>x</mi>
+                  </mrow>
+                  <mo>&#x2227;</mo>
+                  <mrow>
+                    <mi>z</mi>
+                    <mo>&#x2208;</mo>
+                    <mi>y</mi>
+                  </mrow>
+                  <mo>)</mo>
+                </mrow>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </li>
+  <li>
+    (A3)
+    内包公理図式<i:footnote fid="comprehension">
+    『数学基礎論講義』では，内包公理と分出公理をそれぞれ「素朴内包公理」「内包公理」と呼んでいる．
+    </i:footnote>．
+    <math><mi>y</mi></math> を自由変数として含まない論理式 <math><mi>&#x3C6;</mi></math> ごとに，
+    <math display="block">
+      <mrow>
+        <mo>&#x2200;</mo>
+        <mi>z</mi>
+        <mo>,</mo>
+        <mo>&#x2203;</mo>
+        <mi>y</mi>
+        <mo>,</mo>
+        <mo>&#x2200;</mo>
+        <mi>x</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mi>x</mi>
+            <mo>&#x2208;</mo>
+            <mi>y</mi>
+          </mrow>
+          <mo>&#x2194;</mo>
+          <mrow>
+            <mrow>
+              <mi>x</mi>
+              <mo>&#x2208;</mo>
+              <mi>z</mi>
+            </mrow>
+            <mo>&#x2227;</mo>
+            <mrow>
+              <mi>&#x3C6;</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <mi>x</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </li>
+  <li>
+    (A4)
+    対．
+    <math display="block">
+      <mrow>
+        <mo>&#x2203;</mo>
+        <mi>z</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mi>x</mi>
+            <mo>&#x2208;</mo>
+            <mi>z</mi>
+          </mrow>
+          <mo>&#x2227;</mo>
+          <mrow>
+            <mi>y</mi>
+            <mo>&#x2208;</mo>
+            <mi>z</mi>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </li>
+  <li>
+    (A5)
+    和集合．
+    <math display="block">
+      <mrow>
+        <mo>&#x2200;</mo>
+        <mi mathvariant="script">F</mi>
+        <mo>,</mo>
+        <mo>&#x2203;</mo>
+        <mi>A</mi>
+        <mo>,</mo>
+        <mo>&#x2200;</mo>
+        <mi>Y</mi>
+        <mo>,</mo>
+        <mo>&#x2200;</mo>
+        <mi>x</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mrow>
+              <mi>x</mi>
+              <mo>&#x2208;</mo>
+              <mi>Y</mi>
+            </mrow>
+            <mo>&#x2227;</mo>
+            <mrow>
+              <mi>Y</mi>
+              <mo>&#x2208;</mo>
+              <mi mathvariant="script">F</mi>
+            </mrow>
+          </mrow>
+          <mo>&#x2192;</mo>
+          <mrow>
+            <mi>x</mi>
+            <mo>&#x2208;</mo>
+            <mi>A</mi>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </li>
+  <li>
+    (A6)
+    置換公理図式．
+    <math><mi>B</mi></math> を自由変数として含まない論理式 <math><mi>&#x3C6;</mi></math> ごとに，
+    <math display="block">
+      <mrow>
+        <mo>&#x2200;</mo>
+        <mi>A</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mo>(</mo>
+            <mrow>
+              <mo>&#x2200;</mo>
+              <mrow>
+                <mi>x</mi>
+                <mo>&#x2208;</mo>
+                <mi>A</mi>
+              </mrow>
+              <mo>,</mo>
+              <mo>&#x2203;</mo>
+              <mo>!</mo>
+              <mi>y</mi>
+              <mrow>
+                <mi>&#x3C6;</mi>
+                <mo>&#x2061;</mo>
+                <mrow>
+                  <mo>(</mo>
+                  <mi>x</mi>
+                  <mo>,</mo>
+                  <mi>y</mi>
+                  <mo>)</mo>
+                </mrow>
+              </mrow>
+            </mrow>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2192;</mo>
+          <mrow>
+            <mo>&#x2203;</mo>
+            <mi>B</mi>
+            <mo>,</mo>
+            <mo>&#x2200;</mo>
+            <mrow>
+              <mi>a</mi>
+              <mo>&#x2208;</mo>
+              <mi>A</mi>
+            </mrow>
+            <mo>,</mo>
+            <mo>&#x2203;</mo>
+            <mrow>
+              <mi>b</mi>
+              <mo>&#x2208;</mo>
+              <mi>B</mi>
+            </mrow>
+            <mo>,</mo>
+            <mrow>
+              <mi>&#x3C6;</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <mi>a</mi>
+                <mo>,</mo>
+                <mi>b</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </li>
+  <li>
+    (A7)
+    無限．
+    <math display="block">
+      <mrow>
+        <mo>&#x2203;</mo>
+        <mi>w</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mo>&#x2205;</mo>
+            <mo>&#x2208;</mo>
+            <mi>w</mi>
+          </mrow>
+          <mo>&#x2227;</mo>
+          <mrow>
+            <mo>&#x2200;</mo>
+            <mrow>
+              <mi>x</mi>
+              <mo>&#x2208;</mo>
+              <mi>w</mi>
+            </mrow>
+            <mrow>
+              <mo>(</mo>
+              <mrow>
+                <mi mathvariant="normal">S</mi>
+                <mo>&#x2061;</mo>
+                <mrow>
+                  <mo>(</mo>
+                  <mi>x</mi>
+                  <mo>)</mo>
+                </mrow>
+              </mrow>
+              <mo>&#x2208;</mo>
+              <mi>w</mi>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </li>
+  <li>
+    (A8)
+    羃集合．
+    <math display="block">
+      <mrow>
+        <mo>&#x2200;</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mo>&#x2203;</mo>
+        <mi>y</mi>
+        <mo>,</mo>
+        <mo>&#x2200;</mo>
+        <mi>z</mi>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mi>z</mi>
+            <mo>&#x2286;</mo>
+            <mi>x</mi>
+          </mrow>
+          <mo>&#x2192;</mo>
+          <mrow>
+            <mi>z</mi>
+            <mo>&#x2208;</mo>
+            <mi>y</mi>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </math>
+  </li>
+</ul>
+
+<i:p>
+ただし，
+2変数述語 <math><mo><mo>&#x2286;</mo></mo></math>，
+定数 <math><mi>&#x2205;</mi></math>，
+1変数関数 <math><mi mathvariant="normal">S</mi></math>
+は次のように定義される．
+<math display="block">
+  <mrow>
+    <mrow>
+      <mi>x</mi>
+      <mo>&#x2286;</mo>
+      <mi>y</mi>
+    </mrow>
+    <mo>&#x21D4;</mo>
+    <mrow>
+      <mo>&#x2200;</mo>
+      <mi>z</mi>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>z</mi>
+          <mo>&#x2208;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>&#x2192;</mo>
+        <mrow>
+          <mi>z</mi>
+          <mo>&#x2208;</mo>
+          <mi>y</mi>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+
+<math display="block">
+  <mrow>
+    <mrow>
+      <mi>x</mi>
+      <mo>=</mo>
+      <mo>&#x2205;</mo>
+    </mrow>
+    <mo>&#x21D4;</mo>
+    <mrow>
+      <mo>&#x2200;</mo>
+      <mi>z</mi>
+      <mrow>
+        <mo>(</mo>
+        <mi>z</mi>
+        <mo>&#x2209;</mo>
+        <mi>x</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+
+<math display="block">
+  <mrow>
+    <mrow>
+      <mi>y</mi>
+      <mo>=</mo>
+      <mrow>
+        <mi mathvariant="normal">S</mi>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mi>x</mi>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </mrow>
+    <mo>&#x21D4;</mo>
+    <mrow>
+      <mo>&#x2200;</mo>
+      <mi>z</mi>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>z</mi>
+          <mo>&#x2208;</mo>
+          <mi>y</mi>
+        </mrow>
+        <mo>&#x2194;</mo>
+        <mrow>
+          <mrow>
+            <mi>z</mi>
+            <mo>&#x2208;</mo>
+            <mi>x</mi>
+          </mrow>
+          <mo>&#x2228;</mo>
+          <mrow>
+            <mi>z</mi>
+            <mo>=</mo>
+            <mi>x</mi>
+          </mrow>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+</i:p>
+
+<i:p>
+Kunen による置換公理図式の定義 (A6) は，よく見る定義とは微妙に違っている．
+たとえば Jech (2003) "Set Theory" では，置換公理図式は次の形 (A6') で定式化されている <i:cite bid="jech2003">p. 13</i:cite>．
+<math display="block">
+  <mrow>
+    <mrow>
+      <mo>&#x2200;</mo>
+      <mi>x</mi>
+      <mo>,</mo>
+      <mo>&#x2200;</mo>
+      <mi>y</mi>
+      <mo>,</mo>
+      <mo>&#x2200;</mo>
+      <mi>z</mi>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mrow>
+            <mi>&#x3C6;</mi>
+            <mo>&#x2061;</mo>
+            <mrow>
+              <mo>(</mo>
+              <mi>x</mi>
+              <mo>,</mo>
+              <mi>y</mi>
+              <mo>,</mo>
+              <mi>p</mi>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+          <mo>&#x2227;</mo>
+          <mrow>
+            <mi>&#x3C6;</mi>
+            <mo>&#x2061;</mo>
+            <mrow>
+              <mo>(</mo>
+              <mi>x</mi>
+              <mo>,</mo>
+              <mi>z</mi>
+              <mo>,</mo>
+              <mi>p</mi>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+        </mrow>
+        <mo>&#x2192;</mo>
+        <mrow>
+          <mi>y</mi>
+          <mo>=</mo>
+          <mi>z</mi>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>&#x2192;</mo>
+    <mrow>
+      <mo>&#x2200;</mo><mi>A</mi><mo>,</mo>
+      <mo>&#x2203;</mo><mi>B</mi><mo>,</mo>
+      <mo>&#x2200;</mo><mi>b</mi>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>b</mi><mo>&#x2208;</mo><mi>B</mi>
+        </mrow>
+        <mo>&#x2194;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mo>&#x2203;</mo>
+          <mi>a</mi>
+          <mo>&#x2208;</mo>
+          <mi>A</mi>
+          <mo>)</mo>
+        </mrow>
+        <mrow>
+          <mi>&#x3C6;</mi>
+          <mo>&#x2061;</mo>
+          <mrow>
+            <mo>(</mo>
+            <mi>a</mi>
+            <mo>,</mo>
+            <mi>b</mi>
+            <mo>,</mo>
+            <mi>p</mi>
+            <mo>)</mo>
+          </mrow>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+Kunen の流儀 (A6) と Jech の流儀 (A6') を見比べると，主に次の点が異なっている．
+</i:p>
+<ul>
+  <li>量化 <math><mo>∀</mo><mi>A</mi></math> の位置が違う．</li>
+  <li>(A6) では，<math><mi>y</mi></math> の一意性だけではなく存在も要求している．</li>
+  <li>(A6) では，<math><mi>b</mi><mo>∈</mo><mi>B</mi></math> となるための必要条件が課されていない．</li>
+</ul>
+
+<i:p>
+最初の2項がどう影響するかはよく分からないが，最後の項は公理の強さに大きな違いを生むと思う．
+(A6) では，集合 <math><mi>B</mi></math> が論理式 <math><mi>φ</mi></math> で指定した条件をみたす要素だけを含むという保証はない．
+一方 Jech の定式化 (A6') では，内包公理は置換公理から従う <i:cite bid="jech2003">p. 14, Exercise 1.14</i:cite>．
+</i:p>
+
+<i:p>
+(A0)〜(A8) を見ると全体的に公理が弱い印象を受ける．
+指定された要素を含む十分大きな集合の存在のみをとりあえず保証して，内包公理を使い必要に応じて小さい集合を作るというスタンスなのだと思う．
+</i:p>
+
+</i:section>
+
+<i:section sid="model">
+<i:title>置換公理をみたすが内包公理をみたさないモデル</i:title>
+
+<i:p>
+置換公理図式から内包公理図式を導出できないならば，反例モデルが存在するはずである．
+そこで，実際に反例モデルを構成してみる．
+ZF<sup>−</sup> から内包公理図式を除いたもの，
+つまり (A0)〜(A1), (A4)〜(A8) からなる公理系を仮に (ZF<sup>−</sup>)−3 と呼ぶことにする．
+同様に，ZF から内包公理図式を除いたもの，
+つまり (A0)〜(A2), (A4)〜(A8) からなる公理系を ZF−3 と呼ぶことにする．
+(ZF<sup>−</sup>)−3 と ZF−3 のモデルの構成に挑戦してみる．
+</i:p>
+
+<i:section sid="zfminus-com">
+<i:title>(ZF<sup>−</sup>)−3 のモデル</i:title>
+
+<i:p>
+
+万有集合 <math><mi>V</mi></math> があれば，
+<math>
+  <mrow>
+    <mo>&#x2200;</mo>
+    <mrow>
+      <mi>x</mi>
+      <mo>&#x2208;</mo>
+      <mi>A</mi>
+    </mrow>
+    <mo>,</mo>
+    <mo>&#x2203;</mo>
+    <mo>!</mo>
+    <mi>y</mi>
+    <mrow>
+      <mi>&#x3C6;</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+から自動的に
+<math>
+  <mrow>
+    <mo>&#x2200;</mo>
+    <mrow>
+      <mi>a</mi>
+      <mo>&#x2208;</mo>
+      <mi>A</mi>
+    </mrow>
+    <mo>,</mo>
+    <mo>&#x2203;</mo>
+    <mrow>
+      <mi>b</mi>
+      <mo>&#x2208;</mo>
+      <mi>V</mi>
+    </mrow>
+    <mo>,</mo>
+    <mrow>
+      <mi>&#x3C6;</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>a</mi>
+        <mo>,</mo>
+        <mi>b</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+が出てくるので置換公理は自動的にみたされる．
+内包公理がないから，ラッセルのパラドックスによる問題は生じない．
+そこで，<math><mi>A</mi></math> と
+<math>
+  <msub>
+    <mo>&#x2208;</mo>
+    <mi mathvariant="fraktur">A</mi>
+  </msub>
+</math>
+を次で定義すると，
+<math>
+  <mrow>
+    <mi mathvariant="fraktur">A</mi>
+    <mo>=</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>A</mi>
+      <mo>,</mo>
+      <msub>
+        <mo>&#x2208;</mo>
+        <mi mathvariant="fraktur">A</mi>
+      </msub>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+は (ZF<sup>−</sup>)−3 のモデルになる．
+
+<math display="block">
+  <mrow>
+    <mi>A</mi>
+    <mo>=</mo>
+    <mrow>
+      <mo>{</mo>
+      <mn>0</mn>
+      <mo>,</mo>
+      <mn>1</mn>
+      <mo>,</mo>
+      <mn>2</mn>
+      <mo>,</mo>
+      <mo>&#x2026;</mo>
+      <mo>,</mo>
+      <mi>&#x3C9;</mi>
+      <mo>,</mo>
+      <mrow>
+        <mi>&#x3C9;</mi>
+        <mo>+</mo>
+        <mn>1</mn>
+      </mrow>
+      <mo>}</mo>
+    </mrow>
+  </mrow>
+</math>
+<math display="block">
+  <mrow>
+    <msub>
+      <mo>&#x2208;</mo>
+      <mi mathvariant="fraktur">A</mi>
+    </msub>
+    <mo>=</mo>
+    <mrow>
+      <mo>{</mo>
+      <mrow>
+        <mrow>
+          <mo>(</mo>
+          <mi>x</mi>
+          <mo>,</mo>
+          <mi>y</mi>
+          <mo>)</mo>
+        </mrow>
+        <mo>&#x2208;</mo>
+        <msup>
+          <mi>A</mi>
+          <mn>2</mn>
+        </msup>
+      </mrow>
+      <mo>:</mo>
+      <mrow>
+        <mrow>
+          <mi>y</mi>
+          <mo>=</mo>
+          <mrow>
+            <mi>&#x3C9;</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+          </mrow>
+        </mrow>
+        <mo>&#x2228;</mo>
+        <mrow>
+          <mi>x</mi>
+          <mo>&#x2208;</mo>
+          <mi>y</mi>
+        </mrow>
+      </mrow>
+      <mo>}</mo>
+    </mrow>
+  </mrow>
+</math>
+
+ここでは
+<math>
+  <mrow>
+    <msup>
+      <mi>V</mi>
+      <mi mathvariant="fraktur">A</mi>
+    </msup>
+    <mo>=</mo>
+    <mrow>
+      <mi>&#x3C9;</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </mrow>
+</math>
+のつもり．
+対，和集合，冪集合の公理は万有集合があれば自動的にみたされるのでよい．
+</i:p>
+
+</i:section> <!-- @sid = "zfminus-com" -->
+
+<i:section sid="zf-com">
+<i:title>ZF−3 のモデル</i:title>
+
+<i:p>
+万有集合をもつモデルは基礎の公理 (A2) をみたさないので少し工夫する必要がある．
+アイデアとしては，次の戦略で構成する．
+</i:p>
+
+<ul>
+  <li>可算集合のみを含むモデルを考え，サイズの問題を回避する．</li>
+  <li>どの集合も，高々可算個の部分集合しかもたないようにする．（内包公理がないので矛盾は生じない．）</li>
+  <li>疑似的な万有集合が取れるようにする．
+      すなわち，可算個の集合が任意に与えられたとき，
+      それらをすべて含む集合
+      <math><msup><mi>V</mi><mo>&#x27;</mo></msup></math>
+      が取れるようにする．</li>
+</ul>
+
+<i:p>
+これを実現するためには，超限帰納法を使って次のように構成すればいいと思う（自信なし）．
+</i:p>
+
+<i:p>
+順序数 <math><mi>α</mi></math> に対して
+<math>
+  <mrow>
+    <mi>U</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>&#x3B1;</mi>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+を次で定義する．
+</i:p>
+
+<ul>
+  <li>
+    <math>
+      <mrow>
+        <mrow>
+          <mi>U</mi>
+          <mo>&#x2061;</mo>
+          <mrow>
+            <mo>(</mo>
+            <mn>0</mn>
+            <mo>)</mo>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <mi>&#x3C9;</mi>
+      </mrow>
+    </math>.
+  </li>
+  <li>
+    後続順序数
+    <math>
+      <mrow>
+        <mi>&#x3B2;</mi>
+        <mo>+</mo>
+        <mn>1</mn>
+      </mrow>
+    </math>
+    に対して，
+    <math>
+      <mrow>
+        <mrow>
+          <mi>U</mi>
+          <mo>&#x2061;</mo>
+          <mrow>
+            <mo>(</mo>
+            <mi>&#x3B2;</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <mrow>
+          <mrow>
+            <mi>U</mi>
+            <mo>&#x2061;</mo>
+            <mrow>
+              <mo>(</mo>
+              <mi>&#x3B2;</mi>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+          <mo>&#x222A;</mo>
+          <mrow>
+            <mo>{</mo>
+            <mrow>
+              <mi>S</mi>
+              <mo>&#x2282;</mo>
+              <mrow>
+                <mi>U</mi>
+                <mo>&#x2061;</mo>
+                <mrow>
+                  <mo>(</mo>
+                  <mi>&#x3B2;</mi>
+                  <mo>)</mo>
+                </mrow>
+              </mrow>
+            </mrow>
+            <mo>:</mo>
+            <mrow>
+              <mrow>
+                <mo>|</mo>
+                <mi>S</mi>
+                <mo>|</mo>
+              </mrow>
+              <mo>&lt;</mo>
+              <mo>&#x221E;</mo>
+            </mrow>
+            <mo>}</mo>
+          </mrow>
+          <mo>&#x222A;</mo>
+          <mrow>
+            <mo>{</mo>
+            <mrow>
+              <mi>U</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <mi>&#x3B2;</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+            <mo>}</mo>
+          </mrow>
+        </mrow>
+      </mrow>
+    </math>.
+  </li>
+  <li>
+    極限順序数
+    <math>
+      <mrow>
+        <mi>&#x3B3;</mi>
+        <mo>&gt;</mo>
+        <mn>0</mn>
+      </mrow>
+    </math>
+    に対して，
+    <math>
+      <mrow>
+        <mrow>
+          <mi>U</mi>
+          <mo>&#x2061;</mo>
+          <mrow>
+            <mo>(</mo>
+            <mi>&#x3B3;</mi>
+            <mo>)</mo>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <mrow>
+          <msub>
+            <mo>&#8899;</mo>
+            <mrow>
+              <mi>&#x3B4;</mi>
+              <mo>&lt;</mo>
+              <mi>&#x3B3;</mi>
+            </mrow>
+          </msub>
+          <mrow>
+            <mi>U</mi>
+            <mo>&#x2061;</mo>
+            <mrow>
+              <mo>(</mo>
+              <mi>&#x3B4;</mi>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+        </mrow>
+      </mrow>
+    </math>.
+  </li>
+</ul>
+
+<i:p>
+そして，
+<math>
+  <mrow>
+    <mi>A</mi>
+    <mo>=</mo>
+    <mrow>
+      <mi>U</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <msub>
+          <mi>&#x3C9;</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+とし，
+<math>
+  <mi>A</mi>
+</math>
+による ∈-モデル
+<math>
+  <mi mathvariant="fraktur">A</mi>
+</math>
+を考えると，これは ZF−3 のモデルになっていると思う．
+最小の非可算順序数まで取る必要はなく，ZF−3 の証明論的順序数まで取れば十分なのかもしれないが，
+専門家に聞かないと分からない．
+</i:p>
+
+</i:section> <!-- @sid = "zf-com" -->
+
+
+</i:section> <!-- @sid = "model" -->
+
+
+</i:body>
+
+<i:bibliography>
+  <i:bib-entry bid="jech2003" key="J">
+    Thomas Jech (2003).
+    Set theory (The 3rd millennium ed., rev.expanded).
+    Springer.
+    ISBN: 978-3-540-44085-7
+  </i:bib-entry>
+  <i:bib-entry bid="kunen2016" key="K">
+    Kenneth Kunen，藤田博司訳
+    『キューネン 数学基礎論講義』日本評論社，2016年．
+  </i:bib-entry>
+</i:bibliography>
+
+</i:article>
