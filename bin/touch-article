@@ -1,5 +1,7 @@
 #! /usr/bin/env ruby
 
+require 'optparse'
+
 def sed(file, pattern, replacement)
   buf = open(file, 'r') do |fi|
     fi.read.gsub pattern, replacement
@@ -7,6 +9,16 @@ def sed(file, pattern, replacement)
   open(file, 'w') do |fo|
     fo.write buf
   end
+end
+
+option = {
+  :create => false
+}
+OptionParser.new do |opt|
+  opt.on('-c', 'update creation date') do
+    option[:create] = true
+  end
+  opt.parse!(ARGV)
 end
 
 now = Time.now
@@ -23,3 +35,17 @@ sed(
   /<i:updated-at>.*<\/i:updated-at>/,
   "<i:updated-at>#{now.strftime '%Y-%m-%d %H:%M:%S'}</i:updated-at>"
 )
+
+if option[:create]
+  sed(
+    'index.yaml',
+    /^created_at:.*$/,
+    "created_at: #{now.strftime '%Y-%m-%dT%H:%M:%S%:z'}"
+  )
+  
+  sed(
+    'index.xml',
+    /<i:created-at>.*<\/i:created-at>/,
+    "<i:created-at>#{now.strftime '%Y-%m-%d %H:%M:%S'}</i:created-at>"
+  )
+end
