@@ -10,6 +10,6 @@ ogtype: blog
   <%- pubdate = "%04d-%02d-%02d" % [d.year, d.month, d.mday ] -%>
   <section class="article">
     <h3><%= pubdate %>: <a href=".<%= path %>"><%= item[:title] %></a></h3>
-    <p><%= get_summary(item.compiled_content) %></p>
+    <p><%= item[:excerpt] %></p>
   </section>
 <% end %>
