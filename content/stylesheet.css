@@ -121,7 +121,7 @@ a.section-anchor {
 
 blockquote {
   border-left: 3px solid #ccc;
-  padding-left: 4rem;
+  padding-left: 1rem;
 }
 
 #table-of-contents ol {
