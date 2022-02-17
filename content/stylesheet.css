@@ -100,7 +100,7 @@ section.article h3 {
   margin-bottom: 0.25rem;
 }
 
-section.article p {
+section.article p.article-summary {
   margin-top: 0.25rem;
 }
 
