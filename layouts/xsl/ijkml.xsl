@@ -11,9 +11,9 @@
     omit-xml-declaration="yes" />
 
   <xsl:template match="i:article">
-    <main>
-      <xsl:apply-templates select="i:title" />
+    <article>
       <header id="header">
+        <xsl:apply-templates select="i:title" />
         <div class="article-metadata">
           <div>
             <xsl:text>author: </xsl:text>
@@ -38,9 +38,7 @@
           </xsl:if>
         </div>
       </header>
-      <article>
-        <xsl:apply-templates select="i:body" />
-      </article>
+      <xsl:apply-templates select="i:body" />
 
       <xsl:if test="//i:footnote">
         <section id="footnotes">
@@ -70,7 +68,7 @@
 
       <xsl:apply-templates select="i:bibliography" />
 
-    </main>
+    </article>
   </xsl:template>
 
   <xsl:template name="section-title-list">
