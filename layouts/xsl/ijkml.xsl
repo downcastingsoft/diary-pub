@@ -12,8 +12,8 @@
 
   <xsl:template match="i:article">
     <article>
+      <xsl:apply-templates select="i:title" />
       <header id="header">
-        <xsl:apply-templates select="i:title" />
         <div class="article-metadata">
           <div>
             <xsl:text>author: </xsl:text>
