@@ -2,6 +2,7 @@
 title: 日記
 ogtype: blog
 ---
+<main>
 <h1>日記</h1>
 <h2>記事一覧</h2>
 <% sorted_articles.each do |item| %>
@@ -9,7 +10,9 @@ ogtype: blog
   <%- path = "/article/%04d/%02d/%02d/%s/" % [d.year, d.month, d.mday, item[:slug]] -%>
   <%- pubdate = "%04d-%02d-%02d" % [d.year, d.month, d.mday ] -%>
   <section class="article">
-    <h3><%= pubdate %>: <a href=".<%= path %>"><%= item[:title] %></a></h3>
-    <p><%= item[:excerpt] %></p>
+    <h3><a href=".<%= path %>"><%= item[:title] %></a></h3>
+    <div class="article-metadata"><%= pubdate %></div>
+    <p class="article-summary"><%= item[:excerpt] %></p>
   </section>
 <% end %>
+</main>
