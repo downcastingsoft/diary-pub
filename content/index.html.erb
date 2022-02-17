@@ -2,6 +2,7 @@
 title: 日記
 ogtype: blog
 ---
+<main>
 <h1>日記</h1>
 <h2>記事一覧</h2>
 <% sorted_articles.each do |item| %>
@@ -14,3 +15,4 @@ ogtype: blog
     <p class="article-summary"><%= item[:excerpt] %></p>
   </section>
 <% end %>
+</main>
