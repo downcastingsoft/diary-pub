@@ -7,6 +7,7 @@ excerpt: |-
   この記事では，Web ブラウザ上で動作する MathML 入力システム mathml-lifoinput について述べる．
   mathml-lifoinput は XML の木構造を帰りがけ順で記述することにより MathML 文書を入力する．
   出力される MathML の構造を細かく制御できる点に特徴がある．
+author: hnagamin
 
 slug: mathml-lifoinput
 ogtype: article
