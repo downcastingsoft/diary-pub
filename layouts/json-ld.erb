@@ -15,8 +15,8 @@
         "@type": "Organization",
         "name": "Downcastingsoft"
     },
-    <%- if @item[:updated_at] -%>
-    "description": "<% @item[:description] %>",
+    <%- if @item[:excerpt] -%>
+    "description": "<% @item[:excerpt] %>",
     <%- end -%>
     "@context": "http://schema.org"
 }
