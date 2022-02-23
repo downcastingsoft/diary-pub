@@ -1,5 +1,4 @@
 {
-    "@context": "http://schema.org",
     "@type": "<%= @item[:jsonld][:type] %>",
     "headline": "<%= @item[:title] %>",
     <%- if @item[:created_at] -%>
@@ -16,5 +15,8 @@
         "@type": "Organization",
         "name": "Downcastingsoft"
     },
+    <%- if @item[:updated_at] -%>
     "description": "<% @item[:description] %>"
+    <%- end -%>
+    "@context": "http://schema.org",
 }
