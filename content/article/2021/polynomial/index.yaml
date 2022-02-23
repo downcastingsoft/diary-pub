@@ -8,3 +8,5 @@ excerpt: |-
 
 slug: polynomial
 ogtype: article
+jsonld:
+  type: BlogPosting

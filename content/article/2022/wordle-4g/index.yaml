@@ -10,3 +10,5 @@ excerpt: |-
 
 slug: wordle-4g
 ogtype: article
+jsonld:
+  type: BlogPosting

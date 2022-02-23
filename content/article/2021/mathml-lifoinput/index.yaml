@@ -10,3 +10,5 @@ excerpt: |-
 
 slug: mathml-lifoinput
 ogtype: article
+jsonld:
+  type: BlogPosting

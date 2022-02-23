@@ -10,3 +10,5 @@ excerpt: |-
 
 slug: as-repl
 ogtype: article
+jsonld:
+  type: BlogPosting

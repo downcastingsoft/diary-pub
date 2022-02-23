@@ -8,3 +8,5 @@ excerpt: |-
 
 slug: biot-savart
 ogtype: article
+jsonld:
+  type: BlogPosting
