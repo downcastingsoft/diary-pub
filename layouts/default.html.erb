@@ -12,14 +12,16 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=MML_CHTML">
     </script>
 
-    <meta property="og:title" content="<%= title %>">
+    <meta property="og:title" content="<%= title %>" />
     <meta property="og:site_name" content="日記">
+
     <%- if @item[:ogtype] -%>
-    <meta property="og:type" content="<%= @item[:ogtype] %>">
+    <meta property="og:type" content="<%= @item[:ogtype] %>" />
     <%- end -%>
+
     <%- if @item[:ogtype] == 'article' -%>
     <%- summary = @item[:excerpt] -%>
-    <meta property="og:description" content="<%= summary %>">
+    <meta property="og:description" content="<%= summary %>" />
     <%- end -%>
 
     <%- if @item[:created_at] -%>
