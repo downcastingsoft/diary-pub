@@ -5,7 +5,7 @@
     "datePublished": "<%= @item[:created_at].strftime("%FT%T%:z") %>",
     <%- end -%>
     <%- if @item[:updated_at] -%>
-    "dateModified": "<% @item[:updated_at].strftime("%FT%T%:z") %>",
+    "dateModified": "<%= @item[:updated_at].strftime("%FT%T%:z") %>",
     <%- end -%>
     "author": {
         "@type": "Person",
