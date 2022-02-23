@@ -25,6 +25,10 @@
     <%- if @item[:created_at] -%>
     <meta property="article:published_time" content="<%= item[:created_at].strftime("%FT%T%:z") %>" />
     <%- end -%>
+
+    <%- if @item[:updated_at] -%>
+    <meta property="article:modified_time" content="<%= item[:updated_at].strftime("%FT%T%:z") %>" />
+    <%- end -%>
   </head>
   <body>
     <nav id="site-nav">
