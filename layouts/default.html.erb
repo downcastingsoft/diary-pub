@@ -31,6 +31,8 @@
     <%- if @item[:updated_at] -%>
     <meta property="article:modified_time" content="<%= item[:updated_at].strftime("%FT%T%:z") %>" />
     <%- end -%>
+
+    <script type="application/ld+json"><%= render '/json-ld.erb' %></script>
   </head>
   <body>
     <nav id="site-nav">

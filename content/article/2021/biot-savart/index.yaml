@@ -5,6 +5,9 @@ updated_at: 2021-07-24T16:48:31+09:00
 title: "ビオ・サバールの法則とローレンツ変換"
 excerpt: |-
   点電荷がつくる静電界の式とローレンツ変換からビオ・サバールの法則を導出する．
+author: hnagamin
 
 slug: biot-savart
 ogtype: article
+jsonld:
+  type: BlogPosting
