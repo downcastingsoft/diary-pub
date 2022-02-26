@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2022-02-27 00:52:12</i:created-at>
+  <i:updated-at>2022-02-27 00:52:12</i:updated-at>
+</i:head>
+
+<i:title>Zotero におけるアイテムの種類 (item type) 日英対照表</i:title>
+
+<i:summary>
+文献管理ソフト Zotero において，研究資料は35種類の item type（アイテムの種類）に分類される．
+この記事では，item type の日本語名と英語名の対照表を示す．
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+<i:title>はじめに</i:title>
+
+<i:p>
+<a href="https://www.zotero.org/">Zotero</a> は，
+研究資料とその書誌情報を整理するための文書管理ソフトウェアである．
+2006年にジョージ・メイソン大学の Center for History and New Media によって公開された <i:cite bid="cohen2006" />．
+</i:p>
+
+<i:p>
+Zoteroでは，研究資料はその性質に応じて「学術論文」「ウェブページ」など35種類<i:footnote fid="version">
+<a href="https://www.zotero.org/support/changelog#changes_in_50964_february_12_2022">Zotero 5.0.96.4</a> 時点
+</i:footnote>のグループに分けられる．
+各グループを「アイテムの種類」(<a href="https://www.zotero.org/support/kb/item_types_and_fields">item type</a>) という．
+この記事では，Zotero の英語ドキュメンテーションを読む際の参考にすることを目的として，
+アイテムの種類の日本語名と英語名の対応関係についてまとめる．
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
+
+<i:section sid="table">
+<i:title>日英対照表</i:title>
+
+<table>
+  <thead>
+    <th>日本語</th>
+    <th>英語</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>インスタントメッセージ</td>
+      <td>Instant Message</td>
+    </tr>
+    <tr>
+      <td>インタビュー</td>
+      <td>Interview</td>
+    </tr>
+    <tr>
+      <td>ウェブページ</td>
+      <td>Web Page</td>
+    </tr>
+    <tr>
+      <td>コンピュータ・プログラム</td>
+      <td>Software<i:footnote
+        fid="it-software"><a
+        href="https://forums.zotero.org/discussion/comment/349230/#Comment_349230"
+          >https://forums.zotero.org/discussion/comment/349230/#Comment_349230</a>
+        を参照．</i:footnote></td>
+    </tr>
+    <tr>
+      <td>テレビ放送</td>
+      <td>TV Broadcast</td>
+    </tr>
+    <tr>
+      <td>プレゼンテーション</td>
+      <td>Presentation</td>
+    </tr>
+    <tr>
+      <td>ブログ記事</td>
+      <td>Blog Post</td>
+    </tr>
+    <tr>
+      <td>ポッドキャスト</td>
+      <td>Podcast</td>
+    </tr>
+    <tr>
+      <td>ラジオ放送</td>
+      <td>Radio Broadcast</td>
+    </tr>
+    <tr>
+      <td>レポート</td>
+      <td>Report</td>
+    </tr>
+    <tr>
+      <td>映画</td>
+      <td>Film</td>
+    </tr>
+    <tr>
+      <td>学位論文</td>
+      <td>Thesis</td>
+    </tr>
+    <tr>
+      <td>学会発表</td>
+      <td>Conference Paper</td>
+    </tr>
+    <tr>
+      <td>学術論文</td>
+      <td>Journal Article</td>
+    </tr>
+    <tr>
+      <td>議案</td>
+      <td>Bill</td>
+    </tr>
+    <tr>
+      <td>掲示板への投稿</td>
+      <td>Forum Post</td>
+    </tr>
+    <tr>
+      <td>芸術作品</td>
+      <td>Artwork</td>
+    </tr>
+    <tr>
+      <td>原稿</td>
+      <td>Manuscript</td>
+    </tr>
+    <tr>
+      <td>公聴会</td>
+      <td>Hearing</td>
+    </tr>
+    <tr>
+      <td>雑誌記事</td>
+      <td>Magazine Article</td>
+    </tr>
+    <tr>
+      <td>辞書項目</td>
+      <td>Dictionary Entry</td>
+    </tr>
+    <tr>
+      <td>手紙</td>
+      <td>Letter</td>
+    </tr>
+    <tr>
+      <td>書籍</td>
+      <td>Book</td>
+    </tr>
+    <tr>
+      <td>書籍の章</td>
+      <td>Book Section</td>
+    </tr>
+    <tr>
+      <td>新聞記事</td>
+      <td>Newspaper Article</td>
+    </tr>
+    <tr>
+      <td>訴訟</td>
+      <td>Case</td>
+    </tr>
+    <tr>
+      <td>地図</td>
+      <td>Map</td>
+    </tr>
+    <tr>
+      <td>電子メール</td>
+      <td>E-mail</td>
+    </tr>
+    <tr>
+      <td>特許</td>
+      <td>Patent</td>
+    </tr>
+    <tr>
+      <td>百科事典項目</td>
+      <td>Encyclopedia Article</td>
+    </tr>
+    <tr>
+      <td>文書</td>
+      <td>Document</td>
+    </tr>
+    <tr>
+      <td>法律</td>
+      <td>Statute</td>
+    </tr>
+    <tr>
+      <td>録音</td>
+      <td>Audio Recording</td>
+    </tr>
+    <tr>
+      <td>録画</td>
+      <td>Video Recording</td>
+    </tr>
+  </tbody>
+</table>
+
+</i:section> <!-- @sid="table" -->
+
+<i:section sid="making">
+<i:title>表の作成</i:title>
+
+<i:p>
+<a href="https://github.com/zotero/zotero/blob/5.0/chrome/locale/ja-JP/zotero/zotero.properties">ja-JP/zotero/zotero.properties</a> と
+<a href="https://github.com/zotero/zotero/blob/5.0/chrome/locale/en-US/zotero/zotero.properties">en-US/zotero/zotero.properties</a>
+をもとに作成した．
+</i:p>
+
+</i:section> <!-- @sid="making" -->
+
+</i:body>
+
+<i:bibliography>
+  <i:bib-entry bid="cohen2006" key="1">
+    Dan Cohen (2006, October 9).
+    <a href="https://rrchnm.org/news/zotero-the-next-generation-research-tool-now-available-2/"
+    ><i:italic>Zotero: The Next-Generation Research Tool now available</i:italic></a>.
+    Roy Rosenzweig Center for History and New Media.
+  </i:bib-entry>
+</i:bibliography>
+
+</i:article>
