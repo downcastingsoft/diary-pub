@@ -4,17 +4,38 @@
 
 <i:head>
   <i:author>hnagamin</i:author>
-  <i:created-at>2022-02-26 23:08:53</i:created-at>
-  <i:updated-at>2022-02-26 23:08:53</i:updated-at>
+  <i:created-at>2022-02-27 00:52:12</i:created-at>
+  <i:updated-at>2022-02-27 00:52:12</i:updated-at>
 </i:head>
 
 <i:title>Zotero におけるアイテムの種類 (item type) 日英対照表</i:title>
 
 <i:summary>
-文献管理ソフト Zotero のアイテムの種類の日英対照表を示す．
+文献管理ソフト Zotero において，研究資料は35種類の item type（アイテムの種類）に分類される．
+この記事では，item type の日本語名と英語名の対照表を示す．
 </i:summary>
 
 <i:body>
+
+<i:section sid="intro">
+<i:title>はじめに</i:title>
+
+<i:p>
+<a href="https://www.zotero.org/">Zotero</a> は，
+研究資料とその書誌情報を整理するための文書管理ソフトウェアである．
+2006年にジョージ・メイソン大学の Center for History and New Media によって公開された <i:cite bid="cohen2006" />．
+</i:p>
+
+<i:p>
+Zoteroでは，研究資料はその性質に応じて「学術論文」「ウェブページ」など35種類<i:footnote fid="version">
+<a href="https://www.zotero.org/support/changelog#changes_in_50964_february_12_2022">Zotero 5.0.96.4</a> 時点
+</i:footnote>のグループに分けられる．
+各グループを「アイテムの種類」(<a href="https://www.zotero.org/support/kb/item_types_and_fields">item type</a>) という．
+この記事では，Zotero の英語ドキュメンテーションを読む際の参考にすることを目的として，
+アイテムの種類の日本語名と英語名の対応関係についてまとめる．
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
 
 <i:section sid="table">
 <i:title>日英対照表</i:title>
@@ -39,7 +60,11 @@
     </tr>
     <tr>
       <td>コンピュータ・プログラム</td>
-      <td>Software</td>
+      <td>Software<i:footnote
+        fid="it-software"><a
+        href="https://forums.zotero.org/discussion/comment/349230/#Comment_349230"
+          >https://forums.zotero.org/discussion/comment/349230/#Comment_349230</a>
+        を参照．</i:footnote></td>
     </tr>
     <tr>
       <td>テレビ放送</td>
@@ -175,8 +200,17 @@
 をもとに作成した．
 </i:p>
 
-</i:section> <!-- @sid="table" -->
+</i:section> <!-- @sid="making" -->
 
 </i:body>
+
+<i:bibliography>
+  <i:bib-entry bid="cohen2006" key="1">
+    Dan Cohen (2006, October 9).
+    <a href="https://rrchnm.org/news/zotero-the-next-generation-research-tool-now-available-2/"
+    ><i:italic>Zotero: The Next-Generation Research Tool now available</i:italic></a>.
+    Roy Rosenzweig Center for History and New Media.
+  </i:bib-entry>
+</i:bibliography>
 
 </i:article>

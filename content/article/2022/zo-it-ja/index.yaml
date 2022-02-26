@@ -1,11 +1,12 @@
 ---
 kind: article
-created_at: 2022-02-26T23:08:53+09:00
-updated_at: 2022-02-26T23:08:53+09:00
+created_at: 2022-02-27T00:52:12+09:00
+updated_at: 2022-02-27T00:52:12+09:00
 title: "Zotero におけるアイテムの種類 (item type) 日英対照表"
 author: hnagamin
 excerpt: |-
-  文献管理ソフト Zotero のアイテムの種類の日英対照表を示す．
+  文献管理ソフト Zotero において，研究資料は35種類の item type（アイテムの種類）に分類される．
+  この記事では，item type の日本語名と英語名の対照表を示す．
 
 slug: zo-it-ja
 ogtype: article
