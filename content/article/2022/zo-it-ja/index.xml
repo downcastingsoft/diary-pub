@@ -20,146 +20,148 @@
 <i:title>日英対照表</i:title>
 
 <table>
-  <tr>
-    <td>日本語</td>
-    <td>英語</td>
-  </tr>
-  <tr>
-    <td>インスタントメッセージ</td>
-    <td>Instant Message</td>
-  </tr>
-  <tr>
-    <td>インタビュー</td>
-    <td>Interview</td>
-  </tr>
-  <tr>
-    <td>ウェブページ</td>
-    <td>Web Page</td>
-  </tr>
-  <tr>
-    <td>コンピュータ・プログラム</td>
-    <td>Software</td>
-  </tr>
-  <tr>
-    <td>テレビ放送</td>
-    <td>TV Broadcast</td>
-  </tr>
-  <tr>
-    <td>プレゼンテーション</td>
-    <td>Presentation</td>
-  </tr>
-  <tr>
-    <td>ブログ記事</td>
-    <td>Blog Post</td>
-  </tr>
-  <tr>
-    <td>ポッドキャスト</td>
-    <td>Podcast</td>
-  </tr>
-  <tr>
-    <td>ラジオ放送</td>
-    <td>Radio Broadcast</td>
-  </tr>
-  <tr>
-    <td>レポート</td>
-    <td>Report</td>
-  </tr>
-  <tr>
-    <td>映画</td>
-    <td>Film</td>
-  </tr>
-  <tr>
-    <td>学位論文</td>
-    <td>Thesis</td>
-  </tr>
-  <tr>
-    <td>学会発表</td>
-    <td>Conference Paper</td>
-  </tr>
-  <tr>
-    <td>学術論文</td>
-    <td>Journal Article</td>
-  </tr>
-  <tr>
-    <td>議案</td>
-    <td>Bill</td>
-  </tr>
-  <tr>
-    <td>掲示板への投稿</td>
-    <td>Forum Post</td>
-  </tr>
-  <tr>
-    <td>芸術作品</td>
-    <td>Artwork</td>
-  </tr>
-  <tr>
-    <td>原稿</td>
-    <td>Manuscript</td>
-  </tr>
-  <tr>
-    <td>公聴会</td>
-    <td>Hearing</td>
-  </tr>
-  <tr>
-    <td>雑誌記事</td>
-    <td>Magazine Article</td>
-  </tr>
-  <tr>
-    <td>辞書項目</td>
-    <td>Dictionary Entry</td>
-  </tr>
-  <tr>
-    <td>手紙</td>
-    <td>Letter</td>
-  </tr>
-  <tr>
-    <td>書籍</td>
-    <td>Book</td>
-  </tr>
-  <tr>
-    <td>書籍の章</td>
-    <td>Book Section</td>
-  </tr>
-  <tr>
-    <td>新聞記事</td>
-    <td>Newspaper Article</td>
-  </tr>
-  <tr>
-    <td>訴訟</td>
-    <td>Case</td>
-  </tr>
-  <tr>
-    <td>地図</td>
-    <td>Map</td>
-  </tr>
-  <tr>
-    <td>電子メール</td>
-    <td>E-mail</td>
-  </tr>
-  <tr>
-    <td>特許</td>
-    <td>Patent</td>
-  </tr>
-  <tr>
-    <td>百科事典項目</td>
-    <td>Encyclopedia Article</td>
-  </tr>
-  <tr>
-    <td>文書</td>
-    <td>Document</td>
-  </tr>
-  <tr>
-    <td>法律</td>
-    <td>Statute</td>
-  </tr>
-  <tr>
-    <td>録音</td>
-    <td>Audio Recording</td>
-  </tr>
-  <tr>
-    <td>録画</td>
-    <td>Video Recording</td>
-  </tr>
+  <thead>
+    <th>日本語</th>
+    <th>英語</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>インスタントメッセージ</td>
+      <td>Instant Message</td>
+    </tr>
+    <tr>
+      <td>インタビュー</td>
+      <td>Interview</td>
+    </tr>
+    <tr>
+      <td>ウェブページ</td>
+      <td>Web Page</td>
+    </tr>
+    <tr>
+      <td>コンピュータ・プログラム</td>
+      <td>Software</td>
+    </tr>
+    <tr>
+      <td>テレビ放送</td>
+      <td>TV Broadcast</td>
+    </tr>
+    <tr>
+      <td>プレゼンテーション</td>
+      <td>Presentation</td>
+    </tr>
+    <tr>
+      <td>ブログ記事</td>
+      <td>Blog Post</td>
+    </tr>
+    <tr>
+      <td>ポッドキャスト</td>
+      <td>Podcast</td>
+    </tr>
+    <tr>
+      <td>ラジオ放送</td>
+      <td>Radio Broadcast</td>
+    </tr>
+    <tr>
+      <td>レポート</td>
+      <td>Report</td>
+    </tr>
+    <tr>
+      <td>映画</td>
+      <td>Film</td>
+    </tr>
+    <tr>
+      <td>学位論文</td>
+      <td>Thesis</td>
+    </tr>
+    <tr>
+      <td>学会発表</td>
+      <td>Conference Paper</td>
+    </tr>
+    <tr>
+      <td>学術論文</td>
+      <td>Journal Article</td>
+    </tr>
+    <tr>
+      <td>議案</td>
+      <td>Bill</td>
+    </tr>
+    <tr>
+      <td>掲示板への投稿</td>
+      <td>Forum Post</td>
+    </tr>
+    <tr>
+      <td>芸術作品</td>
+      <td>Artwork</td>
+    </tr>
+    <tr>
+      <td>原稿</td>
+      <td>Manuscript</td>
+    </tr>
+    <tr>
+      <td>公聴会</td>
+      <td>Hearing</td>
+    </tr>
+    <tr>
+      <td>雑誌記事</td>
+      <td>Magazine Article</td>
+    </tr>
+    <tr>
+      <td>辞書項目</td>
+      <td>Dictionary Entry</td>
+    </tr>
+    <tr>
+      <td>手紙</td>
+      <td>Letter</td>
+    </tr>
+    <tr>
+      <td>書籍</td>
+      <td>Book</td>
+    </tr>
+    <tr>
+      <td>書籍の章</td>
+      <td>Book Section</td>
+    </tr>
+    <tr>
+      <td>新聞記事</td>
+      <td>Newspaper Article</td>
+    </tr>
+    <tr>
+      <td>訴訟</td>
+      <td>Case</td>
+    </tr>
+    <tr>
+      <td>地図</td>
+      <td>Map</td>
+    </tr>
+    <tr>
+      <td>電子メール</td>
+      <td>E-mail</td>
+    </tr>
+    <tr>
+      <td>特許</td>
+      <td>Patent</td>
+    </tr>
+    <tr>
+      <td>百科事典項目</td>
+      <td>Encyclopedia Article</td>
+    </tr>
+    <tr>
+      <td>文書</td>
+      <td>Document</td>
+    </tr>
+    <tr>
+      <td>法律</td>
+      <td>Statute</td>
+    </tr>
+    <tr>
+      <td>録音</td>
+      <td>Audio Recording</td>
+    </tr>
+    <tr>
+      <td>録画</td>
+      <td>Video Recording</td>
+    </tr>
+  </tbody>
 </table>
 
 </i:section> <!-- @sid="table" -->
