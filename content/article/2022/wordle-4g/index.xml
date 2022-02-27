@@ -294,13 +294,13 @@ Wordle で最後の1文字を当てにくい単語を列挙しました．
     Victor, D. (2022, January 3).
     <i:italic>Wordle Is a Love Story</i:italic>.
     The New York Times.
-    <a href="https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html">https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html</a>
+    <i:url href="https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html" />
   </i:bib-entry>
   <i:bib-entry bid="mucow2022" key="2">
     mucow. (2022, January 16).
     <i:italic>A note on Wordle's word list</i:italic>.
     Reddit.
-    <a href="https://www.reddit.com/r/wordle/comments/s4tcw8/a_note_on_wordles_word_list/">https://www.reddit.com/r/wordle/comments/s4tcw8/a_note_on_wordles_word_list/</a>
+    <i:url href="https://www.reddit.com/r/wordle/comments/s4tcw8/a_note_on_wordles_word_list/" />
   </i:bib-entry>
 </i:bibliography>
 
