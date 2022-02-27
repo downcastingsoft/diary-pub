@@ -174,6 +174,30 @@
     </code>
   </xsl:template>
 
+  <xsl:template match="i:url">
+    <a>
+      <xsl:attribute name="href">
+        <xsl:value-of select="@href" />
+      </xsl:attribute>
+      <xsl:call-template name="url-for-each-character">
+        <xsl:with-param name="url" select="@href" />
+      </xsl:call-template>
+    </a>
+  </xsl:template>
+
+  <xsl:template name="url-for-each-character">
+    <xsl:param name="url" />
+    <xsl:if test="string-length($url) &gt; 0">
+      <xsl:if test="contains('/.', substring($url,1,1)) and not(contains('/.', substring($url,2,1)))">
+        <wbr />
+      </xsl:if>
+      <xsl:value-of select="substring($url,1,1)" />
+      <xsl:call-template name="url-for-each-character">
+        <xsl:with-param name="url" select="substring($url,2)"/>
+      </xsl:call-template>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template match="i:summary">
     <p>
       <xsl:apply-templates />
