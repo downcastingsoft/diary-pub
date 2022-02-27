@@ -60,10 +60,8 @@ Zoteroでは，研究資料はその性質に応じて「学術論文」「ウ�
     </tr>
     <tr>
       <td>コンピュータ・プログラム</td>
-      <td>Software<i:footnote
-        fid="it-software"><a
-        href="https://forums.zotero.org/discussion/comment/349230/#Comment_349230"
-          >https://forums.zotero.org/discussion/comment/349230/#Comment_349230</a>
+      <td>Software<i:footnote fid="it-software">
+        <i:url href="https://forums.zotero.org/discussion/comment/349230/#Comment_349230" />
         を参照．</i:footnote></td>
     </tr>
     <tr>

@@ -26,8 +26,7 @@ mathml-lifoinput は XML の木構造を帰りがけ順で記述することに�
 <i:p>
 ブログに MathML+MathJax で数式を表示することにした．
 しかし，MathML を手打ちするのは大変だったので，入力システムを作った．
-<a href="https://www.downcastingsoft.net/7e5/mathml-lifoinput/"
->https://www.downcastingsoft.net/7e5/mathml-lifoinput/</a>
+<i:url href="https://www.downcastingsoft.net/7e5/mathml-lifoinput/" />
 からアクセスできる．
 </i:p>
 

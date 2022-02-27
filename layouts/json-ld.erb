@@ -1,22 +1,29 @@
 {
     "@type": "<%= @item[:jsonld][:type] %>",
     "headline": "<%= @item[:title] %>",
+
     <%- if @item[:created_at] -%>
     "datePublished": "<%= @item[:created_at].strftime("%FT%T%:z") %>",
     <%- end -%>
+
     <%- if @item[:updated_at] -%>
     "dateModified": "<%= @item[:updated_at].strftime("%FT%T%:z") %>",
     <%- end -%>
+
+    <%- if @item[:author] -%>
     "author": {
         "@type": "Person",
         "name": "<%= @item[:author] %>"
     },
+    <%- end -%>
+
     "publisher": {
         "@type": "Organization",
         "name": "Downcastingsoft"
     },
+
     <%- if @item[:excerpt] -%>
-    "description": "<%= @item[:excerpt] %>",
+        "description": "<%= @item[:excerpt] %>",
     <%- end -%>
     "@context": "http://schema.org"
 }
