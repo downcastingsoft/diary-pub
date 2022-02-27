@@ -23,3 +23,7 @@
 <%- if @item[:updated_at] -%>
 <meta property="article:modified_time" content="<%= item[:updated_at].strftime("%FT%T%:z") %>" />
 <%- end -%>
+
+<%- if @item[:author] -%>
+<meta property="article:author" content="<%= @item[:author] %>" />
+<%- end -%>
