@@ -193,8 +193,12 @@ Zoteroでは，研究資料はその性質に応じて「学術論文」「ウ�
 <i:title>表の作成</i:title>
 
 <i:p>
-<a href="https://github.com/zotero/zotero/blob/5.0/chrome/locale/ja-JP/zotero/zotero.properties">ja-JP/zotero/zotero.properties</a> と
-<a href="https://github.com/zotero/zotero/blob/5.0/chrome/locale/en-US/zotero/zotero.properties">en-US/zotero/zotero.properties</a>
+<a href="https://github.com/zotero/zotero/blob/5.0/chrome/locale/ja-JP/zotero/zotero.properties"
+  ><i:path text="ja-JP/zotero/zotero.properties"
+/></a> と
+<a href="https://github.com/zotero/zotero/blob/5.0/chrome/locale/en-US/zotero/zotero.properties"
+  ><i:path text="en-US/zotero/zotero.properties"
+/></a>
 をもとに作成した．
 </i:p>
 

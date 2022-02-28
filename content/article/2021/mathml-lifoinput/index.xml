@@ -31,14 +31,16 @@ mathml-lifoinput は XML の木構造を帰りがけ順で記述することに�
 </i:p>
 
 <figure>
-  <video src="https://i.gyazo.com/96e51e2b659a66ff88b54d19ec050f5b.mp4" controls="" playsinline=""></video>
+  <video src="https://i.gyazo.com/96e51e2b659a66ff88b54d19ec050f5b.mp4"
+    controls="" playsinline=""
+  ></video>
   <figcaption>入力の様子</figcaption>
 </figure>
 
 <i:p>
 Git リポジトリは
 <a href="https://github.com/1995hnagamin/mathml-lifoinput"
->1995hnagamin/mathml-lifoinput</a>
+><i:path text="1995hnagamin/mathml-lifoinput" /></a>
 にある．
 
 XML を帰りがけ順で記述する入力システムというものは，わざわざ自作しなくても既に誰かがやっていそうだが，
