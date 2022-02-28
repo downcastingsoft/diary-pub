@@ -168,6 +168,27 @@
     </section>
   </xsl:template>
 
+  <xsl:template match="i:path">
+    <span style="font-family:monospace">
+      <xsl:call-template name="path-for-each-character">
+        <xsl:with-param name="path" select="@text" />
+      </xsl:call-template>
+    </span>
+  </xsl:template>
+
+  <xsl:template name="path-for-each-character">
+    <xsl:param name="path" />
+    <xsl:if test="string-length($path) &gt; 0">
+      <xsl:if test="substring($path,1,1) = '/'">
+        <wbr />
+      </xsl:if>
+      <xsl:value-of select="substring($path,1,1)" />
+      <xsl:call-template name="path-for-each-character">
+        <xsl:with-param name="path" select="substring($path,2)"/>
+      </xsl:call-template>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template match="i:snip">
     <code>
       <xsl:apply-templates />
