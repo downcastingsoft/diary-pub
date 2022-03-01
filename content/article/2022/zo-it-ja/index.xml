@@ -11,7 +11,7 @@
 <i:title>Zotero におけるアイテムの種類 (item type) 日英対照表</i:title>
 
 <i:summary>
-文献管理ソフト Zotero において，研究資料は35種類の item type（アイテムの種類）に分類される．
+文献管理ソフト Zotero において，研究資料は34種類の item type（アイテムの種類）に分類される．
 この記事では，item type の日本語名と英語名の対照表を示す．
 </i:summary>
 
@@ -27,7 +27,7 @@
 </i:p>
 
 <i:p>
-Zoteroでは，研究資料はその性質に応じて「学術論文」「ウェブページ」など35種類<i:footnote fid="version">
+Zoteroでは，研究資料はその性質に応じて「学術論文」「ウェブページ」など34種類<i:footnote fid="version">
 <a href="https://www.zotero.org/support/changelog#changes_in_50964_february_12_2022">Zotero 5.0.96.4</a> 時点
 </i:footnote>のグループに分けられる．
 各グループを「アイテムの種類」(<a href="https://www.zotero.org/support/kb/item_types_and_fields">item type</a>) という．
