@@ -202,19 +202,27 @@
       </xsl:attribute>
       <xsl:call-template name="url-for-each-character">
         <xsl:with-param name="url" select="@href" />
+        <xsl:with-param name="last" select="''" />
       </xsl:call-template>
     </a>
   </xsl:template>
 
   <xsl:template name="url-for-each-character">
     <xsl:param name="url" />
+    <xsl:param name="last" />
+
     <xsl:if test="string-length($url) &gt; 0">
-      <xsl:if test="contains('/.', substring($url,1,1)) and not(contains('/.', substring($url,2,1)))">
+      <xsl:variable name="current" select="substring($url,1,1)" />
+      <xsl:if test="contains('._~,-_?%&amp;', $current) or ($current = '/' and not($last = '/'))">
         <wbr />
       </xsl:if>
-      <xsl:value-of select="substring($url,1,1)" />
+      <xsl:value-of select="$current" />
+      <xsl:if test="($current = '/' and $last = '/')">
+        <wbr />
+      </xsl:if>
       <xsl:call-template name="url-for-each-character">
         <xsl:with-param name="url" select="substring($url,2)"/>
+        <xsl:with-param name="last" select="$current" />
       </xsl:call-template>
     </xsl:if>
   </xsl:template>
