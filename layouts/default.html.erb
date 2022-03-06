@@ -1,14 +1,17 @@
 <%- title = (defined? html_title) ? html_title : @item[:title] -%>
 <!DOCTYPE html>
-<html lang="ja">
-  <head prefix="og:http://ogp.me/ns#">
+<html lang="ja" prefix="og: http://ogp.me/ns#">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
+    <%- if @item[:noindex] -%>
+    <meta name="robots" content="noindex">
+    <%- end -%>
     <title><%= title %></title>
     <link href="/stylesheet.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" async
+    <script async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=MML_CHTML">
     </script>
 
