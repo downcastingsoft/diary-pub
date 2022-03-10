@@ -204,8 +204,8 @@ Zoteroでは，研究資料はその性質に応じて「学術論文」「ウ�
 
 </i:section> <!-- @sid="making" -->
 
-<i:section>
-<i:title sid="history">更新履歴</i:title>
+<i:section  sid="history">
+<i:title>更新履歴</i:title>
 <ul>
   <li>2022-02-27: 公開</li>
   <li>2022-03-01: 35を34に修正</li>
