@@ -9,7 +9,3 @@ section.article h3 {
 section.article p.article-summary {
   margin-top: 0.25rem;
 }
-
-.article-metadata, .article-metadata * {
-  font-size: 0.8rem;
-}

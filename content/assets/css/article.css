@@ -77,6 +77,10 @@ mjx-container {
   border-bottom: thin solid black;
 }
 
+.article-metadata, .article-metadata * {
+  font-size: 0.8rem;
+}
+
 a.section-anchor {
   float: left;
   margin-left: -1.5em;
