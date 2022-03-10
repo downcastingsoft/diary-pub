@@ -1,8 +1,3 @@
-body {
-  background: #fff;
-  margin: 0;
-}
-
 a.link-footnote {
   vertical-align: super;
   font-size: x-small;
@@ -77,48 +72,13 @@ mjx-container {
   margin-bottom: 0.5rem;
 }
 
-#site-nav {
-  background: #222;
-  color: #fff;
-  margin-top: 0px;
-}
-
-a.nav-item {
-  margin: 0.5rem;
-  text-decoration: none;
-  color: #fff;
-}
-
-#site-fotter {
-  max-width: 74rem;
-  margin: auto;
-  border-top: thin solid black;
-}
-
 #header {
   padding-bottom: 0.5rem;
   border-bottom: thin solid black;
 }
 
-#page-container {
-  margin: 0.5rem;
-}
-
-main {
-  max-width: 74rem;
-  margin: auto;
-}
-
-section.article {
-  margin-bottom: 2rem;
-}
-
-section.article h3 {
-  margin-bottom: 0.25rem;
-}
-
-section.article p.article-summary {
-  margin-top: 0.25rem;
+.article-metadata, .article-metadata * {
+  font-size: 0.8rem;
 }
 
 a.section-anchor {
@@ -152,8 +112,4 @@ li.toc-item {
 li.toc-item::before {
   content: counters(item, ".") " ";
   counter-increment: item;
-}
-
-.article-metadata, .article-metadata * {
-  font-size: 0.8rem;
 }

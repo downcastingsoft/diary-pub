@@ -1,0 +1,31 @@
+body {
+  background: #fff;
+  margin: 0;
+}
+
+#site-nav {
+  background: #222;
+  color: #fff;
+  margin-top: 0px;
+}
+
+a.nav-item {
+  margin: 0.5rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+#site-fotter {
+  max-width: 74rem;
+  margin: auto;
+  border-top: thin solid black;
+}
+
+#page-container {
+  margin: 0.5rem;
+}
+
+main {
+  max-width: 74rem;
+  margin: auto;
+}

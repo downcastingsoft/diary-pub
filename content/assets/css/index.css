@@ -1,0 +1,15 @@
+section.article {
+  margin-bottom: 2rem;
+}
+
+section.article h3 {
+  margin-bottom: 0.25rem;
+}
+
+section.article p.article-summary {
+  margin-top: 0.25rem;
+}
+
+.article-metadata {
+  font-size: 0.8rem;
+}
