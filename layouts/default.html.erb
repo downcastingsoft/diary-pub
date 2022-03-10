@@ -9,7 +9,13 @@
     <meta name="robots" content="noindex">
     <%- end -%>
     <title><%= title %></title>
-    <link href="/stylesheet.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
+    <%- if ['article', 'draft'].include? @item[:kind] -%>
+      <link href="/assets/css/article.css" rel="stylesheet" type="text/css" />
+    <%- end -%>
+    <%- if @item[:kind] == 'index' -%>
+      <link href="/assets/css/index.css" rel="stylesheet" type="text/css" />
+    <%- end -%>
 
     <script async
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=MML_CHTML">
