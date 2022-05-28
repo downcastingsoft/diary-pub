@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2022-05-28 20:06:43</i:created-at>
+  <i:updated-at>2022-05-28 20:06:43</i:updated-at>
+</i:head>
+
+<i:title>本間・五十嵐・川口『数値電磁力学』(5.51)式の導出</i:title>
+
+<i:summary>
+本間利久・五十嵐一・川口秀樹『数値電磁力学：基礎と応用』(2002) の
+第5.1節「微分形式とホイットニー要素」(5.51)式では，
+1次ホイットニー要素基底の頂点座標による表示が与えられている．
+本稿では，ベクトル三重積の公式と外積の性質を用いて(5.51)式を導出する．
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+<i:title>(5.51)式の導出</i:title>
+
+<i:p>
+先週の輪講で質問されたが，導出に1時間近くかかったのでここにメモしておく．
+</i:p>
+
+<i:p>
+<i:url href="https://www.dropbox.com/s/42i82so48nu6i2n/document.pdf" />
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
+
+
+<i:section  sid="history">
+<i:title>更新履歴</i:title>
+<ul>
+  <li>2022-05-28: 公開</li>
+</ul>
+</i:section> <!-- @sid="history" -->
+
+</i:body>
+
+<i:bibliography>
+  <i:bib-entry bid="honma-igarashi-kawaguchi-2002" key="1">
+    本間利久・五十嵐一・川口秀樹『数値電磁力学：基礎と応用』．
+    日本シミュレーション学会編．
+    計算電気・電子工学シリーズ14．
+    森北出版．
+    初版．
+    ISBN: 4-627-71641-9.
+    2002
+  </i:bib-entry>
+</i:bibliography>
+
+</i:article>
