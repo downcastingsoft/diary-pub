@@ -9,6 +9,8 @@ end
 
 # Compilation rules
 
+ignore '/**/nanoc-ignore/**/*'
+
 compile '/article/**/*.xml' do
   layout '/xsl/ijkml.xsl'
   layout '/default.html.erb'
