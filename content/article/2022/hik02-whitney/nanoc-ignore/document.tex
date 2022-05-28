@@ -34,7 +34,7 @@
 }
 
 \title{本間・五十嵐・川口『数値電磁力学』 (5.51)式の導出}
-\author{hnagamin\thanks{\url{https://www.downcastingsoft.net/7e5/diary/2022/mm/dd/hik02-whitney/}}}
+\author{hnagamin\thanks{\url{https://www.downcastingsoft.net/7e5/diary/article/2022/05/28/hik02-whitney/}}}
 
 \allowdisplaybreaks
 
@@ -55,7 +55,7 @@
 
 初めに，\(\lambda_l\)とその勾配\(\nabla\lambda_l\)の表式を求める．
 そのためには，\eqref{eq:lambdak},~\eqref{eq:dlambdak}式で添字を\(
-  (k,l,m,n)\mapsto(l,m,n,k)
+  (k,l,m,n)\mapsto(l,m,k,n)
 \)と置換すればよい．
 
 \begin{align}
@@ -114,7 +114,7 @@
 ~\eqref{eq:lambdak},~\eqref{eq:dlambdak},~\eqref{eq:lambdal},~\eqref{eq:dlambdal}式より，次の等式が成り立つ．
 \begin{align}
   \lambda_k
-  &= (\bm{x}-\bm{x}_k)\cdot\nabla\lambda_k
+  &= (\bm{x}-\bm{x}_m)\cdot\nabla\lambda_k
   \label{eq:lk-dlk} \\
   \lambda_l
   &= (\bm{x}-\bm{x}_k)\cdot\nabla\lambda_l
@@ -132,7 +132,7 @@
   \label{eq:bac-abc}
 \end{align}
 
-以上をふまえると，辺\(e=\left\{k,l\right\}\)に関する1次ホイットニー要素基底\(\bm{w}_{e}\)を次のように書ける．
+以上をふまえると，辺\(e=\left\{k,l\right\}\)に関する1次ホイットニー要素基底\(\bm{w}_{e}\)は次のように書ける．
 \begin{align}
   \bm{w}_e
   &= \lambda_k \nabla\lambda_l - \lambda_l \nabla\lambda_k \\
@@ -175,6 +175,6 @@
 \end{align}
 であり，教科書~(5.51)式が導かれた．
 
-\printbibliography
+\printbibliography[title={参考文献}]
 
 \end{document}
