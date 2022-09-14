@@ -1,0 +1,1386 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2022-09-14 11:53:12</i:created-at>
+  <i:updated-at>2022-09-14 11:53:12</i:updated-at>
+</i:head>
+
+<i:title>累乗根の [1/1] パデ近似</i:title>
+
+<i:summary>
+<math>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>1</mn>
+</math>
+の周りにおける
+<math><mi>n</mi></math> 乗根関数
+<math>
+  <mrow>
+    <mrow>
+      <mi>f</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>x</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <msup>
+      <mi>x</mi>
+      <mrow>
+        <mn>1</mn>
+        <mo>/</mo>
+        <mi>n</mi>
+      </mrow>
+    </msup>
+  </mrow>
+</math>
+の [1/1] パデ近似を求める．
+また，いくつかの計算例を示す．
+
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+<i:title>はじめに</i:title>
+
+<i:p>
+点
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <msub>
+      <mi>x</mi>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+</math>
+の周りにおける
+関数
+<math>
+  <mrow>
+    <mi>f</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>x</mi>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+の
+<math>
+  <mrow>
+    <mo>[</mo>
+    <mi>m</mi>
+    <mo>/</mo>
+    <mi>n</mi>
+    <mo>]</mo>
+  </mrow>
+</math>
+パデ近似とは，
+有理関数
+<math>
+  <mrow>
+    <mrow>
+      <msub>
+        <mi>f</mi>
+        <mrow>
+          <mi>m</mi>
+          <mo>/</mo>
+          <mi>n</mi>
+        </mrow>
+      </msub>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>x</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mi>P</mi>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mi>x</mi>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+      <mo>/</mo>
+      <mrow>
+        <mi>Q</mi>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mi>x</mi>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+（ただし
+<math>
+  <mrow>
+    <mi>P</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>x</mi>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>,
+<math>
+  <mrow>
+    <mi>Q</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>x</mi>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+はそれぞれ
+<math>
+  <mi>m</mi>
+</math>,
+<math>
+  <mi>n</mi>
+</math>
+次多項式）であって，
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <msub>
+      <mi>x</mi>
+      <mn>0</mn>
+    </msub>
+  </mrow>
+</math>
+の周りにおけるテイラー展開の係数が
+元の関数
+<math>
+  <mrow>
+    <mi>f</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>x</mi>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+と
+<math>
+  <mrow>
+    <mi>m</mi>
+    <mo>+</mo>
+    <mi>n</mi>
+  </mrow>
+</math>
+次まで一致するもののことである<i:cite bid="baker-graves-morris-2010">p. 1</cite>．
+</i:p>
+
+<i:p>
+累乗根の [1/1] パデ近似は覚えやすい形をしており，計算精度も高い．
+この記事では，
+<math>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>1</mn>
+</math>
+の周りにおける
+<math>
+  <mi>n</mi>
+</math>
+乗根関数の
+[1/1]
+パデ近似の式を導く．
+また，応用例として
+<math>
+  <msqrt>
+    <mn>47</mn>
+  </msqrt>
+</math>,
+<math>
+  <mroot>
+    <mn>42</mn>
+    <mn>3</mn>
+  </mroot>
+</math>
+の近似値を計算する<i:footnote fid="origin">
+  この記事は<a href="https://twitter.com/MathExplorer262/status/1569181182369370113"
+  >まえすく@数学垢さんの9月12日のツイート</a>から刺激を受けて書いた．
+</i:footnote>．
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
+
+<i:section sid="deriv">
+<i:title>導出</i:title>
+
+<i:p>
+[1/1] パデ近似なので，
+分母・分子が共に1次の有理関数であって，
+そのテイラー展開が累乗根のテイラー展開と2次の項まで一致するものを求めたい．
+はじめに，関数
+<math>
+  <mrow>
+    <mrow>
+      <mi>f</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>x</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <mroot>
+      <mi>x</mi>
+      <mi>n</mi>
+    </mroot>
+  </mrow>
+</math>
+を
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mn>1</mn>
+  </mrow>
+</math>
+の周りで展開する．
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>+</mo>
+      <mi>&#x3B5;</mi>
+    </mrow>
+  </mrow>
+</math>
+とおくと，
+<math display="block">
+  <mrow>
+    <mroot>
+      <mi>x</mi>
+      <mi>n</mi>
+    </mroot>
+    <mo>=</mo>
+    <mn>1</mn>
+    <mo>+</mo>
+    <mrow>
+      <mfrac>
+        <mn>1</mn>
+        <mi>n</mi>
+      </mfrac>
+      <mo>&#x2062;</mo>
+      <mi>&#x3B5;</mi>
+    </mrow>
+    <mo>-</mo>
+    <mrow>
+      <mfrac>
+        <mrow>
+          <mi>n</mi>
+          <mo>-</mo>
+          <mn>1</mn>
+        </mrow>
+        <mrow>
+          <mn>2</mn>
+          <mo>&#x2062;</mo>
+          <msup>
+            <mi>n</mi>
+            <mn>2</mn>
+          </msup>
+        </mrow>
+      </mfrac>
+      <mo>&#x2062;</mo>
+      <msup>
+        <mi>&#x3B5;</mi>
+        <mn>2</mn>
+      </msup>
+    </mrow>
+    <mo>+</mo>
+    <mo>&#x22EF;</mo>
+  </mrow>
+</math>
+である．
+次に，
+<math>
+  <mrow>
+    <mrow>
+      <msub>
+        <mi>f</mi>
+        <mi>1/1</mi>
+      </msub>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>x</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>a</mi>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mi>b</mi>
+        <mo>)</mo>
+      </mrow>
+      <mo>/</mo>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <mi>c</mi>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mi>d</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+を
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mn>1</mn>
+  </mrow>
+</math>
+の周りで展開する．
+先ほどと同様に
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>=</mo>
+    <mrow>
+      <mn>1</mn>
+      <mo>+</mo>
+      <mi>&#x3B5;</mi>
+    </mrow>
+  </mrow>
+</math>
+とおくと，次のようになる．
+<math display="block">
+  <mrow>
+    <mfrac>
+      <mrow>
+        <mrow>
+          <mi>a</mi>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mi>b</mi>
+      </mrow>
+      <mrow>
+        <mrow>
+          <mi>c</mi>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mi>d</mi>
+      </mrow>
+    </mfrac>
+    <mo>=</mo>
+    <mfrac>
+      <mrow>
+        <mi>a</mi>
+        <mo>+</mo>
+        <mi>b</mi>
+      </mrow>
+      <mrow>
+        <mi>c</mi>
+        <mo>+</mo>
+        <mi>d</mi>
+      </mrow>
+    </mfrac>
+    <mo>+</mo>
+    <mrow>
+      <mfrac>
+        <mrow>
+          <mrow>
+            <mi>a</mi>
+            <mo>&#x2062;</mo>
+            <mi>d</mi>
+          </mrow>
+          <mo>-</mo>
+          <mrow>
+            <mi>b</mi>
+            <mo>&#x2062;</mo>
+            <mi>c</mi>
+          </mrow>
+        </mrow>
+        <msup>
+          <mrow>
+            <mo>(</mo>
+            <mi>c</mi>
+            <mo>+</mo>
+            <mi>d</mi>
+            <mo>)</mo>
+          </mrow>
+          <mn>2</mn>
+        </msup>
+      </mfrac>
+      <mo>&#x2062;</mo>
+      <mi>&#x3B5;</mi>
+    </mrow>
+    <mo>-</mo>
+    <mrow>
+      <mfrac>
+        <mrow>
+          <mi>c</mi>
+          <mo>&#x2062;</mo>
+          <mrow>
+            <mo>(</mo>
+            <mrow>
+              <mi>a</mi>
+              <mo>&#x2062;</mo>
+              <mi>d</mi>
+            </mrow>
+            <mo>-</mo>
+            <mrow>
+              <mi>b</mi>
+              <mo>&#x2062;</mo>
+              <mi>c</mi>
+            </mrow>
+            <mo>)</mo>
+          </mrow>
+        </mrow>
+        <msup>
+          <mrow>
+            <mo>(</mo>
+            <mi>c</mi>
+            <mo>+</mo>
+            <mi>d</mi>
+            <mo>)</mo>
+          </mrow>
+          <mn>3</mn>
+        </msup>
+      </mfrac>
+      <mo>&#x2062;</mo>
+      <msup>
+        <mi>&#x3B5;</mi>
+        <mn>2</mn>
+      </msup>
+    </mrow>
+    <mo>+</mo>
+    <mo>&#x22EF;</mo>
+  </mrow>
+</math>
+</i:p>
+
+<i:p>
+<math>
+  <mrow>
+    <mi>f</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>x</mi>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+と
+<math>
+  <mrow>
+    <msub>
+      <mi>f</mi>
+      <mi>1/1</mi>
+    </msub>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>x</mi>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+のテイラー展開が2次の係数まで一致すると仮定すると次の式を得る．
+
+<math display="block">
+  <mrow>
+    <mrow>
+      <mfrac>
+        <mrow>
+          <mi>a</mi>
+          <mo>+</mo>
+          <mi>b</mi>
+        </mrow>
+        <mrow>
+          <mi>c</mi>
+          <mo>+</mo>
+          <mi>d</mi>
+        </mrow>
+      </mfrac>
+      <mo>=</mo>
+      <mn>1</mn>
+    </mrow>
+    <mo>,</mo>
+    <mspace width="veryverythickmathspace" />
+    <mrow>
+      <mfrac>
+        <mrow>
+          <mrow>
+            <mi>a</mi>
+            <mo>&#x2062;</mo>
+            <mi>d</mi>
+          </mrow>
+          <mo>-</mo>
+          <mrow>
+            <mi>b</mi>
+            <mo>&#x2062;</mo>
+            <mi>c</mi>
+          </mrow>
+        </mrow>
+        <msup>
+          <mrow>
+            <mo>(</mo>
+            <mi>c</mi>
+            <mo>+</mo>
+            <mi>d</mi>
+            <mo>)</mo>
+          </mrow>
+          <mn>2</mn>
+        </msup>
+      </mfrac>
+      <mo>=</mo>
+      <mfrac>
+        <mn>1</mn>
+        <mi>n</mi>
+      </mfrac>
+    </mrow>
+    <mo>,</mo>
+    <mspace width="veryverythickmathspace" />
+    <mrow>
+      <mfrac>
+        <mrow>
+          <mi>c</mi>
+          <mo>&#x2062;</mo>
+          <mrow>
+            <mo>(</mo>
+            <mrow>
+              <mi>a</mi>
+              <mo>&#x2062;</mo>
+              <mi>d</mi>
+            </mrow>
+            <mo>-</mo>
+            <mrow>
+              <mi>b</mi>
+              <mo>&#x2062;</mo>
+              <mi>c</mi>
+            </mrow>
+            <mo>)</mo>
+          </mrow>
+        </mrow>
+        <msup>
+          <mrow>
+            <mo>(</mo>
+            <mi>c</mi>
+            <mo>+</mo>
+            <mi>d</mi>
+            <mo>)</mo>
+          </mrow>
+          <mn>3</mn>
+        </msup>
+      </mfrac>
+      <mo>=</mo>
+      <mfrac>
+        <mrow>
+          <mi>n</mi>
+          <mo>-</mo>
+          <mn>1</mn>
+        </mrow>
+        <mrow>
+          <mn>2</mn>
+          <mo>&#x2062;</mo>
+          <msup>
+            <mi>n</mi>
+            <mn>2</mn>
+          </msup>
+        </mrow>
+      </mfrac>
+    </mrow>
+  </mrow>
+</math>
+
+この連立方程式を解く．
+未知変数は
+<math>
+  <mrow>
+    <mi>a</mi><mo>,</mo>
+    <mi>b</mi><mo>,</mo>
+    <mi>c</mi><mo>,</mo>
+    <mi>d</mi>
+  </mrow>
+</math>
+の4つであるが，条件が3つなので自由度が1つ余る．
+ただし，この自由度は分母と分子を定数倍するだけなので，関数
+<math>
+  <mrow>
+    <msub>
+      <mi>f</mi>
+      <mi>1/1</mi>
+    </msub>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>x</mi>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</math>
+は結局1つに定まる．
+</i:p>
+
+<i:p>
+まず，
+<math>
+  <mrow>
+    <mrow>
+      <mi>c</mi>
+      <mo>/</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>c</mi>
+        <mo>+</mo>
+        <mi>d</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <mrow>
+      <mrow>
+        <mo>(</mo>
+        <mi>n</mi>
+        <mo>-</mo>
+        <mn>1</mn>
+        <mo>)</mo>
+      </mrow>
+      <mo>/</mo>
+      <mrow>
+        <mn>2</mn>
+        <mo>&#x2062;</mo>
+        <mi>n</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+より
+<math>
+  <mrow>
+    <mi>c</mi>
+    <mo>=</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>-</mo>
+      <mn>1</mn>
+    </mrow>
+  </mrow>
+</math>,
+<math>
+  <mrow>
+    <mi>d</mi>
+    <mo>=</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </mrow>
+</math>
+としてよい．
+これを代入すると
+<math display="block">
+  <mrow>
+    <mrow>
+      <mrow>
+        <mi>a</mi>
+        <mo>+</mo>
+        <mi>b</mi>
+      </mrow>
+      <mo>=</mo>
+      <mrow>
+        <mn>2</mn>
+        <mo>&#x2062;</mo>
+        <mi>n</mi>
+      </mrow>
+    </mrow>
+    <mo>,</mo>
+    <mspace width="veryverythickmathspace" />
+    <mrow>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2062;</mo>
+          <mi>a</mi>
+        </mrow>
+        <mo>-</mo>
+        <mrow>
+          <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>-</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2062;</mo>
+          <mi>b</mi>
+        </mrow>
+      </mrow>
+      <mo>=</mo>
+      <mrow>
+        <mn>4</mn>
+        <mo>&#x2062;</mo>
+        <mi>n</mi>
+      </mrow>
+    </mrow>
+  </mrow>
+</math>
+を得る．
+ここから
+<math>
+  <mrow>
+    <mi>a</mi>
+    <mo>=</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>+</mo>
+      <mn>1</mn>
+    </mrow>
+  </mrow>
+</math>,
+<math>
+  <mrow>
+    <mi>b</mi>
+    <mo>=</mo>
+    <mrow>
+      <mi>n</mi>
+      <mo>-</mo>
+      <mn>1</mn>
+    </mrow>
+  </mrow>
+</math>
+が分かる．
+以上より
+<math display="block">
+  <mrow>
+    <mrow>
+      <mi>f</mi>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>x</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>≈</mo>
+    <mrow>
+      <msub>
+        <mi>f</mi>
+        <mi>1/1</mi>
+      </msub>
+      <mo>&#x2061;</mo>
+      <mrow>
+        <mo>(</mo>
+        <mi>x</mi>
+        <mo>)</mo>
+      </mrow>
+    </mrow>
+    <mo>=</mo>
+    <mfrac>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mrow>
+          <mo>(</mo>
+          <mi>n</mi>
+          <mo>-</mo>
+          <mn>1</mn>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>-</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mrow>
+          <mo>(</mo>
+          <mi>n</mi>
+          <mo>+</mo>
+          <mn>1</mn>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>
+となる．
+<math>
+<mi>x</mi>
+</math>
+を
+<math>
+  <mrow>
+    <mi>x</mi>
+    <mo>/</mo>
+    <mi>t</mi>
+  </mrow>
+</math>
+で置き換えると，最終的に次の式を得る．
+<math display="block">
+  <mrow>
+    <mroot>
+      <mfrac>
+        <mi>x</mi>
+        <mi>t</mi>
+      </mfrac>
+      <mi>n</mi>
+    </mroot>
+    <mo>≈</mo>
+    <mfrac>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mrow>
+          <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>-</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2062;</mo>
+          <mi>t</mi>
+        </mrow>
+      </mrow>
+      <mrow>
+        <mrow>
+          <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>-</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mrow>
+          <mrow>
+            <mo>(</mo>
+            <mi>n</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+            <mo>)</mo>
+          </mrow>
+          <mo>&#x2062;</mo>
+          <mi>t</mi>
+        </mrow>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>
+
+たとえば，
+<math>
+  <mrow>
+    <mi>n</mi>
+    <mo>=</mo>
+    <mn>3</mn>
+  </mrow>
+</math>
+のときは次のようになる．
+<math display="block">
+  <mrow>
+    <mroot>
+      <mfrac>
+        <mi>x</mi>
+        <mi>t</mi>
+      </mfrac>
+      <mn>3</mn>
+    </mroot>
+    <mo>≈</mo>
+    <mfrac>
+      <mrow>
+        <mrow>
+          <mn>4</mn>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mrow>
+          <mn>2</mn>
+          <mo>&#x2062;</mo>
+          <mi>t</mi>
+        </mrow>
+      </mrow>
+      <mrow>
+        <mrow>
+          <mn>2</mn>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mrow>
+          <mn>4</mn>
+          <mo>&#x2062;</mo>
+          <mi>t</mi>
+        </mrow>
+      </mrow>
+    </mfrac>
+    <mo>=</mo>
+    <mfrac>
+      <mrow>
+        <mrow>
+          <mn>2</mn>
+          <mo>&#x2062;</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mi>t</mi>
+      </mrow>
+      <mrow>
+        <mi>x</mi>
+        <mo>+</mo>
+        <mrow>
+          <mn>2</mn>
+          <mo>&#x2062;</mo>
+          <mi>t</mi>
+        </mrow>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>
+</i:p>
+
+<i:p>
+係数の順番がややこしいが，
+<math>
+  <mi>x</mi>
+  <mo>=</mo>
+  <mn>0</mn>
+</math>
+を代入したときに誤差が小さくなる方と覚えておくと忘れにくい．
+</i:p>
+
+</i:section>
+
+<i:section sid="example">
+<i:title>計算例</i:title>
+
+<i:p>
+例1．
+47 の平方根を考える．
+<math>
+  <mi>t</mi>
+  <mo>=</mo>
+  <mn>49</mn>
+</math>
+とおくと次の近似値を得る．
+<math display="block">
+  <mrow>
+    <msqrt>
+      <mn>47</mn>
+    </msqrt>
+    <mo>=</mo>
+    <mrow>
+      <mn>7</mn>
+      <mo>&#xD7;</mo>
+      <msqrt>
+        <mfrac>
+          <mn>47</mn>
+          <mn>49</mn>
+        </mfrac>
+      </msqrt>
+    </mrow>
+    <mo>&#x2248;</mo>
+    <mrow>
+      <mn>7</mn>
+      <mo>&#xD7;</mo>
+      <mfrac>
+        <mrow>
+          <mn>3</mn>
+          <mo>&#xD7;</mo>
+          <mn>47</mn>
+          <mo>+</mo>
+          <mn>49</mn>
+        </mrow>
+        <mrow>
+          <mn>47</mn>
+          <mo>+</mo>
+          <mn>3</mn>
+          <mo>&#xD7;</mo>
+          <mn>49</mn>
+        </mrow>
+      </mfrac>
+    </mrow>
+    <mo>=</mo>
+    <mfrac>
+      <mn>665</mn>
+      <mn>97</mn>
+    </mfrac>
+    <mo>=</mo>
+    <mn>6.855670⋯</mn>
+  </mrow>
+</math>
+<math display="block">
+  <mrow>
+    <msup>
+      <mrow>
+        <mo>(</mo>
+        <mfrac>
+          <mn>665</mn>
+          <mn>97</mn>
+        </mfrac>
+        <mo>)</mo>
+      </mrow>
+      <mn>2</mn>
+    </msup>
+    <mo>=</mo>
+    <mn>47.00021&#x22EF;</mn>
+  </mrow>
+</math>
+実際には
+<math>
+  <mrow>
+    <msqrt>
+      <mn>47</mn>
+    </msqrt>
+    <mo>=</mo>
+    <mn>6.85565460⋯</mn>
+  </mrow>
+</math>
+（相対誤差 2.3 ppm）である．
+</i:p>
+
+<i:p>
+例2．
+42の立方根を考える．
+<math>
+  <mi>t</mi>
+  <mo>=</mo>
+  <mn>27</mn>
+</math>
+とおくと
+次の近似値を得る．
+<math display="block">
+  <mrow>
+    <mroot>
+      <mn>42</mn>
+      <mn>3</mn>
+    </mroot>
+    <mo>=</mo>
+    <mrow>
+      <mn>3</mn>
+      <mo>&#xD7;</mo>
+      <mroot>
+        <mfrac>
+          <mn>42</mn>
+          <mn>27</mn>
+        </mfrac>
+        <mn>3</mn>
+      </mroot>
+    </mrow>
+    <mo>&#x2248;</mo>
+    <mrow>
+      <mn>3</mn>
+      <mo>&#xD7;</mo>
+      <mfrac>
+        <mrow>
+          <mn>2</mn>
+          <mo>&#xD7;</mo>
+          <mn>42</mn>
+          <mo>+</mo>
+          <mn>27</mn>
+        </mrow>
+        <mrow>
+          <mn>42</mn>
+          <mo>+</mo>
+          <mn>2</mn>
+          <mo>&#xD7;</mo>
+          <mn>27</mn>
+        </mrow>
+      </mfrac>
+    </mrow>
+    <mo>=</mo>
+    <mfrac>
+      <mn>111</mn>
+      <mn>32</mn>
+    </mfrac>
+    <mo>=</mo>
+    <mn>3.46875</mn>
+  </mrow>
+</math>
+<math display="block">
+  <mrow>
+    <msup>
+      <mrow>
+        <mo>(</mo>
+        <mfrac>
+          <mn>111</mn>
+          <mn>32</mn>
+        </mfrac>
+        <mo>)</mo>
+      </mrow>
+      <mn>3</mn>
+    </msup>
+    <mo>=</mo>
+    <mn>41.73678⋯</mn>
+  </mrow>
+</math>
+実際には
+<math>
+<mrow>
+  <mroot>
+    <mn>42</mn>
+    <mn>3</mn>
+  </mroot>
+  <mo>=</mo>
+  <mn>3.4760266⋯</mn>
+</mrow>
+</math>
+（相対誤差 0.21 %）である．
+精度を上げるため，
+<math>
+  <mrow>
+    <mn>111</mn>
+    <mo>/</mo>
+    <mn>32</mn>
+  </mrow>
+</math>
+に近い簡単な分数として適当に
+<math>
+  <mrow>
+    <mn>7</mn>
+    <mo>/</mo>
+    <mn>2</mn>
+  </mrow>
+</math>
+を取ってもう一度計算すると
+<math display="block">
+  <mrow>
+    <mroot>
+      <mn>42</mn>
+      <mn>3</mn>
+    </mroot>
+    <mo>=</mo>
+    <mrow>
+      <mfrac>
+        <mn>7</mn>
+        <mn>2</mn>
+      </mfrac>
+      <mo>&#xD7;</mo>
+      <mroot>
+        <mfrac>
+          <mrow>
+            <mn>42</mn>
+            <mo>&#xD7;</mo>
+            <msup>
+              <mn>2</mn>
+              <mn>3</mn>
+            </msup>
+          </mrow>
+          <msup>
+            <mn>7</mn>
+            <mn>3</mn>
+          </msup>
+        </mfrac>
+        <mn>3</mn>
+      </mroot>
+    </mrow>
+    <mo>&#x2248;</mo>
+    <mrow>
+      <mfrac>
+        <mn>7</mn>
+        <mn>2</mn>
+      </mfrac>
+      <mo>&#xD7;</mo>
+      <mfrac>
+        <mrow>
+          <mn>2</mn>
+          <mo>&#xD7;</mo>
+          <mn>42</mn>
+          <mo>&#xD7;</mo>
+          <mn>8</mn>
+          <mo>+</mo>
+          <mn>343</mn>
+        </mrow>
+        <mrow>
+          <mn>42</mn>
+          <mo>&#xD7;</mo>
+          <mn>8</mn>
+          <mo>+</mo>
+          <mn>2</mn>
+          <mo>&#xD7;</mo>
+          <mn>343</mn>
+        </mrow>
+      </mfrac>
+    </mrow>
+    <mo>=</mo>
+    <mfrac>
+      <mrow>
+        <mn>16</mn>
+        <mo>&#xD7;</mo>
+        <mn>42</mn>
+        <mo>+</mo>
+        <mn>343</mn>
+      </mrow>
+      <mrow>
+        <mn>2</mn>
+        <mo>&#xD7;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mn>48</mn>
+          <mo>+</mo>
+          <mn>98</mn>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </mfrac>
+    <mo>=</mo>
+    <mfrac>
+      <mn>1015</mn>
+      <mn>292</mn>
+    </mfrac>
+    <mo>=</mo>
+    <mn>3.476027397⋯</mn>
+  </mrow>
+</math>
+<math display="block">
+  <mrow>
+    <msup>
+      <mrow>
+        <mo>(</mo>
+        <mfrac>
+          <mn>1015</mn>
+          <mn>292</mn>
+        </mfrac>
+        <mo>)</mo>
+      </mrow>
+      <mn>3</mn>
+    </msup>
+    <mo>=</mo>
+    <mn>42.00002727&#x22EF;</mn>
+  </mrow>
+</math>
+を得る（相対誤差 0.22 ppm）．
+</i:p>
+
+<figure>
+  <img
+    src="https://i.gyazo.com/6b6e918db109d3d2b43c6487e1fcba0e.png"
+    alt="平方根の近似値の計算精度のグラフ" width="355"/>
+  <figcaption>
+    <math>
+      <msqrt>
+        <mn>1</mn>
+      </msqrt>
+    </math
+    >〜<math>
+      <msqrt>
+        <mn>200</mn>
+      </msqrt>
+    </math>
+    の近似値の相対誤差のグラフ．
+  </figcaption>
+</figure>
+
+<figure>
+  <img
+    src="https://i.gyazo.com/f5d01b28fd31f533dc67bc39d43e2cb8.png"
+    alt="近似の方法による計算精度の違いを表すグラフ" width="355"/>
+  <figcaption>
+    <math>
+      <mi>k</mi>
+    </math>
+    の取り方による計算精度の違い．
+  </figcaption>
+</figure>
+
+</i:section> <!-- @sid="example" -->
+
+<i:section  sid="history">
+<i:title>更新履歴</i:title>
+<ul>
+  <li>2022-09-14: 公開</li>
+</ul>
+</i:section> <!-- @sid="history" -->
+
+</i:body>
+
+
+<i:bibliography>
+  <i:bib-entry bid="baker-graves-morris-2010" key="BG">
+    George A. Baker, Jr. and Peter Graves-Morris (2010).
+    <i:italic>Padé approximants</i:italic> (2nd ed.).
+    Cambridge University Press.
+    ISBN: <a href="https://www.cambridge.org/9780521135092">978-0-521-13509-2</a>.
+  </i:bib-entry>
+</i:bibliography>
+
+
+</i:article>
