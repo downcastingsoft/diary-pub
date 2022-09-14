@@ -4,11 +4,11 @@
 
 <i:head>
   <i:author>hnagamin</i:author>
-  <i:created-at>2022-09-13 20:31:40</i:created-at>
-  <i:updated-at>2022-09-13 20:31:40</i:updated-at>
+  <i:created-at>2022-09-14 11:53:12</i:created-at>
+  <i:updated-at>2022-09-14 11:53:12</i:updated-at>
 </i:head>
 
-<i:title>べき乗根の [1/1] パデ近似</i:title>
+<i:title>累乗根の [1/1] パデ近似</i:title>
 
 <i:summary>
 <math>
@@ -195,7 +195,7 @@
 </i:p>
 
 <i:p>
-べき乗根の [1/1] パデ近似は覚えやすい形をしており，計算精度も高い．
+累乗根の [1/1] パデ近似は覚えやすい形をしており，計算精度も高い．
 この記事では，
 <math>
   <mi>x</mi>
@@ -207,17 +207,7 @@
   <mi>n</mi>
 </math>
 乗根関数の
-<math>
-  <math>
-    <mrow>
-      <mo>[</mo>
-      <mn>1</mn>
-      <mo>/</mo>
-      <mn>1</mn>
-      <mo>]</mo>
-    </mrow>
-  </math>
-</math>
+[1/1]
 パデ近似の式を導く．
 また，応用例として
 <math>
@@ -243,7 +233,10 @@
 <i:title>導出</i:title>
 
 <i:p>
-関数
+[1/1] パデ近似なので，
+分母・分子が共に1次の有理関数であって，
+そのテイラー展開が累乗根のテイラー展開と2次の項まで一致するものを求めたい．
+はじめに，関数
 <math>
   <mrow>
     <mrow>
@@ -270,7 +263,7 @@
     <mn>1</mn>
   </mrow>
 </math>
-の周りでテイラー展開する．
+の周りで展開する．
 <math>
   <mrow>
     <mi>x</mi>
@@ -379,7 +372,7 @@
     <mn>1</mn>
   </mrow>
 </math>
-の周りでテイラー展開する．
+の周りで展開する．
 先ほどと同様に
 <math>
   <mrow>
@@ -1337,14 +1330,43 @@
 を得る（相対誤差 0.22 ppm）．
 </i:p>
 
+<figure>
+  <img
+    src="https://i.gyazo.com/6b6e918db109d3d2b43c6487e1fcba0e.png"
+    alt="平方根の近似値の計算精度のグラフ" width="355"/>
+  <figcaption>
+    <math>
+      <msqrt>
+        <mn>1</mn>
+      </msqrt>
+    </math
+    >〜<math>
+      <msqrt>
+        <mn>200</mn>
+      </msqrt>
+    </math>
+    の近似値の相対誤差のグラフ．
+  </figcaption>
+</figure>
 
+<figure>
+  <img
+    src="https://i.gyazo.com/f5d01b28fd31f533dc67bc39d43e2cb8.png"
+    alt="近似の方法による計算精度の違いを表すグラフ" width="355"/>
+  <figcaption>
+    <math>
+      <mi>k</mi>
+    </math>
+    の取り方による計算精度の違い．
+  </figcaption>
+</figure>
 
 </i:section> <!-- @sid="example" -->
 
 <i:section  sid="history">
 <i:title>更新履歴</i:title>
 <ul>
-  <li>2022-09-13: 公開</li>
+  <li>2022-09-14: 公開</li>
 </ul>
 </i:section> <!-- @sid="history" -->
 

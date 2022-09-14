@@ -1,8 +1,8 @@
 ---
 kind: article
-created_at: 2022-09-13T20:31:40+09:00
-updated_at: 2022-09-13T20:31:40+09:00
-title: "べき乗根の [1/1] パデ近似"
+created_at: 2022-09-14T11:53:12+09:00
+updated_at: 2022-09-14T11:53:12+09:00
+title: "累乗根の [1/1] パデ近似"
 author: hnagamin
 excerpt: |-
   x = 1 の周りにおける n 乗根関数 f(x) = x^(1/n) の [1/1] パデ近似を求める．
