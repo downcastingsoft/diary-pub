@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-11-17 22:57:58</i:created-at>
-  <i:updated-at>2022-11-17 22:57:58</i:updated-at>
+  <i:updated-at>2022-11-17 23:10:52</i:updated-at>
 </i:head>
 
 <i:title>テラスタルを考慮した PokéRank</i:title>
@@ -391,7 +391,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 一方、『スカーレット・バイオレット』では、テラスタルによってタイプ相性とタイプ一致ボーナスが変化する。
 この情報を表現するために、グラフの辺重みの設定方法を変更する必要がある。
 先行プレイ映像 <i:cite bid="liao-2022-10-21" /> などに基づく考察 <i:cite bid="in21908312-2022-10-24"/>, <i:cite bid="viera-2022-10-28"/>
-から、次のようなシステムになるのではないかと推測されている<i:footnote fnid="terastal-spec">
+から、『スカーレット・バイオレット』のテラスタルは次のようなシステムになるのではないかと推測されている<i:footnote fid="terastal-spec">
 <a href="https://www.youtube.com/watch?v=38vMi09nQBA">Washington Post Gaming の動画</a>内でこの仕様になると明言されている訳ではなさそうだった。
 </i:footnote>。
 </i:p>
@@ -1266,7 +1266,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 全体的な傾向としてテラスタイプじめんの得点が高い。
 これは、でんき、はがねタイプの強さに起因すると考えられる。
 でんき、はがねは優秀な耐性をもつため得点が高く、それらの弱点を突けるじめんタイプの得点も高くなったと解釈できる。
-実際、タイプ数を変えて計算すると以下のことが分かる<i:footnote fnid="discussion.score.norm">
+実際、タイプ数を変えて計算すると以下のことが分かる<i:footnote fid="discussion.score.norm">
 この系統の比較を行う場合は、最大得点が 100 になるように規格化するのではなく、得点の和が 1 になるになるように規格化した方が良さそう。
 </i:footnote>。
 </i:p>
@@ -1394,7 +1394,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 <i:section  sid="history">
 <i:title>更新履歴</i:title>
 <ul>
-  <li>2022-11-17: 公開</li>
+  <li>2022-11-17: 公開、少し修正</li>
 </ul>
 </i:section> <!-- @sid="history" -->
 
