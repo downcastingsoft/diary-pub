@@ -1,0 +1,1482 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2022-11-17 22:57:58</i:created-at>
+  <i:updated-at>2022-11-17 22:57:58</i:updated-at>
+</i:head>
+
+<i:title>テラスタルを考慮した PokéRank</i:title>
+
+<i:summary>
+PokéRank は、ページランクを応用してポケモンにおける強いタイプの組合せを計算する手法である。
+この記事では、『ポケットモンスター スカーレット・バイオレット』で新たに導入されるテラスタルについて検討するための、新しい PokéRank 法の変種を提案する。
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+<i:title>はじめに</i:title>
+
+<i:p>
+『ポケットモンスター スカーレット・バイオレット』は、株式会社ポケモンより明日（2022 年 11 月 18 日）から発売されるニンテンドースイッチ向けのゲームで、
+ポケットモンスターシリーズの最新作である。
+『スカーレット・バイオレット』では、メガシンカ、Zワザ、ダイマックスに続く新たな対戦要素として「テラスタル」というシステムが導入される <i:cite bid="pokemon-2022-08-22"/>。
+テラスタルを行うと、ポケモンのタイプが（「テラスタイプ」という各ポケモンに固有のタイプへ）変化し、技のダメージなどに影響を及ぼす。
+</i:p>
+
+<i:p>
+テラスタルをうまく使うことでバトルを有利に進めることができる。
+たとえば、いわ・あくタイプのバンギラスがテラスタルしてゴーストタイプに変化することによって、相手のかくとう技は効果なしになる。
+自分のポケモンのテラスタイプはテラスタルするまで相手に分からないため意表を付くことができ、技や特性などとも組み合わせることで戦略の幅を広げることが可能である <i:cite bid="pokemon-2022-08-22"/>。
+テラスタルのシステムはこれまでのポケモンに見られないものであり、対戦環境で活躍するポケモンは今後大きく変化すると予想される。
+このため、テラスタル環境で強いポケモンについて調べるのは重要である。
+現在までに、テラスタルと相性の良いポケモンについて多くの考察が行われている
+<i:cite bid="azumabi-2022-08-14" />,
+<i:cite bid="ciufa-2022-10-18" />,
+<i:cite bid="banb-2022-11-19"/>。
+</i:p>
+
+<i:p>
+PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @masaka_programming によって提案された手法であり、
+ページランク <i:cite bid="page-et-al-1999"/> の考え方を応用してポケモンの強いタイプを計算するものである。
+ページランクを用いると、ポケモンのタイプに関する次のような性質を上手く表現することができる。
+</i:p>
+<ul>
+  <li>多くのタイプに有利（不利でない）なタイプは強い。</li>
+  <li>強い タイプに有利なタイプは強い。</li>
+  <li>強いタイプに有利な数少ないタイプは強い。</li>
+</ul>
+
+<i:p>
+この記事では、テラスタルを考慮したタイプの分析ができるように PokéRank 法を拡張し、これを用いてテラスタル環境において強いタイプの検討を行う。
+もちろんポケモンの強さはタイプのみによって決まるのではなく、技、特性、道具、育て方、バトル中の立ち回りなど様々な要素に影響されるが、
+これらの要素を捨象したときのタイプの平均的な強さは PokéRank 法によって推定できると思われる。
+</i:p>
+
+<i:p>
+はじめに、従来の PokéRank アルゴリズムからの変更点について述べる。
+『スカーレット・バイオレット』ではポケモンのタイプのシステムが変更されているため、グラフの作り方に変更が必要である。
+次に、拡張された PokéRank 法を4タイプからなる小さなモデルに対して適用し、手法の妥当性について検討する。
+その後、18タイプからなる実際のモデルに対して適用し、強いタイプの組合せを調べる。
+最後にまとめと今後の課題を述べる。
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
+
+<i:section sid="method">
+<i:title>PokéRank 法のテラスタル環境への拡張</i:title>
+
+<i:section sid="method.node">
+<i:title>グラフ頂点の設定</i:title>
+
+<i:p>
+通常の PokéRank 法では、グラフの頂点は 19*18/2=171 種類のタイプを表現する。
+『スカーレット・バイオレット』では、これら元のタイプに加えて、各ポケモンが固有のテラスタイプをもつ。
+この情報を表現するために、グラフ頂点の設定方法を変更する必要がある。
+簡単のため、今回は次の仮定のもとで計算を行う。
+</i:p>
+
+<p  style="border: thin solid; padding: 10px;">
+タイプの定常的な強さは、バトルのどのタイミングでテラスタルするかによらず、<br/>
+(1) 元のタイプ、および<br/>
+(2) テラスタルするかどうか、テラスタルを行う場合テラスタイプは何か<br/>
+によって決まる。
+</p>
+
+<i:p>
+このとき、各頂点には元のタイプ（171 種類）とテラスタルの種類（1+18 通り）の情報を持たせればよい。
+グラフの頂点数は 171+171*18=3249 である。
+</i:p>
+
+<i:p>
+実際のバトルではテラスタルのタイミングは非常に重要と思われる。より現実的な仮定のもとで計算を行うのは今後の課題である。
+</i:p>
+
+</i:section> <!-- @sid="method.node" -->
+
+<i:section sid="method.edge">
+<i:title>辺重みの設定</i:title>
+
+<i:p>
+通常の PokéRank 法では、グラフの辺の重み
+<math><mi>h</mi></math>
+は互いのタイプの「複合ダメージ倍率」の大小関係によって決められる。
+具体的には次の式によって定められる。
+<math display="block">
+<mrow>
+  <mrow>
+    <mi>h</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mrow>
+        <mo>(</mo>
+        <msub>
+          <mi>s</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>s</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>)</mo>
+      </mrow>
+      <mo>,</mo>
+      <mrow>
+        <mo>(</mo>
+        <msub>
+          <mi>t</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>t</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>)</mo>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <msub>
+      <mo>log</mo>
+      <mn>2</mn>
+    </msub>
+    <mo>&#x2061;</mo>
+    <mfrac>
+      <mrow>
+        <mo>max</mo>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mi>g</mi>
+            <mo>&#x2061;</mo>
+            <mrow>
+              <mo>(</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mn>1</mn>
+                </msub>
+                <mo>,</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mn>2</mn>
+                </msub>
+                <mo>)</mo>
+              </mrow>
+              <mo>,</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mn>1</mn>
+                </msub>
+                <mo>,</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mn>2</mn>
+                </msub>
+                <mo>)</mo>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+          <mo>,</mo>
+          <mrow>
+            <mn>1</mn>
+            <mo>/</mo>
+            <mn>8</mn>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+      <mrow>
+        <mo>max</mo>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mi>g</mi>
+            <mo>&#x2061;</mo>
+            <mrow>
+              <mo>(</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mn>1</mn>
+                </msub>
+                <mo>,</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mn>2</mn>
+                </msub>
+                <mo>)</mo>
+              </mrow>
+              <mo>,</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mn>1</mn>
+                </msub>
+                <mo>,</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mn>2</mn>
+                </msub>
+                <mo>)</mo>
+              </mrow>
+              <mo>)</mo>
+            </mrow>
+          </mrow>
+          <mo>,</mo>
+          <mrow>
+            <mn>1</mn>
+            <mo>/</mo>
+            <mn>8</mn>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </mfrac>
+  </mrow>
+</mrow>
+</math>
+<math display="block">
+<mrow>
+  <mrow>
+    <mi>g</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mrow>
+        <mo>(</mo>
+        <msub>
+          <mi>s</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>s</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>)</mo>
+      </mrow>
+      <mo>,</mo>
+      <mrow>
+        <mo>(</mo>
+        <msub>
+          <mi>t</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>t</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>)</mo>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <mo>max</mo>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mrow>
+        <mi>f</mi>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mi>s</mi>
+            <mn>1</mn>
+          </msub>
+          <mo>,</mo>
+          <mrow>
+            <mo>(</mo>
+            <msub>
+              <mi>t</mi>
+              <mn>1</mn>
+            </msub>
+            <mo>,</mo>
+            <msub>
+              <mi>t</mi>
+              <mn>2</mn>
+            </msub>
+            <mo>)</mo>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+      <mo>,</mo>
+      <mrow>
+        <mi>f</mi>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mi>s</mi>
+            <mn>2</mn>
+          </msub>
+          <mo>,</mo>
+          <mrow>
+            <mo>(</mo>
+            <msub>
+              <mi>t</mi>
+              <mn>1</mn>
+            </msub>
+            <mo>,</mo>
+            <msub>
+              <mi>t</mi>
+              <mn>2</mn>
+            </msub>
+            <mo>)</mo>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+</mrow>
+</math>
+ここで、
+<math>
+<mrow>
+  <mo>(</mo>
+  <msub>
+    <mi>s</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>s</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>)</mo>
+</mrow>
+</math>,
+<math>
+<mrow>
+  <mo>(</mo>
+  <msub>
+    <mi>t</mi>
+    <mn>1</mn>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>t</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>)</mo>
+</mrow>
+</math>
+はそれぞれ自分・相手のタイプを表す。
+また、
+<math><mi>f</mi></math>
+は攻撃する際のダメージ倍率を表す。
+一方、『スカーレット・バイオレット』では、テラスタルによってタイプ相性とタイプ一致ボーナスが変化する。
+この情報を表現するために、グラフの辺重みの設定方法を変更する必要がある。
+先行プレイ映像 <i:cite bid="liao-2022-10-21" /> などに基づく考察 <i:cite bid="in21908312-2022-10-24"/>, <i:cite bid="viera-2022-10-28"/>
+から、次のようなシステムになるのではないかと推測されている<i:footnote fnid="terastal-spec">
+<a href="https://www.youtube.com/watch?v=38vMi09nQBA">Washington Post Gaming の動画</a>内でこの仕様になると明言されている訳ではなさそうだった。
+</i:footnote>。
+</i:p>
+
+<ul>
+  <li>
+    テラスタルしたポケモンがテラスタイプと同じタイプの技をくり出した場合、タイプ一致ボーナス x1.5 が付く。<br/>
+    ただし、テラスタイプと元のタイプが一致している場合は、タイプ一致ボーナスは x1.5 ではなく x2 になる。
+  </li>
+  <li>
+    テラスタルしたポケモンが（テラスタイプと異なる）元のタイプと同じタイプの技をくり出した場合、
+    タイプ一致ボーナス x1.5 が付く。
+  </li>
+  <li>
+    テラスタルしたポケモンがダメージを受ける場合は、元のタイプではなくテラスタイプを用いてダメージ計算を行う。
+  </li>
+</ul>
+
+<i:p>
+これらの仕様を考慮するために、今回は素朴な拡張として辺重みの計算式を次のように修正する。
+<math display="block">
+<mrow>
+  <mrow>
+    <mi>h</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mrow>
+        <mo>(</mo>
+        <msub>
+          <mi>s</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>s</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>s</mi>
+          <mi>x</mi>
+        </msub>
+        <mo>)</mo>
+      </mrow>
+      <mo>,</mo>
+      <mrow>
+        <mo>(</mo>
+        <msub>
+          <mi>t</mi>
+          <mn>1</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>t</mi>
+          <mn>2</mn>
+        </msub>
+        <mo>,</mo>
+        <msub>
+          <mi>t</mi>
+          <mi>x</mi>
+        </msub>
+        <mo>)</mo>
+      </mrow>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mrow>
+    <msub>
+      <mo>log</mo>
+      <mn>2</mn>
+    </msub>
+    <mo>&#x2061;</mo>
+    <mfrac>
+      <mrow>
+        <mo>max</mo>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mrow>
+              <mi>f</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mn>1</mn>
+                </msub>
+                <mo>,</mo>
+                <mi>T</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+            <mo>&#xD7;</mo>
+            <mrow>
+              <mi>b</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mn>1</mn>
+                </msub>
+                <mo>,</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mi>x</mi>
+                </msub>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+          </mrow>
+          <mo>,</mo>
+          <mrow>
+            <mrow>
+              <mi>f</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mn>2</mn>
+                </msub>
+                <mo>,</mo>
+                <mi>T</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+            <mo>&#xD7;</mo>
+            <mrow>
+              <mi>b</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mn>2</mn>
+                </msub>
+                <mo>,</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mi>x</mi>
+                </msub>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+          </mrow>
+          <mo>,</mo>
+          <mrow>
+            <mrow>
+              <mi>f</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>s</mi>
+                  <mi>x</mi>
+                </msub>
+                <mo>,</mo>
+                <mi>T</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+            <mo>&#xD7;</mo>
+            <mn>1.5</mn>
+          </mrow>
+          <mo>,</mo>
+          <mrow>
+            <mn>1.5</mn>
+            <mo>/</mo>
+            <mn>8</mn>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+      <mrow>
+        <mo>max</mo>
+        <mo>&#x2061;</mo>
+        <mrow>
+          <mo>(</mo>
+          <mrow>
+            <mrow>
+              <mi>f</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mn>1</mn>
+                </msub>
+                <mo>,</mo>
+                <mi>S</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+            <mo>&#xD7;</mo>
+            <mrow>
+              <mi>b</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mn>1</mn>
+                </msub>
+                <mo>,</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mi>x</mi>
+                </msub>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+          </mrow>
+          <mo>,</mo>
+          <mrow>
+            <mrow>
+              <mi>f</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mn>2</mn>
+                </msub>
+                <mo>,</mo>
+                <mi>S</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+            <mo>&#xD7;</mo>
+            <mrow>
+              <mi>b</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mn>2</mn>
+                </msub>
+                <mo>,</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mi>x</mi>
+                </msub>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+          </mrow>
+          <mo>,</mo>
+          <mrow>
+            <mrow>
+              <mi>f</mi>
+              <mo>&#x2061;</mo>
+              <mrow>
+                <mo>(</mo>
+                <msub>
+                  <mi>t</mi>
+                  <mi>x</mi>
+                </msub>
+                <mo>,</mo>
+                <mi>S</mi>
+                <mo>)</mo>
+              </mrow>
+            </mrow>
+            <mo>&#xD7;</mo>
+            <mn>1.5</mn>
+          </mrow>
+          <mo>,</mo>
+          <mrow>
+            <mn>1.5</mn>
+            <mo>/</mo>
+            <mn>8</mn>
+          </mrow>
+          <mo>)</mo>
+        </mrow>
+      </mrow>
+    </mfrac>
+  </mrow>
+</mrow>
+</math>
+<math display="block">
+<mrow>
+  <mrow>
+    <mi>b</mi>
+    <mo>&#x2061;</mo>
+    <mrow>
+      <mo>(</mo>
+      <mi>s</mi>
+      <mo>,</mo>
+      <msub>
+        <mi>s</mi>
+        <mi>x</mi>
+      </msub>
+      <mo>)</mo>
+    </mrow>
+  </mrow>
+  <mo>=</mo>
+  <mo>{</mo>
+  <mtable>
+    <mtr>
+      <mtd>
+        <mn>1.5</mn>
+      </mtd>
+      <mtd>
+        <mrow>
+          <mi>s</mi>
+          <mo>&#x2260;</mo>
+          <msub>
+            <mi>s</mi>
+            <mi>x</mi>
+          </msub>
+        </mrow>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd>
+        <mn>2</mn>
+      </mtd>
+      <mtd>
+        <mrow>
+          <mi>s</mi>
+          <mo>=</mo>
+          <msub>
+            <mi>s</mi>
+            <mi>x</mi>
+          </msub>
+        </mrow>
+      </mtd>
+    </mtr>
+  </mtable>
+</mrow>
+</math>
+<math display="block">
+<mrow>
+  <mi>S</mi>
+  <mo>=</mo>
+  <mo>{</mo>
+  <mtable>
+    <mtr>
+      <mtd>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mi>s</mi>
+            <mi>x</mi>
+          </msub>
+          <mo>,</mo>
+          <mo>-</mo>
+          <mo>)</mo>
+        </mrow>
+      </mtd>
+      <mtd>
+        <mtext>自分がテラスタルを行う場合</mtext>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mi>s</mi>
+            <mn>1</mn>
+          </msub>
+          <mo>,</mo>
+          <msub>
+            <mi>s</mi>
+            <mn>2</mn>
+          </msub>
+          <mo>)</mo>
+        </mrow>
+      </mtd>
+      <mtd>
+        <mtext>自分がテラスタルを行わない場合</mtext>
+      </mtd>
+    </mtr>
+  </mtable>
+</mrow>
+</math>
+<math display="block">
+<mrow>
+  <mi>T</mi>
+  <mo>=</mo>
+  <mo>{</mo>
+  <mtable>
+    <mtr>
+      <mtd>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mi>t</mi>
+            <mi>x</mi>
+          </msub>
+          <mo>,</mo>
+          <mo>-</mo>
+          <mo>)</mo>
+        </mrow>
+      </mtd>
+      <mtd>
+        <mtext>相手がテラスタルを行う場合</mtext>
+      </mtd>
+    </mtr>
+    <mtr>
+      <mtd>
+        <mrow>
+          <mo>(</mo>
+          <msub>
+            <mi>t</mi>
+            <mn>1</mn>
+          </msub>
+          <mo>,</mo>
+          <msub>
+            <mi>t</mi>
+            <mn>2</mn>
+          </msub>
+          <mo>)</mo>
+        </mrow>
+      </mtd>
+      <mtd>
+        <mtext>相手がテラスタルを行わない場合</mtext>
+      </mtd>
+    </mtr>
+  </mtable>
+</mrow>
+</math>
+ここで
+<math><mrow>
+  <msub>
+    <mi>s</mi>
+    <mi>x</mi>
+  </msub>
+  <mo>,</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>x</mi>
+  </msub>
+</mrow>
+</math>
+は自分と相手のテラスタイプを表す。
+</i:p>
+
+</i:section> <!-- @sid="method.edge" -->
+
+</i:section> <!-- @sid="method" -->
+
+<i:section sid="result">
+<i:title>計算結果</i:title>
+
+<i:section sid="result.fwge">
+<i:title>ほのお、みず、じめん、でんきの4タイプのみを考慮する場合</i:title>
+
+<i:p>
+手法の妥当性を確かめるために、ほのお、みず、じめん、でんきの 4 タイプだけからなる小さいモデルで予備的な実験を行う。
+この場合グラフ頂点数は 5*4/2*5=50 である。
+みず、じめん、でんきは三竦みをなし、一方ほのおタイプはみず、じめんに不利である。
+よって、「みず > じめん ≒ でんき >> ほのお」という序列ができると予想される。
+また、みず・じめんタイプは上記 4 タイプの中に弱点を持たないため得点が高くなると予想される。
+</i:p>
+
+<i:p>
+50 頂点のグラフから Google 行列を構成し、
+各タイプの得点を計算した（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/wgef/pokerank.csv">pokerank.csv</a>）。
+得点の高かった上位 10 タイプを以下の表に示す。
+得点の最大値が 100 になるように規格化している。
+最も得点が高かったのは「みず・じめん／テラスタルしない」であり、
+その次に「みず・でんき／テラスタイプみず」（98.1 点）、
+「でんき・じめん／テラスタイプでんき」（75.3 点）、
+「みず・じめん／テラスタイプみず」（71.1 点）が続いた。
+最下位は「ほのお／テラスタルしない」（5.2 点）だった。
+</i:p>
+
+<table>
+  <thead>
+    <th>#</th>
+    <th>タイプ</th>
+    <th>テラスタイプ</th>
+    <th>得点</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>みず・じめん</td>
+      <td>（なし）</td>
+      <td>100</td>
+    </tr><tr>
+      <td>2</td>
+      <td>みず・でんき</td>
+      <td>みず</td>
+      <td>98.1</td>
+    </tr><tr>
+      <td>3</td>
+      <td>でんき・じめん</td>
+      <td>でんき</td>
+      <td>75.3</td>
+    </tr><tr>
+      <td>4</td>
+      <td>みず・じめん</td>
+      <td>みず</td>
+      <td>71.1</td>
+    </tr><tr>
+      <td>5</td>
+      <td>ほのお・みず</td>
+      <td>みず</td>
+      <td>66.4</td>
+    </tr><tr>
+      <td>6</td>
+      <td>みず</td>
+      <td>みず</td>
+      <td>66.4</td>
+    </tr><tr>
+      <td>7</td>
+      <td>みず・じめん</td>
+      <td>じめん</td>
+      <td>61.9</td>
+    </tr><tr>
+      <td>8</td>
+      <td>みず・でんき</td>
+      <td>でんき</td>
+      <td>56.1</td>
+    </tr><tr>
+      <td>9</td>
+      <td>でんき・じめん</td>
+      <td>みず</td>
+      <td>55.4</td>
+    </tr><tr>
+      <td>10</td>
+      <td>ほのお・でんき</td>
+      <td>みず</td>
+      <td>55.3</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>ほのお</td>
+      <td>（なし）</td>
+      <td>5.2</td>
+    </tr>
+  </tbody>
+</table>
+
+<i:section sid="result.fwge.avg">
+<i:title>各テラスタイプの平均点</i:title>
+
+<i:p>
+各テラスタイプごとに、元のタイプが 5*4/2 = 10 種類存在する。
+それら 10 種類の得点の平均をテラスタイプごとに計算した結果を以下の表に示す（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/wgef/ttas.csv">ttas.csv</a>）。
+「みず > でんき > じめん > （テラスタルしない） > ほのお」の順に平均点が高かった。
+ほのおテラスタイプの平均点は他のテラスタイプと比べて 10 点以上低かった。
+</i:p>
+
+<table>
+  <thead>
+    <th>テラスタイプ</th>
+    <th>平均点</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>みず</td>
+      <td>54.8</td>
+    </tr><tr>
+      <td>でんき</td>
+      <td>45.1</td>
+    </tr><tr>
+      <td>じめん</td>
+      <td>40.3</td>
+    </tr><tr>
+      <td>（なし）</td>
+      <td>25.3</td>
+    </tr><tr>
+      <td>ほのお</td>
+      <td>6.9</td>
+    </tr>
+  </tbody>
+</table>
+
+</i:section> <!-- @sid="result.fwge.avg" -->
+
+<i:section sid="result.fwge.discussion">
+<i:title>手法の妥当性の検討</i:title>
+
+<i:p>
+予想通りみず・じめんタイプが最高得点を獲得した。
+また、各テラスタイプの平均点でも予想通り「みず > じめん > でんき > ほのお」という序列が見られた。
+よって、今回のグラフの設定を用いて、テラスタル環境における各タイプの定常的な強さをある程度うまく表現できると期待される。
+</i:p>
+
+<i:p>
+各テラスタイプの平均点では、みず、じめん、でんきの得点が 40〜50 点台に固まっており、
+一方ほのおの得点は 10 点を下回っていた。
+得点は単に順序を決めるのみならず、タイプの定量的な強さをある程度反映していると考えられる。
+</i:p>
+
+</i:section> <!-- @sid="result.fwge.discussion" -->
+
+</i:section> <!-- @sid="result.fwge" -->
+
+<i:section sid="result.18">
+<i:title>全 18 タイプを考慮する場合</i:title>
+
+<i:p>
+前節の結果を踏まえて、この節では全 18 タイプを考慮した計算を行う。
+この場合グラフ頂点数は 19*18/2*19=3249 である。
+</i:p>
+
+<i:p>
+得点の高かった上位 30 タイプを以下の表に示す（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/18/pokerank.csv">pokerank.csv</a>）。
+最も得点が高かったのは「でんき・じめん／テラスタイプでんき」であり、
+その次に「こおり・じめん／テラスタイプじめん」（99.0 点）、
+「じめん・いわ／テラスタイプじめん」（95.53 点）、
+「じめん・フェアリー／テラスタイプじめん」（95.51 点）が続いた。
+なお、じめん・フェアリータイプのポケモンは前作『ポケットモンスター ソード・シールド』までには登場していない。
+最下位は「ノーマル／テラスタルしない」（7.0 点）だった。
+</i:p>
+
+<table>
+  <thead>
+    <th>#</th>
+    <th>タイプ</th>
+    <th>テラスタイプ</th>
+    <th>得点</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>でんき・じめん</td>
+      <td>でんき</td>
+      <td>100</td>
+    </tr><tr>
+      <td>2</td>
+      <td>こおり・じめん</td>
+      <td>じめん</td>
+      <td>99.0</td>
+    </tr><tr>
+      <td>3</td>
+      <td>じめん・いわ</td>
+      <td>じめん</td>
+      <td>95.5</td>
+    </tr><tr>
+      <td>4</td>
+      <td>じめん・フェアリー</td>
+      <td>じめん</td>
+      <td>95.5</td>
+    </tr><tr>
+      <td>5</td>
+      <td>かくとう・じめん</td>
+      <td>じめん</td>
+      <td>94.6</td>
+    </tr><tr>
+      <td>6</td>
+      <td>じめん・ひこう</td>
+      <td>じめん</td>
+      <td>94.3</td>
+    </tr><tr>
+      <td>7</td>
+      <td>じめん・ゴースト</td>
+      <td>じめん</td>
+      <td>94.2</td>
+    </tr><tr>
+      <td>8</td>
+      <td>じめん・あく</td>
+      <td>じめん</td>
+      <td>94.2</td>
+    </tr><tr>
+      <td>9</td>
+      <td>じめん・はがね</td>
+      <td>はがね</td>
+      <td>93.4</td>
+    </tr><tr>
+      <td>10</td>
+      <td>じめん・むし</td>
+      <td>じめん</td>
+      <td>91.7</td>
+    </tr><tr>
+      <td>11</td>
+      <td>じめん・フェアリー</td>
+      <td>フェアリー</td>
+      <td>91.3</td>
+    </tr><tr>
+      <td>12</td>
+      <td>じめん・はがね</td>
+      <td>じめん</td>
+      <td>91.3</td>
+    </tr><tr>
+      <td>13</td>
+      <td>みず・じめん</td>
+      <td>じめん</td>
+      <td>91.3</td>
+    </tr><tr>
+      <td>14</td>
+      <td>どく・じめん</td>
+      <td>じめん</td>
+      <td>91.2</td>
+    </tr><tr>
+      <td>15</td>
+      <td>くさ・じめん</td>
+      <td>じめん</td>
+      <td>91.2</td>
+    </tr><tr>
+      <td>16</td>
+      <td>でんき・じめん</td>
+      <td>じめん</td>
+      <td>91.1</td>
+    </tr><tr>
+      <td>17</td>
+      <td>ほのお・じめん</td>
+      <td>じめん</td>
+      <td>90.6</td>
+    </tr><tr>
+      <td>18</td>
+      <td>かくとう・じめん</td>
+      <td>かくとう</td>
+      <td>90.3</td>
+    </tr><tr>
+      <td>19</td>
+      <td>かくとう・じめん</td>
+      <td>でんき</td>
+      <td>90.2</td>
+    </tr><tr>
+      <td>20</td>
+      <td>じめん・エスパー</td>
+      <td>じめん</td>
+      <td>89.8</td>
+    </tr><tr>
+      <td>21</td>
+      <td>いわ・フェアリー</td>
+      <td>フェアリー</td>
+      <td>89.1</td>
+    </tr><tr>
+      <td>22</td>
+      <td>じめん・ドラゴン</td>
+      <td>じめん</td>
+      <td>88.6</td>
+    </tr><tr>
+      <td>23</td>
+      <td>じめん・フェアリー</td>
+      <td>でんき</td>
+      <td>88.4</td>
+    </tr><tr>
+      <td>24</td>
+      <td>みず・フェアリー</td>
+      <td>フェアリー</td>
+      <td>86.9</td>
+    </tr><tr>
+      <td>25</td>
+      <td>くさ・フェアリー</td>
+      <td>フェアリー</td>
+      <td>86.5</td>
+    </tr><tr>
+      <td>26</td>
+      <td>じめん・ひこう</td>
+      <td>でんき</td>
+      <td>86.5</td>
+    </tr><tr>
+      <td>27</td>
+      <td>どく・じめん</td>
+      <td>どく</td>
+      <td>86.0</td>
+    </tr><tr>
+      <td>28</td>
+      <td>ノーマル・じめん</td>
+      <td>じめん</td>
+      <td>85.9</td>
+    </tr><tr>
+      <td>29</td>
+      <td>じめん</td>
+      <td>じめん</td>
+      <td>85.9</td>
+    </tr><tr>
+      <td>30</td>
+      <td>みず・かくとう</td>
+      <td>みず</td>
+      <td>85.9</td>
+    </tr>
+    <tr>
+      <td>3249</td>
+      <td>ノーマル</td>
+      <td>（なし）</td>
+      <td>7.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<i:section sid="result.18.avg">
+<i:title>各テラスタイプの平均点</i:title>
+
+<i:p>
+各テラスタイプごとに、元のタイプが 19*18/2=171 種類存在する。
+それら 171 種類の得点の平均をテラスタイプごとに計算した結果を以下の表に示す（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/18/ttas.csv">ttas.csv</a>）。
+最も平均点の高いテラスタイプはじめん（63.8 点）であり、その次にはがね（61.1 点）、でんき（55.8 点）、かくとう（55.7 点）が続いた。
+テラスタルしないポケモンの平均点は 35.8 点だった。
+唯一テラスタイプいわがこれを下回った（31.4 点）。
+</i:p>
+
+<table>
+  <thead>
+    <th>テラスタイプ</th>
+    <th>平均点</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>じめん</td>
+      <td>63.8</td>
+    </tr><tr>
+      <td>はがね</td>
+      <td>61.1</td>
+    </tr><tr>
+      <td>でんき</td>
+      <td>55.8</td>
+    </tr><tr>
+      <td>かくとう</td>
+      <td>55.7</td>
+    </tr><tr>
+      <td>フェアリー</td>
+      <td>55.7</td>
+    </tr><tr>
+      <td>みず</td>
+      <td>55.1</td>
+    </tr><tr>
+      <td>どく</td>
+      <td>47.8</td>
+    </tr><tr>
+      <td>ほのお</td>
+      <td>47.3</td>
+    </tr><tr>
+      <td>ひこう</td>
+      <td>45.9</td>
+    </tr><tr>
+      <td>ゴースト</td>
+      <td>45.7</td>
+    </tr><tr>
+      <td>エスパー</td>
+      <td>44.6</td>
+    </tr><tr>
+      <td>あく</td>
+      <td>44.1</td>
+    </tr><tr>
+      <td>ノーマル</td>
+      <td>43.3</td>
+    </tr><tr>
+      <td>むし</td>
+      <td>42.1</td>
+    </tr><tr>
+      <td>こおり</td>
+      <td>38.9</td>
+    </tr><tr>
+      <td>くさ</td>
+      <td>38.6</td>
+    </tr><tr>
+      <td>ドラゴン</td>
+      <td>37.1</td>
+    </tr><tr>
+      <td>（なし）</td>
+      <td>35.8</td>
+    </tr><tr>
+      <td>いわ</td>
+      <td>31.4</td>
+    </tr>
+  </tbody>
+</table>
+
+</i:section> <!-- @sid="result.18.avg" -->
+
+</i:section> <!-- @sid="result.18" -->
+
+</i:section> <!-- @sid="result" -->
+
+<i:section sid="discussion">
+<i:title>考察</i:title>
+
+<i:p>
+全体的な傾向としてテラスタイプじめんの得点が高い。
+これは、でんき、はがねタイプの強さに起因すると考えられる。
+でんき、はがねは優秀な耐性をもつため得点が高く、それらの弱点を突けるじめんタイプの得点も高くなったと解釈できる。
+実際、タイプ数を変えて計算すると以下のことが分かる<i:footnote fnid="discussion.score.norm">
+この系統の比較を行う場合は、最大得点が 100 になるように規格化するのではなく、得点の和が 1 になるになるように規格化した方が良さそう。
+</i:footnote>。
+</i:p>
+<ul>
+  <li>でんきタイプを除いた 17 タイプを使って計算するとテラスタイプじめんの平均点は 49.0 点に低下する。</li>
+  <li>はがねタイプを除いた 17 タイプを使って計算するとテラスタイプじめんの平均点は 58.2 点に低下する。</li>
+</ul>
+
+<i:p>
+でんき、じめん、はがねタイプは元々強いタイプであるため、実際のテラスタル環境でも活躍しそうである。
+ただし、今回の計算ではふゆうやふうせんを考慮に入れていないため、じめんタイプの強さが過大評価されている点に注意が必要である。
+</i:p>
+
+<i:p>
+今回の計算で高い得点を獲得したタイプのポケモンを以下に示す。
+マンムー、ドサイドン、ランドロス、ドリュウズなどは無難に強そうな感じがする。
+</i:p>
+
+<ul>
+  <li>でんき・じめん／テラスタイプでんき
+    <ul>
+      <li>マッギョ</li>
+    </ul>
+  </li>
+  <li>こおり・じめん／テラスタイプじめん
+    <ul>
+      <li>ウリムー</li>
+      <li>イノムー</li>
+      <li>マンムー</li>
+    </ul>
+  </li>
+  <li>じめん・いわ／テラスタイプじめん
+    <ul>
+      <li>イワーク</li>
+      <li>サイホーン</li>
+      <li>サイドン</li>
+      <li>ヨーギラス</li>
+      <li>サナギラス</li>
+      <li>ドサイドン</li>
+    </ul>
+  </li>
+  <li>じめん・ひこう／テラスタイプじめん
+    <ul>
+      <li>ランドロス</li>
+    </ul>
+  </li>
+  <li>じめん・ゴースト／テラスタイプじめん
+    <ul>
+      <li>デスマス（ガラルのすがた）</li>
+      <li>ゴビット</li>
+      <li>ゴルーグ</li>
+      <li>スナバァ</li>
+      <li>シロデスナ</li>
+      <li>デスバーン</li>
+    </ul>
+  </li>
+  <li>じめん・あく／テラスタイプじめん
+    <ul>
+      <li>メグロコ</li>
+      <li>ワルビル</li>
+      <li>ワルビアル</li>
+    </ul>
+  </li>
+  <li>じめん・はがね／テラスタイプじめん
+    <ul>
+      <li>ディグダ（アローラのすがた）</li>
+      <li>ダグトリオ（アローラのすがた）</li>
+      <li>ハガネール</li>
+      <li>ドリュウズ</li>
+      <li>マッギョ（ガラルのすがた）</li>
+    </ul>
+  </li>
+</ul>
+
+<i:p>
+テラスタイプいわは他のテラスタイプに比べて飛び抜けて得点が低い。
+これは、相性不利のじめん、はがねタイプが上位にいることが原因と考えられる。
+</i:p>
+
+</i:section> <!-- @sid="discussion" -->
+
+<i:section sid="future-work">
+<i:title>まとめと今後の課題</i:title>
+
+<i:p>
+この記事では PokéRank 法を拡張し、『スカーレット・バイオレット』のテラスタル現象を考慮したタイプの強さの分析を行った。
+テラスタイプじめん、でんき、はがねは平均的に高い得点を記録した。
+これらのテラスタイプは実際の対戦環境でも活躍しそうである。
+拡張された PokéRank 法は、タイプの定常的な強さをある程度うまく表現できると期待される。
+</i:p>
+
+<i:p>
+ところで、この記事を書くために調べ物をしているところ数時間前に先行研究が出ていたことを発見した <i:cite bid="yb3-2022-11-17"/>。
+上位のタイプも同じなので手法としては全く同一のものだと思う。
+この記事ではタイプ数を変えたときの検証も行っているのでどうか許してほしい。
+</i:p>
+
+<i:p>
+以下に今後の課題を述べる。
+</i:p>
+
+<ul>
+  <li>テラスタルの動的な性質を考慮した分析。<br/>
+    問題を簡単にするために、今回はテラスタルのタイミングを考慮しないで計算を行った。
+    しかしこの方法では、バトル中に柔軟にタイプを変化できるというテラスタルの動的な性質を考慮できていない。
+    そのため、たとえば「いわ・あく／テラスタイプゴースト」（36.6 点）、「みず・ひこう／テラスタイプじめん」（63.1 点）などが過小評価されていると思われる。
+    辺重みの設定方法を工夫したり、非斉時的過程を導入したりすると、より現実的な分析ができるかもしれない。
+  </li>
+  <li>パルデア図鑑の反映。<br/>
+    この記事では、171 種類のタイプがすべて存在するという仮定のもとで計算を行った。
+    その結果、じめん・フェアリーという現状存在しない複合タイプが上位に来てしまった。
+    また、全てのポケモンがテラスタル可能という仮定で計算しているが、この仮定が成り立つかは疑わしい。
+    たとえば、ヌケニン（むし・ゴースト）がでんきタイプにテラスタルできるのかは不明である <i:cite bid="viera-2022-10-30"/>。
+    パルデア地方に存在するタイプのみを使って計算するのは今後の課題である。
+  </li>
+  <li>特性や道具を考慮した分析。<br/>
+    今回は純粋にタイプ相性のみを考慮し、ダメージを変化・無効化させる特性や道具は考慮しなかった。
+    しかし、実際のバトルではこれらも大事な要素である。
+    特に、ふゆうを考慮した計算を行うのは、テラスタイプじめんのより現実的な評価を行うために重要なことと思われる。
+  </li>
+</ul>
+
+</i:section>
+
+<i:section  sid="history">
+<i:title>更新履歴</i:title>
+<ul>
+  <li>2022-11-17: 公開</li>
+</ul>
+</i:section> <!-- @sid="history" -->
+
+</i:body>
+
+
+<i:bibliography>
+
+  <i:bib-entry bid="pokemon-2022-08-22" key="1">
+    株式会社ポケモン (2022 年 8 月 22 日).
+    「<a href="https://www.pokemon.co.jp/ex/sv/ja/battle/220822_02/"
+    >「テラスタル」をバトルで使いこなそう！</a>」,
+    『ポケットモンスター スカーレット・バイオレット』公式サイト.
+  </i:bib-entry>
+
+  <i:bib-entry bid="azumabi-2022-08-14" key="2">
+    アズマビ (2022 年 8 月 14 日).
+    「<a href="https://note.com/azumabi/n/n3c98c35d1de4">【ポケモンSV】テラスタル考察 </a>」,
+    note.
+  </i:bib-entry>
+
+  <i:bib-entry bid="ciufa-2022-10-18" key="3">
+    しゅふぁ (2022 年 10 月 6 日).
+    「<a href="https://app-date.net/terastal/">【ポケモンSV】テラスタルの仕様や相性の良いポケモン考察してみた 【めざパ再び？】</a>」,
+    クレイジーポケモンメディア†APPDATE†.
+  </i:bib-entry>
+
+  <i:bib-entry bid="banb-2022-11-19" key="4">
+    バンビー (2022 年 11 月 19 日).
+    「<a href="https://www.youtube.com/watch?v=GTqRBfZ54Oo">【天才？】考察レベルが高すぎる「視聴者考案の最強テラスタル」を紹介！</a>」,
+    YouTube.
+  </i:bib-entry>
+
+  <i:bib-entry bid="masaka-programming-2022" key="5">
+    @masaka_programming (2022 年 2 月 6 日).
+    「<a href="https://qiita.com/masaka_programming/items/503eaa2c1fa776dfdb19"
+    >ポケモンの最強タイプを全力で考える【グラフ理論】</a>」,
+    Qiita.
+  </i:bib-entry>
+
+  <i:bib-entry bid="page-et-al-1999" key="6">
+    Page, Lawrence and Brin, Sergey and Motwani, Rajeev and Winograd, Terry (1999).
+    <i:italic>The PageRank Citation Ranking: Bringing Order to the Web</i:italic>.
+    Technical Report.
+    Stanford InfoLab. <i:url href="http://ilpubs.stanford.edu/422/"/>
+  </i:bib-entry>
+
+  <i:bib-entry bid="liao-2022-10-21" key="7">
+  Liao, Shannon (2022 年 10 月 21 日).
+  <a href="https://www.washingtonpost.com/video-games/2022/10/21/pokemon-scarlet-hands-on-impressions/"
+  ><i:italic>‘Pokémon Scarlet’ offers a new twist on the franchise: Freak sandwiches</i:italic></a>.
+  Washington Post.
+  </i:bib-entry>
+
+  <i:bib-entry bid="in21908312-2022-10-24" key="8">
+    たなかずき (2022 年 10 月 24 日).
+    「<a href="https://twitter.com/in21908312/status/1584465787347423234"
+    >テラスタルの仕様が海外の先行プレイで判明したらしいのでそれをまとめた情報をペイントツールでまとめてみた</a>」,
+    Twitter.
+  </i:bib-entry>
+
+  <i:bib-entry bid="viera-2022-10-28" key="9">
+    ビエラ (2022 年 10 月 28 日).
+    「<a href="https://www.youtube.com/watch?v=htkuhFXP5NQ"
+    >【ポケモン対戦がヤバいことに...泣】海外の先行プレイで新たに判明したテラスタルの仕様がエグすぎたので徹底解説します【ポケモンSV ビエラ スカーレット・バイオレット】</a>」,
+    YouTube.
+  </i:bib-entry>
+
+  <i:bib-entry bid="yb3-2022-11-17" key="10">
+    yb3 (2022 年 11 月 17 日).
+    「<a href="https://zenn.dev/shugo/articles/tera_type_combination">テラスタルを考慮したタイプの組み合わせの優秀さをPythonで計算する</a>」,
+    Zenn.
+  </i:bib-entry>
+
+  <i:bib-entry bid="viera-2022-10-30" key="11">
+    ビエラ (2022 年 10 月 30 日).
+    「<a href="https://www.youtube.com/watch?v=qaF42OgEshg"
+    >テラスタル×ヌケニンやばくねWWWWWとなっているそこのあなたへ</a>」,
+    YouTube.
+  </i:bib-entry>
+
+</i:bibliography>
+
+
+</i:article>
