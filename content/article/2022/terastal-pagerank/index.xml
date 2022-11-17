@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-11-17 22:57:58</i:created-at>
-  <i:updated-at>2022-11-17 23:10:52</i:updated-at>
+  <i:updated-at>2022-11-17 23:58:09</i:updated-at>
 </i:head>
 
 <i:title>テラスタルを考慮した PokéRank</i:title>
@@ -46,7 +46,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 </i:p>
 <ul>
   <li>多くのタイプに有利（不利でない）なタイプは強い。</li>
-  <li>強い タイプに有利なタイプは強い。</li>
+  <li>強いタイプに有利なタイプは強い。</li>
   <li>強いタイプに有利な数少ないタイプは強い。</li>
 </ul>
 
@@ -854,8 +854,15 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 </i:p>
 
 <i:p>
+Julia を用いてページランクを計算するプログラムを作成した（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/2c133a94bfe2a8f0167795348ba1c6033fe80edc/2022/pagerank-terastal/pokerank.jl">pokerank.jl</a>）。
 50 頂点のグラフから Google 行列を構成し、
 各タイプの得点を計算した（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/wgef/pokerank.csv">pokerank.csv</a>）。
+固有ベクトルの計算には 2.4 秒かかった<i:footnote fid="comp.eig">
+  このプログラムでは Google 行列の全固有値を計算しているが、実際には最大固有値 1 に対応する固有ベクトルだけを計算すればよいので、ここまでやらなくてよい。
+</i:footnote>。
+</i:p>
+<i:code>2.400986 seconds (1.90 M allocations: 99.549 MiB, 1.91% gc time, 99.96% compilation time)</i:code>
+<i:p>
 得点の高かった上位 10 タイプを以下の表に示す。
 得点の最大値が 100 になるように規格化している。
 最も得点が高かったのは「みず・じめん／テラスタルしない」であり、
@@ -995,8 +1002,9 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 <i:p>
 前節の結果を踏まえて、この節では全 18 タイプを考慮した計算を行う。
 この場合グラフ頂点数は 19*18/2*19=3249 である。
+固有値の計算には 33.1 秒かかった。
 </i:p>
-
+<i:code>33.080218 seconds (1.90 M allocations: 425.009 MiB, 0.72% gc time, 4.03% compilation time)</i:code>
 <i:p>
 得点の高かった上位 30 タイプを以下の表に示す（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/18/pokerank.csv">pokerank.csv</a>）。
 最も得点が高かったのは「でんき・じめん／テラスタイプでんき」であり、
@@ -1361,6 +1369,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 <i:p>
 ところで、この記事を書くために調べ物をしているところ数時間前に先行研究が出ていたことを発見した <i:cite bid="yb3-2022-11-17"/>。
 上位のタイプも同じなので手法としては全く同一のものだと思う。
+残念ながら先を越されてしまった。
 この記事ではタイプ数を変えたときの検証も行っているのでどうか許してほしい。
 </i:p>
 
@@ -1394,7 +1403,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 <i:section  sid="history">
 <i:title>更新履歴</i:title>
 <ul>
-  <li>2022-11-17: 公開、少し修正</li>
+  <li>2022-11-17: 公開、少し修正、プログラムに関する説明の追加</li>
 </ul>
 </i:section> <!-- @sid="history" -->
 
