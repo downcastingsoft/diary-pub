@@ -1,0 +1,14 @@
+---
+kind: article
+created_at: 2022-11-17T14:27:35+09:00
+updated_at: 2022-11-17T14:27:35+09:00
+title: "テラスタルを考慮した PokéRank"
+author: hnagamin
+excerpt: |-
+  PokéRank は，ページランクを応用してポケモンにおける強いタイプの組合せを計算する手法である．
+  この記事では，『ポケットモンスター スカーレット・バイオレット』で新たに導入されるテラスタルについて検討するための，新しい PokéRank 法の変種を提案する．
+
+slug: terastal-pagerank
+ogtype: article
+jsonld:
+  type: BlogPosting
