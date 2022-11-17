@@ -4,8 +4,8 @@
 
 <i:head>
   <i:author>hnagamin</i:author>
-  <i:created-at>2022-11-17 14:27:35</i:created-at>
-  <i:updated-at>2022-11-17 14:27:35</i:updated-at>
+  <i:created-at>2022-11-17 22:57:58</i:created-at>
+  <i:updated-at>2022-11-17 22:57:58</i:updated-at>
 </i:head>
 
 <i:title>テラスタルを考慮した PokéRank</i:title>
@@ -855,7 +855,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 
 <i:p>
 50 頂点のグラフから Google 行列を構成し、
-各タイプの得点を計算した。
+各タイプの得点を計算した（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/wgef/pokerank.csv">pokerank.csv</a>）。
 得点の高かった上位 10 タイプを以下の表に示す。
 得点の最大値が 100 になるように規格化している。
 最も得点が高かったのは「みず・じめん／テラスタルしない」であり、
@@ -938,7 +938,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 
 <i:p>
 各テラスタイプごとに、元のタイプが 5*4/2 = 10 種類存在する。
-それら 10 種類の得点の平均をテラスタイプごとに計算した結果を以下の表に示す。
+それら 10 種類の得点の平均をテラスタイプごとに計算した結果を以下の表に示す（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/wgef/ttas.csv">ttas.csv</a>）。
 「みず > でんき > じめん > （テラスタルしない） > ほのお」の順に平均点が高かった。
 ほのおテラスタイプの平均点は他のテラスタイプと比べて 10 点以上低かった。
 </i:p>
@@ -998,7 +998,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 </i:p>
 
 <i:p>
-得点の高かった上位 30 タイプを以下の表に示す。 
+得点の高かった上位 30 タイプを以下の表に示す（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/18/pokerank.csv">pokerank.csv</a>）。
 最も得点が高かったのは「でんき・じめん／テラスタイプでんき」であり、
 その次に「こおり・じめん／テラスタイプじめん」（99.0 点）、
 「じめん・いわ／テラスタイプじめん」（95.53 点）、
@@ -1180,7 +1180,7 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 
 <i:p>
 各テラスタイプごとに、元のタイプが 19*18/2=171 種類存在する。
-それら 171 種類の得点の平均をテラスタイプごとに計算した結果を以下の表に示す。
+それら 171 種類の得点の平均をテラスタイプごとに計算した結果を以下の表に示す（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/18/ttas.csv">ttas.csv</a>）。
 最も平均点の高いテラスタイプはじめん（63.8 点）であり、その次にはがね（61.1 点）、でんき（55.8 点）、かくとう（55.7 点）が続いた。
 テラスタルしないポケモンの平均点は 35.8 点だった。
 唯一テラスタイプいわがこれを下回った（31.4 点）。
@@ -1359,6 +1359,12 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
 </i:p>
 
 <i:p>
+ところで、この記事を書くために調べ物をしているところ数時間前に先行研究が出ていたことを発見した <i:cite bid="yb3-2022-11-17"/>。
+上位のタイプも同じなので手法としては全く同一のものだと思う。
+この記事ではタイプ数を変えたときの検証も行っているのでどうか許してほしい。
+</i:p>
+
+<i:p>
 以下に今後の課題を述べる。
 </i:p>
 
@@ -1457,7 +1463,13 @@ PokéRank 法 <i:cite bid="masaka-programming-2022"/> は 2022 年 2 月に @mas
     YouTube.
   </i:bib-entry>
 
-  <i:bib-entry bid="viera-2022-10-30" key="10">
+  <i:bib-entry bid="yb3-2022-11-17" key="10">
+    yb3 (2022 年 11 月 17 日).
+    「<a href="https://zenn.dev/shugo/articles/tera_type_combination">テラスタルを考慮したタイプの組み合わせの優秀さをPythonで計算する</a>」,
+    Zenn.
+  </i:bib-entry>
+
+  <i:bib-entry bid="viera-2022-10-30" key="11">
     ビエラ (2022 年 10 月 30 日).
     「<a href="https://www.youtube.com/watch?v=qaF42OgEshg"
     >テラスタル×ヌケニンやばくねWWWWWとなっているそこのあなたへ</a>」,
