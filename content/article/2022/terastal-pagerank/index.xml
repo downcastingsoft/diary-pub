@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-11-17 22:57:58</i:created-at>
-  <i:updated-at>2022-11-18 12:19:36</i:updated-at>
+  <i:updated-at>2022-11-18 12:24:03</i:updated-at>
 </i:head>
 
 <i:title>テラスタルを考慮した PokéRank</i:title>
@@ -859,7 +859,7 @@ Julia を用いてページランクを計算するプログラムを作成し�
 50 頂点のグラフから Google 行列を構成し、
 各タイプの得点を計算した（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/wgef/pokerank.csv">pokerank.csv</a>）。
 固有ベクトルの計算には 2.4 秒かかった<i:footnote fid="comp.eig">
-  このプログラムでは Google 行列の全固有値を計算しているが、実際には最大固有値 1 に対応する固有ベクトルだけを計算すればよいので、ここまでやらなくてよい。
+  このプログラムでは Google 行列の全固有値と固有ベクトルを計算しているが、実際には最大固有値に対応する固有ベクトルだけを計算すればよいので、ここまでやらなくてよい。
 </i:footnote>。
 </i:p>
 <i:code>2.400986 seconds (1.90 M allocations: 99.549 MiB, 1.91% gc time, 99.96% compilation time)</i:code>
@@ -948,7 +948,7 @@ Julia を用いてページランクを計算するプログラムを作成し�
 各テラスタイプごとに、元のタイプが 5*4/2 = 10 種類存在する。
 それら 10 種類の得点の平均をテラスタイプごとに計算した結果を以下の表に示す（<a href="https://github.com/1995hnagamin/sys-sandbox/blob/1dbe0f990dddaae0f1596c613710392fc12a6805/2022/pagerank-terastal/wgef/ttas.csv">ttas.csv</a>）。
 「みず > でんき > じめん > （テラスタルしない） > ほのお」の順に平均点が高かった。
-ほのおテラスタイプの平均点は他のテラスタイプと比べて 10 点以上低かった。
+テラスタイプほのおの平均点は他のテラスタイプと比べて 10 点以上低かった。
 </i:p>
 
 <table>
@@ -1003,7 +1003,7 @@ Julia を用いてページランクを計算するプログラムを作成し�
 <i:p>
 前節の結果を踏まえて、この節では全 18 タイプを考慮した計算を行う。
 この場合グラフ頂点数は 19*18/2*19=3249 である。
-固有値の計算には 33.1 秒かかった。
+固有ベクトルの計算には 33.1 秒かかった。
 </i:p>
 <i:code>33.080218 seconds (1.90 M allocations: 425.009 MiB, 0.72% gc time, 4.03% compilation time)</i:code>
 <i:p>
