@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-11-17 22:57:58</i:created-at>
-  <i:updated-at>2022-11-18 12:24:03</i:updated-at>
+  <i:updated-at>2022-11-18 12:51:16</i:updated-at>
 </i:head>
 
 <i:title>テラスタルを考慮した PokéRank</i:title>
@@ -1368,7 +1368,7 @@ Julia を用いてページランクを計算するプログラムを作成し�
 </i:p>
 
 <i:p>
-ところで、この記事を書くために調べ物をしていたところ数時間前に全く同じことを行っている記事が出ていたことを発見した <i:cite bid="yb3-2022-11-17"/>。
+ところで、この記事を書くために調べ物をしていたところ数時間前に全く同じことを行っている記事が出ていたことを発見した <i:cite bid="yb3-2022 年 11 月 17 日▼閲覧"/>。
 先を越されてしまい悲しい。
 この記事ではタイプ数を変えたときの検証も行っているのでどうか許してほしい。
 </i:p>
@@ -1404,7 +1404,7 @@ Julia を用いてページランクを計算するプログラムを作成し�
 <i:title>更新履歴</i:title>
 <ul>
   <li>2022-11-17: 公開、少し修正、プログラムに関する説明の追加</li>
-  <li>2022-11-18: 少し修正</li>
+  <li>2022-11-18: 少し修正、参考文献の更新</li>
 </ul>
 </i:section> <!-- @sid="history" -->
 
@@ -1415,34 +1415,42 @@ Julia を用いてページランクを計算するプログラムを作成し�
 
   <i:bib-entry bid="pokemon-2022-08-22" key="1">
     株式会社ポケモン (2022 年 8 月 22 日).
-    「<a href="https://www.pokemon.co.jp/ex/sv/ja/battle/220822_02/"
-    >「テラスタル」をバトルで使いこなそう！</a>」,
+    「「テラスタル」をバトルで使いこなそう！」.
     『ポケットモンスター スカーレット・バイオレット』公式サイト.
+    <i:url href="https://www.pokemon.co.jp/ex/sv/ja/battle/220822_02/" />,
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
   <i:bib-entry bid="azumabi-2022-08-14" key="2">
     アズマビ (2022 年 8 月 14 日).
-    「<a href="https://note.com/azumabi/n/n3c98c35d1de4">【ポケモンSV】テラスタル考察 </a>」,
+    「【ポケモンSV】テラスタル考察」.
     note.
+    <i:url href="https://note.com/azumabi/n/n3c98c35d1de4" />,
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
   <i:bib-entry bid="ciufa-2022-10-18" key="3">
     しゅふぁ (2022 年 10 月 6 日).
-    「<a href="https://app-date.net/terastal/">【ポケモンSV】テラスタルの仕様や相性の良いポケモン考察してみた 【めざパ再び？】</a>」,
+    「【ポケモンSV】テラスタルの仕様や相性の良いポケモン考察してみた 【めざパ再び？】」.
     クレイジーポケモンメディア†APPDATE†.
+    <i:url href="https://app-date.net/terastal/" />,
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
   <i:bib-entry bid="banb-2022-11-19" key="4">
     バンビー (2022 年 11 月 19 日).
-    「<a href="https://www.youtube.com/watch?v=GTqRBfZ54Oo">【天才？】考察レベルが高すぎる「視聴者考案の最強テラスタル」を紹介！</a>」,
+    「【天才？】考察レベルが高すぎる「視聴者考案の最強テラスタル」を紹介！」.
     YouTube.
+    <i:url href="https://www.youtube.com/watch?v=GTqRBfZ54Oo"/>,
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
   <i:bib-entry bid="masaka-programming-2022" key="5">
     @masaka_programming (2022 年 2 月 6 日).
-    「<a href="https://qiita.com/masaka_programming/items/503eaa2c1fa776dfdb19"
-    >ポケモンの最強タイプを全力で考える【グラフ理論】</a>」,
+    「ポケモンの最強タイプを全力で考える【グラフ理論】」.
     Qiita.
+    <i:url href="https://qiita.com/masaka_programming/items/503eaa2c1fa776dfdb19" />,
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
   <i:bib-entry bid="page-et-al-1999" key="6">
@@ -1454,36 +1462,41 @@ Julia を用いてページランクを計算するプログラムを作成し�
 
   <i:bib-entry bid="liao-2022-10-21" key="7">
   Liao, Shannon (2022 年 10 月 21 日).
-  <a href="https://www.washingtonpost.com/video-games/2022/10/21/pokemon-scarlet-hands-on-impressions/"
-  ><i:italic>‘Pokémon Scarlet’ offers a new twist on the franchise: Freak sandwiches</i:italic></a>.
-  Washington Post.
+  “‘Pokémon Scarlet’ offers a new twist on the franchise: Freak sandwiches,”
+  <i:italic>Washington Post</i:italic>.
+  <i:url href="https://www.washingtonpost.com/video-games/2022/10/21/pokemon-scarlet-hands-on-impressions/" />
   </i:bib-entry>
 
   <i:bib-entry bid="in21908312-2022-10-24" key="8">
     たなかずき (2022 年 10 月 24 日).
-    「<a href="https://twitter.com/in21908312/status/1584465787347423234"
-    >テラスタルの仕様が海外の先行プレイで判明したらしいのでそれをまとめた情報をペイントツールでまとめてみた</a>」,
+    「テラスタルの仕様が海外の先行プレイで判明したらしいのでそれをまとめた情報をペイントツールでまとめてみた」.
     Twitter.
+    <i:url href="https://twitter.com/in21908312/status/1584465787347423234" />,
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
   <i:bib-entry bid="viera-2022-10-28" key="9">
     ビエラ (2022 年 10 月 28 日).
-    「<a href="https://www.youtube.com/watch?v=htkuhFXP5NQ"
-    >【ポケモン対戦がヤバいことに...泣】海外の先行プレイで新たに判明したテラスタルの仕様がエグすぎたので徹底解説します【ポケモンSV ビエラ スカーレット・バイオレット】</a>」,
+    「【ポケモン対戦がヤバいことに...泣】海外の先行プレイで新たに判明したテラスタルの仕様がエグすぎたので徹底解説します【ポケモンSV ビエラ スカーレット・バイオレット】」.
     YouTube.
+    <i:url href="https://www.youtube.com/watch?v=htkuhFXP5NQ" />,
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
   <i:bib-entry bid="yb3-2022-11-17" key="10">
     yb3 (2022 年 11 月 17 日).
-    「<a href="https://zenn.dev/shugo/articles/tera_type_combination">テラスタルを考慮したタイプの組み合わせの優秀さをPythonで計算する</a>」,
+    「テラスタルを考慮したタイプの組み合わせの優秀さをPythonで計算する」.
     Zenn.
+    <i:url href="https://zenn.dev/shugo/articles/tera_type_combination" />,
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
   <i:bib-entry bid="viera-2022-10-30" key="11">
     ビエラ (2022 年 10 月 30 日).
-    「<a href="https://www.youtube.com/watch?v=qaF42OgEshg"
-    >テラスタル×ヌケニンやばくねWWWWWとなっているそこのあなたへ</a>」,
+    「テラスタル×ヌケニンやばくねWWWWWとなっているそこのあなたへ」.
     YouTube.
+    <i:url href="https://www.youtube.com/watch?v=qaF42OgEshg" />
+    (2022 年 11 月 17 日閲覧).
   </i:bib-entry>
 
 </i:bibliography>
