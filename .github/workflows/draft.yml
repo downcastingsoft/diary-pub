@@ -12,9 +12,6 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: bundle exec nanoc
 
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '16'
     - uses: netlify/actions/cli@master
       id: netlify-deploy
       with:
