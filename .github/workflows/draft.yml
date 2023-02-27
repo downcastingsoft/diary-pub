@@ -15,11 +15,10 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: '16'
-    - run: npx -y --verbose netlify-cli deploy --dir=output | tee netlify-deploy.txt
+    - uses: netlify/actions/cli@master
+      id: netlify-deploy
+      with:
+        args: deploy --dir=output
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-    - run: grep 'Draft URL' netlify-deploy.txt | gh pr comment -F - "${URL}"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        URL: ${{ github.event.pull_request.html_url }}
