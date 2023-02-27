@@ -8,17 +8,17 @@ jobs:
   build-diary:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.1.0
+        ruby-version: 3.2.0
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: bundle exec nanoc
 
-    - uses: actions/setup-node@v2
+    - uses: netlify/actions/cli@master
+      id: netlify-deploy
       with:
-        node-version: '14'
-    - run: npx -y --verbose netlify-cli deploy --dir=output --prod
+        args: deploy --dir=output --prod
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
