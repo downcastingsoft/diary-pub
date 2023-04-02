@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-05-28 20:06:43</i:created-at>
-  <i:updated-at>2022-05-28 20:06:43</i:updated-at>
+  <i:updated-at>2023-04-02 23:14:45</i:updated-at>
 </i:head>
 
 <i:title>本間・五十嵐・川口『数値電磁力学』(5.51)式の導出</i:title>
@@ -37,7 +37,11 @@
 <i:title>更新履歴</i:title>
 <ul>
   <li>2022-05-28: 公開</li>
+  <li>2023-04-02: Document ID を追加</li>
 </ul>
+<i:p>
+Permanent ID of this document: fa85e0a6c7ca38113d3cdab9b655bf81
+</i:p>
 </i:section> <!-- @sid="history" -->
 
 </i:body>

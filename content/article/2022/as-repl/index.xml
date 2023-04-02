@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-02-15 19:23:31</i:created-at>
-  <i:updated-at>2022-02-15 22:17:34</i:updated-at>
+  <i:updated-at>2023-04-02 23:11:06</i:updated-at>
 </i:head>
 
 <i:title>『キューネン 数学基礎論講義』の置換公理</i:title>
@@ -1051,7 +1051,11 @@ ZF<sup>−</sup> から内包公理図式を除いたもの，
 <i:title>更新履歴</i:title>
 <ul>
   <li>2022-02-15: 公開，細かい修正</li>
+  <li>2023-04-02: Document ID を追加</li>
 </ul>
+<i:p>
+Permanent ID of this document: 4ef16ce058f792bc73bc38a7045c613c
+</i:p>
 </i:section> <!-- @sid = "history" -->
 
 

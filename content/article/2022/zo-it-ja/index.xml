@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-02-27 00:52:12</i:created-at>
-  <i:updated-at>2022-03-01 14:46:42</i:updated-at>
+  <i:updated-at>2023-04-02 23:13:20</i:updated-at>
 </i:head>
 
 <i:title>Zotero におけるアイテムの種類 (item type) 日英対照表</i:title>
@@ -209,7 +209,11 @@ Zoteroでは，研究資料はその性質に応じて「学術論文」「ウ�
 <ul>
   <li>2022-02-27: 公開</li>
   <li>2022-03-01: 35を34に修正</li>
+  <li>2023-04-02: Document ID を追加</li>
 </ul>
+<i:p>
+Permanent ID of this document: 340ea482139595af91123bc75d0d7bb9
+</i:p>
 </i:section> <!-- @sid="history" -->
 
 </i:body>

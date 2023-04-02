@@ -6,7 +6,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2021-07-14 23:56:12</i:created-at>
-  <i:updated-at>2021-07-14 23:56:12</i:updated-at>
+  <i:updated-at>2023-04-02 23:06:30</i:updated-at>
 </i:head>
 
 <i:title>スタックベースの MathML 入力システム mathml-lifoinput</i:title>
@@ -379,6 +379,18 @@ mrow 3
 </i:section> <!-- @sid="react" -->
 
 </i:section> <!-- @sid="future-work" -->
+
+
+<i:section sid="history">
+<i:title>更新履歴</i:title>
+<ul>
+  <li>2021-07-14: 公開</li>
+  <li>2023-04-02: Document ID を追加</li>
+</ul>
+<i:p>
+Permanent ID of this document: 95d1b628a42e0c7fbff8eb12f3eb2a75
+</i:p>
+</i:section> <!-- @sid="history" -->
 
 </i:body>
 </i:article>

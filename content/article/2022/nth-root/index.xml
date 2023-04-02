@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-09-14 11:53:12</i:created-at>
-  <i:updated-at>2022-09-14 11:53:12</i:updated-at>
+  <i:updated-at>2023-04-02 23:18:59</i:updated-at>
 </i:head>
 
 <i:title>累乗根の [1/1] パデ近似</i:title>
@@ -1367,7 +1367,11 @@
 <i:title>更新履歴</i:title>
 <ul>
   <li>2022-09-14: 公開</li>
+  <li>2023-04-02: Document ID を追加</li>
 </ul>
+<i:p>
+Permanent ID of this document: 4a465cdb12bc8608219aff4fd20e7b4a
+</i:p>
 </i:section> <!-- @sid="history" -->
 
 </i:body>

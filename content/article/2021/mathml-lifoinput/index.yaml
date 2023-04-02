@@ -1,6 +1,6 @@
 kind: article
 created_at: 2021-07-14T23:56:12+09:00
-updated_at: 2021-07-14T23:56:12+09:00
+updated_at: 2023-04-02T23:06:30+09:00
 title:  "スタックベースの MathML 入力システム mathml-lifoinput"
 excerpt: |-
   MathML (Mathematical Markup Language) は数式を記述するためのマークアップ言語である．

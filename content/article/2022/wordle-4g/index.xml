@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-01-23 17:51:35</i:created-at>
-  <i:updated-at>2022-01-23 19:00:59</i:updated-at>
+  <i:updated-at>2023-04-02 23:09:37</i:updated-at>
 </i:head>
 
 <i:title>Wordle で最後の1文字を当てにくい単語</i:title>
@@ -286,7 +286,11 @@ Wordle で最後の1文字を当てにくい単語を列挙しました．
 <i:title sid="history">更新履歴</i:title>
 <ul>
   <li>2022-01-23: 公開，微修正</li>
+  <li>2023-04-02: Document ID を追加</li>
 </ul>
+<i:p>
+Permanent ID of this document: 7dbcb93b613046248bf2d7cb80db6721
+</i:p>
 </i:section> <!-- @sid="history" -->
 
 </i:body>
