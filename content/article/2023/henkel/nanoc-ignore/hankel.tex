@@ -1,0 +1,307 @@
+\RequirePackage{plautopatch}
+\documentclass{jlreq}
+
+\usepackage{aliascnt}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{anyfontsize}
+\usepackage[backend=biber,style=alphabetic,]{biblatex}
+\usepackage{bm,bbm}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{fontspec}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{url}
+
+% "Make sure it comes last of your loaded packages."
+\usepackage[luatex,unicode,hidelinks,pdfusetitle]{hyperref}
+\usepackage{cleveref}
+
+% biblatex
+\addbibresource{refs.bib}
+
+% cleveref
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{example}[theorem]{例}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{remark}[theorem]{注意}
+\newtheorem{conjecture}[theorem]{予想}
+
+\crefname{theorem}{定理}{定理}
+\crefname{corollary}{系}{系}
+\crefname{definition}{定義}{定義}
+\crefname{example}{例}{例}
+\crefname{lemma}{補題}{補題}
+\crefname{proposition}{命題}{命題}
+\crefname{remark}{注意}{注意}
+\crefname{conjecture}{予想}{予想}
+
+\crefname{chapter}{第}{第}
+\creflabelformat{chapter}{#2#1章#3}
+\crefname{section}{第}{第}
+\creflabelformat{section}{#2#1節#3}
+\crefname{subsection}{第}{第}
+\creflabelformat{subsection}{#2#1節#3}
+
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{equation}{}{}
+\creflabelformat{equation}{#2(#1)式#3}
+
+% enumerate
+\renewcommand{\labelenumi}{(\arabic{enumi})\quad}
+
+
+\allowdisplaybreaks
+
+\newcommand{\functype}[3]{#1\colon#2\longrightarrow#3}
+\newcommand{\mcL}{\mathcal{L}}
+\newcommand{\polynoms}[2]{#1[#2]}
+\newcommand{\realnums}{\mathbb{R}}
+\newcommand{\sequence}[3]{\sequenceparen{#1}{#2}{#3}{(}{)}} % chktex 9
+\newcommand{\sequenceparen}[5]{{#4#1#5}_{#2}^{#3}}
+\newcommand{\setbrace}[1]{\left\{#1\right\}} % chktex 21
+\newcommand{\setbuilder}[2]{\setbuilderparen{#1}{#2}{\left\lbrace}{\right\rbrace}}
+\DeclareMathOperator{\spanset}{span}
+
+
+\begin{document}
+
+\title{直交多項式系とハンケル行列式\thanks{%
+  最終更新日：{\today}．\\
+  Document ID: \texttt{d282e42033b88010fe03ed85ee395b22}.
+  URL: \url{https://www.downcastingsoft.net/7e5/diary/article/2023/05/20/hankel/}.
+  Date: 2023.05.20.
+}}
+\author{hnagamin}
+\date{2022年5月20日}
+\maketitle
+
+\begin{definition}
+  実線形写像\(\functype{\mcL}{\polynoms{\realnums}{x}}{\realnums}\)を\emph{モーメント汎関数}と呼ぶ．
+  このとき，非負整数\(n\)に対して，
+  \begin{align}
+    \mu_n &= \mcL[x^n]
+  \end{align}
+  を\(\mcL\)の\(n\)次\emph{モーメント}という．
+  列\(\sequence{\mu_n}{n=0}{\infty}\)を\(\mcL\)の\emph{モーメント列}という．
+
+  実多項式の無限列\(\sequence{p_n}{n=0}{\infty}\)が\(\mcL\)に関する\emph{直交多項式系}であるとは，
+  各整数\(n\:(\ge0)\)に対して
+  次の条件がすべて成り立つことをいう．
+  \begin{enumerate}
+    \item \(p_n\)は\(n\)次多項式．
+    \item \(\mcL[(p_n)^2]\neq0\)．
+    \item 各整数\(k\:(0\le k<n)\)に対して\(\mcL[p_n p_k]=0\)．
+    \qed
+  \end{enumerate}
+\end{definition}
+
+\begin{lemma}%
+  \label{thm:orthp.basis}
+  \(\functype{\mcL}{\polynoms{\realnums}{x}}{\realnums}\)をモーメント汎関数，
+  \(\sequence{p_n\in\polynoms{\realnums}{x}}{n=0}{\infty}\)を\(\mcL\)に関する直交多項式系とする．
+  このとき，任意の多項式\(q\in\polynoms{\realnums}{x}\)は\(p_0,p_1,\dots,p_n\:(n=\deg q)\)の線形結合で書け，
+  しかもその係数は一意的である．
+\end{lemma}
+\begin{proof}
+  \(n\)に関する帰納法で示す．
+
+  \(n=0\)のとき，
+  \(\mcL[p_0^2]\neq0\)に注意して\(v_0=q/p_0\)とおくと\(q=v_0 p_0\)である．
+
+  \(n>0\)とする．
+  \(q\)の最高次の係数を\(Q\:(\neq0)\)，\(p_n\)の最高次の係数を\(a_{nn}\:(\neq0)\)とする．
+  \(v_n=Q/a_{nn}\)とおくと，\(q-v_n p_n\)は\(n-1\)次多項式だから，
+  帰納法の仮定より\(v_0,\dots,v_{n-1}\in\realnums\)が存在して
+  \begin{align}
+    q-v_n p_n &= \sum_{i=0}^{n-1} v_i p_i
+  \end{align}
+  が成り立つ．よって\(q\in\spanset{\setbrace{p_0,\dots,p_n}}\)である．
+
+  上の議論から，任意の\(n\)次多項式\(q\)は\(q=v_0 p_0+\cdots+v_n p_n\)という形で書けることが分かった．
+  いま，\(i\)を\(n\)以下の非負整数とすると，
+  \begin{align}
+    \mcL[p_i q]
+    &= \sum_{j=0}^n v_j \mcL[p_i p_j]
+     = v_i \mcL[p_i^2]
+    \label{eq:orthp.basis.piq}
+  \end{align}
+  だから\(v_i=\mcL[p_i q]/\mcL[p_i^2]\)．
+  よって各\(v_i\)は一意的に定まる．
+\end{proof}
+
+いま非負整数\(n\)を任意に固定し，
+\(q=u_0+u_1x+\cdots+u_n x^n\)を高々\(n\)次の多項式とする．
+\cref{thm:orthp.basis}より，\(q\)は以下のような形で一意的に書ける．
+\begin{align}
+  q &= v_0 p_0+v_1 p_1+\cdots+v_n p_n
+\end{align}
+上式から\((u_0,\dots,u_n)\longmapsto(v_0,\dots,v_n)\)という対応が定められるが，
+これは可逆かつ線形だから線形同型である．
+この同型はめっちゃ重要なので具体的に中身を書き下してみる．
+\(K_n=\mcL[p_n^2]\)とおくと，
+\cref{eq:orthp.basis.piq}より
+\begin{align}
+  v_i
+  &= \frac{\mcL[p_i q]}{K_i}
+  = \sum_{i=0}^n \frac{\mcL[p_i x^j]}{K_i} u_j
+  & &(i=0,1,\dots,n)
+\end{align}
+である．
+\(T_{ij}=\mcL[p_i x^j]/K_i\)とおくと，行列\(T=(T_{ij})_{ij}\)は上三角であって
+\begin{align}
+  \begin{pmatrix}
+    v_0 \\ \vdots \\ v_n
+  \end{pmatrix}
+  &=
+  \begin{pmatrix}
+    T_{00} & \cdots & T_{0n} \\
+    \vdots & \ddots & \vdots \\
+    0 & \cdots & T_{nn}
+  \end{pmatrix}
+  \begin{pmatrix}
+    u_0 \\ \vdots \\ u_n
+  \end{pmatrix}
+\end{align}
+が成り立つ．
+ところで，
+\begin{align}
+  p_n &= a_{n0} + a_{n1} x + \cdots + a_{nn}x^n
+  & &(n=0,1,2,\dots)
+\end{align}
+とおくと
+\begin{align}
+  T_{ij}
+  &= \frac{\mcL[p_i x^j]}{K_i}
+  = \sum_{k=0}^i \frac{\mcL[a_{ik}x^k x^j]}{K_i}
+  = \sum_{k=0}^i \frac{a_{ik}\mu_{k+j}}{K_i}
+  & &(i, j=0,1,\dots,n)
+\end{align}
+だから次式が成り立つ．
+\begin{align}
+  \begin{pmatrix}
+    T_{00} & \cdots & T_{0n} \\
+    \vdots & \ddots & \vdots \\
+    0 & \cdots & T_{nn}
+  \end{pmatrix}
+  &=
+  \begin{pmatrix}
+    a_{00}/K_0 & \cdots & 0 \\
+    \vdots & \ddots & \vdots \\
+    a_{n0}/K_n & \cdots & a_{nn}/K_n
+  \end{pmatrix}
+  \begin{pmatrix}
+    \mu_0 & \cdots & \mu_n \\
+    \vdots & \ddots & \vdots \\
+    \mu_n & \cdots & \mu_{2n}
+  \end{pmatrix}
+  \label{eq:T.AH}
+\end{align}
+あるいはざっくり次のように考えることもできる．
+\begin{align}
+  \begin{pmatrix}
+    v_0 \\ \vdots \\ v_n
+  \end{pmatrix}
+  &=\mcL \left[
+      \begin{pmatrix}
+        p_0/K_0 \\ \vdots \\ p_n/K_n
+      \end{pmatrix}
+      q
+    \right]
+  =\mcL \left[
+    \begin{pmatrix}
+      a_{00}/K_0 & \cdots & 0 \\
+      \vdots & \ddots & \vdots \\
+      a_{n0}/K_n & \cdots & a_{nn}/K_n
+    \end{pmatrix}
+      \begin{pmatrix}
+        1 \\ \vdots \\ x^n
+      \end{pmatrix}
+      \begin{pmatrix}
+        1 & \cdots & x^n
+      \end{pmatrix}
+      \begin{pmatrix}
+        u_0 \\ \vdots \\ u_n
+      \end{pmatrix}
+    \right]
+\end{align}
+
+\begin{definition}
+  \(\functype{\mcL}{\polynoms{\realnums}{x}}{\realnums}\)をモーメント汎関数，
+  \(\sequence{\mu_n}{n=0}{\infty}\)を\(\mcL\)のモーメント列，
+  \(n\)を非負整数とする．
+  このとき，\((n+1)\)次行列
+  \begin{align}
+    H_n
+    &=
+    \begin{pmatrix}
+      \mu_0 & \mu_1 & \cdots & \mu_n \\
+      \mu_1 & \mu_2 & \cdots & \mu_{n+1} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \mu_n & \mu_{n+1} & \cdots & \mu_{2n}
+    \end{pmatrix}
+  \end{align}
+  を\(\mcL\)に関する\(n\)次\emph{ハンケル行列}といい，
+  \(\Delta_n=\det H_n\)を\(n\)次\emph{ハンケル行列式}という．
+  \qed
+\end{definition}
+
+このとき次の定理が証明できる．
+
+\begin{theorem}
+  \(\functype{\mcL}{\polynoms{\realnums}{x}}{\realnums}\)をモーメント汎関数とする．
+  このとき，\(\mcL\)に関する直交多項式系\(\sequence{p_n}{n=0}{\infty}\)が存在するための必要十分条件は，
+  すべての非負整数\(n\)について，\(\mcL\)に関するハンケル行列式\(\Delta_n\)が非零となることである\cite[p. 11, Theorem 3.1]{Chihara2011}．
+\end{theorem}
+\begin{proof}
+  \underline{必要性}．
+  \cref{eq:T.AH}の左辺は正則行列だったから右辺の2つの行列はいずれも正則である．
+  したがって\(\Delta_n\neq0\)．
+
+  \underline{十分性}．
+  多項式列\(\sequence{p_n}{n=0}{\infty}\)を次のように定める．
+  まず，\(p_0=1\)とする．
+  次に，各整数\(n\:(>0)\)に対してハンケル行列\(H_n\)の第\((n,j)\)小行列式を\(M_{nj}\)とおき，
+  多項式\(p_n\)を
+  \begin{align}
+    p_n &= \sum_{j=0}^n (-1)^{n+j} M_{nj} x^j
+    =
+    \begin{vmatrix}
+      \mu_0 & \mu_1 & \cdots & \mu_n \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \mu_{n-1} & \mu_n & \cdots & \mu_{2n-1} \\
+      1 & x & \cdots & x^n
+    \end{vmatrix}
+  \end{align}
+  で定める．
+  \(\Delta_{n-1}\neq0\)だから\(p_n\)は\(n\)次である．
+  このとき，\(k=0,1,\dots,n\)について
+  \begin{align}
+    \mcL[p_n x^k]
+    &= \sum_{j=0}^n (-1)^{n+j} M_{nj} \mcL[x^{j+k}]
+    =
+    \begin{vmatrix}
+      \mu_0 & \mu_1 & \cdots & \mu_n \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \mu_{n-1} & \mu_n & \cdots & \mu_{2n-1} \\
+      \mu_{k} & \mu_{k+1} & \cdots & \mu_{k+n}
+    \end{vmatrix}
+    =
+    \begin{cases}
+      0 & (k<n) \\
+      \Delta_n & (k=n)
+    \end{cases}
+  \end{align}
+  が成り立つ．
+  \(\Delta_n\neq0\)だったから\(\sequence{p_n}{n=0}{\infty}\)は直交多項式系となる．
+\end{proof}
+
+\printbibliography[title={参考文献}]
+
+\end{document}
