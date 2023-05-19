@@ -1,0 +1,13 @@
+---
+kind: article
+created_at: 2023-05-20T00:00:49+09:00
+updated_at: 2023-05-20T00:00:49+09:00
+title: "直交多項式系とハンケル行列式"
+author: hnagamin
+excerpt: |-
+
+slug: hankel
+djbid: d282e42033b88010fe03ed85ee395b22
+ogtype: article
+jsonld:
+  type: BlogPosting

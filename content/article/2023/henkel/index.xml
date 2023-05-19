@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2023-05-20 00:00:49</i:created-at>
+  <i:updated-at>2023-05-20 00:00:49</i:updated-at>
+</i:head>
+
+<i:title>直交多項式系とハンケル行列式</i:title>
+
+<i:summary>
+yee
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+<i:title>直交多項式系が存在するための必要十分条件</i:title>
+
+<i:p>
+yee
+</i:p>
+
+<i:p>
+<i:url href="https://www.dropbox.com/s/051zpxcgzqlaeds/hankel.pdf" />
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
+
+
+<i:section  sid="history">
+<i:title>更新履歴</i:title>
+<ul>
+  <li>2023-05-20: 公開</li>
+</ul>
+<i:p>
+Permanent ID of this document: d282e42033b88010fe03ed85ee395b22
+</i:p>
+</i:section> <!-- @sid="history" -->
+
+</i:body>
+
+</i:article>
