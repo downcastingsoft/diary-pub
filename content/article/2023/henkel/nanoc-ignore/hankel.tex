@@ -144,7 +144,7 @@
 \end{align}
 上式から\((u_0,\dots,u_n)\longmapsto(v_0,\dots,v_n)\)という対応が定められるが，
 これは可逆かつ線形だから線形同型である．
-この同型はめっちゃ重要なので具体的に中身を書き下してみる．
+この同型はめっちゃ重要なので，具体的に中身を書き下してみようと考えるのは当然のことである．
 \(K_n=\mcL[p_n^2]\)とおくと，
 \cref{eq:orthp.basis.piq}より
 \begin{align}
@@ -203,34 +203,6 @@
   \end{pmatrix}
   \label{eq:T.AH}
 \end{align}
-あるいはざっくり次のように考えることもできる．
-\begin{align}
-  \begin{pmatrix}
-    v_0 \\ \vdots \\ v_n
-  \end{pmatrix}
-  &=\mcL \left[
-      \begin{pmatrix}
-        p_0/K_0 \\ \vdots \\ p_n/K_n
-      \end{pmatrix}
-      q
-    \right]
-  =\mcL \left[
-    \begin{pmatrix}
-      a_{00}/K_0 & \cdots & 0 \\
-      \vdots & \ddots & \vdots \\
-      a_{n0}/K_n & \cdots & a_{nn}/K_n
-    \end{pmatrix}
-      \begin{pmatrix}
-        1 \\ \vdots \\ x^n
-      \end{pmatrix}
-      \begin{pmatrix}
-        1 & \cdots & x^n
-      \end{pmatrix}
-      \begin{pmatrix}
-        u_0 \\ \vdots \\ u_n
-      \end{pmatrix}
-    \right]
-\end{align}
 
 \begin{definition}
   \(\functype{\mcL}{\polynoms{\realnums}{x}}{\realnums}\)をモーメント汎関数，
@@ -251,8 +223,6 @@
   \(\Delta_n=\det H_n\)を\(n\)次\emph{ハンケル行列式}という．
   \qed
 \end{definition}
-
-このとき次の定理が証明できる．
 
 \begin{theorem}
   \(\functype{\mcL}{\polynoms{\realnums}{x}}{\realnums}\)をモーメント汎関数とする．
@@ -301,6 +271,8 @@
   が成り立つ．
   \(\Delta_n\neq0\)だったから\(\sequence{p_n}{n=0}{\infty}\)は直交多項式系となる．
 \end{proof}
+
+このやり方だと，当然考察するべき重要な対象について素直に計算してみると重要な定理が出てくるという流れになっていて，個人的に好き．
 
 \printbibliography[title={参考文献}]
 
