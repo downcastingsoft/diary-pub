@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<i:article
+  xmlns:i="http://www.downcastingsoft.net/2021/IJKML">
+
+<i:head>
+  <i:author>hnagamin</i:author>
+  <i:created-at>2023-05-20 23:14:55</i:created-at>
+  <i:updated-at>2023-05-20 23:14:55</i:updated-at>
+</i:head>
+
+<i:title>Chihara の Theorem 3.1 (Existence of OPS)</i:title>
+
+<i:summary>
+  Chihara (1978/2011) <i:italic>An Introduction to Orthogonal Polynomials</i:italic> の第1章3節 “Existence of OPS” には，直交多項式系が存在することとハンケル行列式が非零であることとの同値性を述べた定理（Theorem 3.1）がある．
+  この記事では Theorem 3.1 の別証明を与える．
+  多項式がなすベクトル空間における座標変換を利用する．
+</i:summary>
+
+<i:body>
+
+<i:section sid="intro">
+<i:title>直交多項式系が存在するための必要十分条件</i:title>
+
+<i:p>
+直交多項式の復習をしたいと思って最近 Chihara の本 <i:cite bid="chihara" /> を読んでたのですが，与えられたモーメント汎関数に関する直交多項式系が存在するかどうかを考える箇所 (pp. 11-12, Theorem 3.1) で結構テクい議論をしてて数日悩みました．
+</i:p>
+
+<i:quote>
+  Now of an OPS for <math><mi mathvariant="script">L</mi></math> exists, it is uniquely determined by the constants
+  <math><msub><mi>K</mi><mi>n</mi></msub></math> in (3.2) (Ex. 2.3).
+  It then follows that (3.2) has a unique solution so that
+  <math>
+    <mrow>
+      <msub>
+        <mi>&#x394;</mi>
+        <mi>n</mi>
+      </msub>
+      <mo>&#x2260;</mo>
+      <mn>0</mn>
+    </mrow>
+  </math>
+  <math>
+    <mrow>
+      <mo>(</mo>
+      <mi>n</mi>
+      <mo>≧</mo>
+      <mn>0</mn>
+      <mo>)</mo>
+    </mrow>
+  </math>.
+</i:quote>
+
+<i:p>
+はじめ，(3.2) 式の線形方程式が唯一解をもつからといって他の右辺ベクトルについても唯一解をもつとは限らないのではないか，
+たまたま (3.2) 式の右辺ベクトルが像空間に入っているだけということは起きないのかと思って悩んだのですが，
+よく考えると線形方程式ではそういうことは起きないですね（解空間が空でなければその次元は一定なので）．
+</i:p>
+
+<i:p>
+ということにこの記事を書き終わるまで気付かなかったので自分で別証明を考えてみました．
+多項式がなすベクトル空間には単項式の基底と直交多項式の基底があるので，基底を取り替えたときの座標変換行列が考えられますが，
+この行列の成分を具体的に書き下すと自動的にハンケル行列式が出てきます．
+このやり方だと，座標変換の行列という当然考察すべき重要な対象について素直に計算すると重要な定理が証明できるという流れになっていて，個人的に好きです．
+</i:p>
+
+<i:p>
+<i:url href="https://www.dropbox.com/s/051zpxcgzqlaeds/hankel.pdf" />
+</i:p>
+
+<i:p>
+別証明と書きましたが結局 Chihara と同じことをしているだけかもしれないのでもうちょい考えないといけないかもです．
+卒業までに直交多項式（特に，重み関数の増大点が有限個しかない場合）についてもう少し勉強する必要があるので詳しい人がいたら教えてください．
+</i:p>
+
+</i:section> <!-- @sid="intro" -->
+
+
+<i:section  sid="history">
+<i:title>更新履歴</i:title>
+<ul>
+  <li>2023-05-20: 公開</li>
+</ul>
+<i:p>
+Permanent ID of this document: d282e42033b88010fe03ed85ee395b22
+</i:p>
+</i:section> <!-- @sid="history" -->
+
+</i:body>
+
+<i:bibliography>
+  <i:bib-entry bid="chihara" key="C">
+    Chihara, T. S. (2011).
+    <i:italic>An Introduction to Orthogonal Polynomials</i:italic>.
+    Dover Publications.
+    (Original work published 1978).
+  </i:bib-entry>
+</i:bibliography>
+
+</i:article>
