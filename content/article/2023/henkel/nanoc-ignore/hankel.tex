@@ -72,7 +72,7 @@
 
 \begin{document}
 
-\title{直交多項式系とハンケル行列式\thanks{%
+\title{ChiharaのTheorem 3.1 (Existence of OPS)\thanks{%
   最終更新日：{\today}．\\
   Document ID: \texttt{d282e42033b88010fe03ed85ee395b22}.
   URL: \url{https://www.downcastingsoft.net/7e5/diary/article/2023/05/20/hankel/}.
@@ -144,7 +144,7 @@
 \end{align}
 上式から\((u_0,\dots,u_n)\longmapsto(v_0,\dots,v_n)\)という対応が定められるが，
 これは可逆かつ線形だから線形同型である．
-この同型はめっちゃ重要なので，具体的に中身を書き下してみようと考えるのは当然のことである．
+この同型は見るからに重要なので，具体的に中身を書き下してみる．
 \(K_n=\mcL[p_n^2]\)とおくと，
 \cref{eq:orthp.basis.piq}より
 \begin{align}
@@ -168,6 +168,7 @@
   \begin{pmatrix}
     u_0 \\ \vdots \\ u_n
   \end{pmatrix}
+  \label{eq:v.Tu}
 \end{align}
 が成り立つ．
 ところで，
@@ -231,7 +232,9 @@
 \end{theorem}
 \begin{proof}
   \underline{必要性}．
-  \cref{eq:T.AH}の左辺は正則行列だったから右辺の2つの行列はいずれも正則である．
+  直交多項式系\(\sequence{p_n}{n=0}{\infty}\)があれば，
+  各\(n=0,1,2,\dots\)について\cref{eq:T.AH}左辺の
+  行列が作れて正則になるから，右辺の2つの行列はいずれも正則である．
   したがって\(\Delta_n\neq0\)．
 
   \underline{十分性}．

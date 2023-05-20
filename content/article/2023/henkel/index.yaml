@@ -2,9 +2,12 @@
 kind: article
 created_at: 2023-05-20T00:00:49+09:00
 updated_at: 2023-05-20T00:00:49+09:00
-title: "直交多項式系とハンケル行列式"
+title: "Chihara の Theorem 3.1 (Existence of OPS)"
 author: hnagamin
 excerpt: |-
+  Chihara (1978/2011) “An Introduction to Orthogonal Polynomials” の第1章3節 “Existence of OPS” には，直交多項式系が存在することとハンケル行列式が非零であることとの同値性を述べた定理（Theorem 3.1）がある．
+  この記事では Theorem 3.1 の別証明を与える．
+  多項式がなすベクトル空間における座標変換を利用する．
 
 slug: hankel
 djbid: d282e42033b88010fe03ed85ee395b22
