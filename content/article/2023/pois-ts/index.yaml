@@ -1,0 +1,14 @@
+---
+kind: article
+created_at: 2023-06-14T12:17:14+09:00
+updated_at: 2023-06-14T12:17:14+09:00
+title: "ポアソン到着とタイムスタンプ"
+author: hnagamin
+excerpt: |-
+  ポアソン分布に従って到着するリクエストを到着時刻のタイムスタンプで処理する場合にタイムスタンプが衝突する確率を計算する．
+
+slug: pois-ts
+djbid: 834c86967799b6e69d4c5ea9fbb76c8b
+ogtype: article
+jsonld:
+  type: BlogPosting
