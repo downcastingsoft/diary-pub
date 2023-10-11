@@ -9,6 +9,7 @@
     <meta name="robots" content="noindex">
     <%- end -%>
     <title><%= title %></title>
+    <link rel="canonical" href="<%= "https://www.downcastingsoft.net/7e5/diary" + @item.path  %>">
     <link href="/assets/css/common.css" rel="stylesheet" type="text/css" />
     <%- if ['article', 'draft'].include? @item[:kind] -%>
       <link href="/assets/css/article.css" rel="stylesheet" type="text/css" />
