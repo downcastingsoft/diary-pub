@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-09-14 11:53:12</i:created-at>
-  <i:updated-at>2023-04-02 23:18:59</i:updated-at>
+  <i:updated-at>2023-12-03 21:06:38</i:updated-at>
 </i:head>
 
 <i:title>累乗根の [1/1] パデ近似</i:title>
@@ -223,7 +223,7 @@
 </math>
 の近似値を計算する<i:footnote fid="origin">
   この記事は<a href="https://twitter.com/MathExplorer262/status/1569181182369370113"
-  >まえすく@数学垢さんの9月12日のツイート</a>から刺激を受けて書いた．
+  >ますえく@数学垢さんの9月12日のツイート</a>から刺激を受けて書いた．
 </i:footnote>．
 </i:p>
 
@@ -1368,6 +1368,7 @@
 <ul>
   <li>2022-09-14: 公開</li>
   <li>2023-04-02: Document ID を追加</li>
+  <li>2023-12-03: 名前を間違えていたので訂正</li>
 </ul>
 <i:p>
 Permanent ID of this document: 4a465cdb12bc8608219aff4fd20e7b4a
