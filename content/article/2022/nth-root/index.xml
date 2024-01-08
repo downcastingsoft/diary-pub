@@ -5,7 +5,7 @@
 <i:head>
   <i:author>hnagamin</i:author>
   <i:created-at>2022-09-14 11:53:12</i:created-at>
-  <i:updated-at>2023-12-03 21:06:38</i:updated-at>
+  <i:updated-at>2024-01-09 01:38:41</i:updated-at>
 </i:head>
 
 <i:title>累乗根の [1/1] パデ近似</i:title>
@@ -1363,12 +1363,67 @@
 
 </i:section> <!-- @sid="example" -->
 
+<i:section sid="ps-halley">
+<i:title>追記１：ハレイの方法について</i:title>
+
+<i:p>
+(2024-01-09 作成)
+</i:p>
+
+<i:p>
+この記事について愛知県の林邦英さんからお手紙 (2023.11.29) が届いた．
+大変ありがたいことです．
+林さんについて調べてみると，連分数論や近似論について精力的に研究なさっているようで，
+沢山の研究資料がオンラインで公開されている
+<i:footnote fid="tozsun-com">
+  たとえば，<i:url href="https://www.tozsun.com/whr-mathHP/report/hayasi/hayasi.html" />
+</i:footnote>．
+その中でも資料 <i:cite bid="hayasi-2007-07" /> によると，
+平方根の近似式
+<math display="block">
+  <mrow>
+    <msqrt>
+      <mi>x</mi>
+    </msqrt>
+    <mo>≈</mo>
+    <mfrac>
+      <mrow>
+        <mrow>
+          <mn>3</mn>
+          <mo>⁢</mo>
+          <mi>x</mi>
+        </mrow>
+        <mo>+</mo>
+        <mn>1</mn>
+      </mrow>
+      <mrow>
+        <mi>x</mi>
+        <mo>+</mo>
+        <mn>3</mn>
+      </mrow>
+    </mfrac>
+  </mrow>
+</math>
+にはハレイの方法という名前がついているらしい．
+これは知らなかった．
+博論の提出が終わったらハレイの方法についてもう少し調べたい……．
+</i:p>
+
+<i:p>
+林さんからのお手紙には，常用対数の計算手法に関する結果もまとめられていた．
+しかしまだきちんと読めていない……大変申し訳ないことです．
+内容をちゃんと理解できたら別記事とお返事のお手紙を出したい．
+</i:p>
+
+</i:section> <!-- @sid="ps-halley" -->
+
 <i:section  sid="history">
 <i:title>更新履歴</i:title>
 <ul>
   <li>2022-09-14: 公開</li>
   <li>2023-04-02: Document ID を追加</li>
   <li>2023-12-03: 名前を間違えていたので訂正</li>
+  <li>2024-01-09: 追記１（林さんからのコメントを受けて）</li>
 </ul>
 <i:p>
 Permanent ID of this document: 4a465cdb12bc8608219aff4fd20e7b4a
@@ -1384,6 +1439,13 @@ Permanent ID of this document: 4a465cdb12bc8608219aff4fd20e7b4a
     <i:italic>Padé approximants</i:italic> (2nd ed.).
     Cambridge University Press.
     ISBN: <a href="https://www.cambridge.org/9780521135092">978-0-521-13509-2</a>.
+  </i:bib-entry>
+  <i:bib-entry bid="hayasi-2007-07" key="H">
+    林邦英 (2007年7月17日)．
+    「ハレイの方法（3次収束）の始まりについての予想」．
+    TOZSUN.COM,
+    <i:url href="https://www.tozsun.com/whr-mathHP/report/hayasi/hayasi20070717.pdf" />,
+    (2023年12月5日閲覧)．
   </i:bib-entry>
 </i:bibliography>
 
